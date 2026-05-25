@@ -328,44 +328,7 @@ export function Home() {
           }}
           className="absolute bottom-0 inset-x-0 z-20 border-t border-white/10 backdrop-blur-md bg-ink-950/40">
           
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 grid grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-            {
-              v: 120,
-              s: '+',
-              l: 'Facilities equipped'
-            },
-            {
-              v: 10,
-              s: '+',
-              l: 'Global OEM partners'
-            },
-            {
-              v: 3,
-              s: '',
-              l: 'Countries served'
-            },
-            {
-              v: 24,
-              s: '/7',
-              l: 'Engineering support'
-            }].
-            map((stat, i) =>
-            <div key={i} className="flex items-center gap-3">
-                <span className="font-mono text-[10px] text-signal-400">
-                  0{i + 1}
-                </span>
-                <div>
-                  <div className="font-display text-2xl lg:text-3xl text-white font-medium">
-                    <AnimatedCounter end={stat.v} suffix={stat.s} />
-                  </div>
-                  <div className="text-[11px] text-white/50 uppercase tracking-wider">
-                    {stat.l}
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
+          {/* Stats section removed for minimalism */}
         </motion.div>
       </section>
 
@@ -492,35 +455,7 @@ export function Home() {
                 every engagement is built for the long term.
               </p>
 
-              <div className="grid grid-cols-2 gap-8 pt-8 border-t border-ink-200">
-                {[
-                {
-                  label: 'OEM Partners',
-                  value: '10+'
-                },
-                {
-                  label: 'Countries',
-                  value: '3'
-                },
-                {
-                  label: 'Service SLA',
-                  value: '<48h'
-                },
-                {
-                  label: 'Cert. Standard',
-                  value: 'ISO 13485'
-                }].
-                map((m, i) =>
-                <div key={i}>
-                    <div className="font-display text-3xl text-ink-900 font-medium mb-1">
-                      {m.value}
-                    </div>
-                    <div className="text-xs text-ink-500 uppercase tracking-wider">
-                      {m.label}
-                    </div>
-                  </div>
-                )}
-              </div>
+              {/* Certifications and stats removed for minimalism */}
             </motion.div>
           </div>
         </div>
