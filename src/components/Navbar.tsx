@@ -44,7 +44,7 @@ export function Navbar() {
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link to="/" className="flex items-center group">
-            <img src="/logo.avif" alt="MITDASH Logo" className="h-14 w-auto" />
+            <img src="/logo.avif" alt="MITDASH Logo" className="h-20 w-auto" />
           </Link>
 
           {/* Desktop Nav */}

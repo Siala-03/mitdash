@@ -242,7 +242,48 @@ export function Products() {
       <section className="py-10 pb-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            {/* Sidebar removed as requested */}
+            <aside className="lg:col-span-3 bg-white border border-paper-300 rounded-3xl p-5 h-fit lg:sticky lg:top-28">
+              <div className="mb-5">
+                <h2 className="font-display text-2xl text-ink-900">Search Catalog</h2>
+                <p className="text-sm text-ink-500">Filter by item name or category.</p>
+              </div>
+
+              <div>
+                <label className="text-xs uppercase tracking-widest text-ink-500 font-semibold">Search</label>
+                <div className="relative mt-2">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-400" size={16} />
+                  <input
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Search equipment"
+                    className="w-full pl-10 pr-9 py-2.5 rounded-xl bg-white border border-paper-300 text-sm focus:outline-none focus:ring-2 focus:ring-signal-400"
+                  />
+                  {searchQuery && (
+                    <button
+                      onClick={() => setSearchQuery('')}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-ink-400 hover:text-ink-700"
+                    >
+                      <X size={14} />
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              <button
+                onClick={() => {
+                  setSearchQuery('');
+                  setActiveCategory('all');
+                }}
+                className="mt-5 w-full rounded-xl border border-ink-200 py-2.5 text-sm font-medium text-ink-600 hover:text-ink-900"
+              >
+                Reset Filters
+              </button>
+
+              <div className="mt-6 rounded-2xl bg-white border border-paper-300 p-4">
+                <div className="font-mono text-xs uppercase tracking-wider text-ink-500">Indexed Equipment</div>
+                <div className="font-display text-3xl text-ink-900">{totalItems}</div>
+              </div>
+            </aside>
 
             <div className="lg:col-span-9">
               <div className="mb-5">

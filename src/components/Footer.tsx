@@ -132,22 +132,20 @@ export function Footer() {
               <li className="flex items-start gap-3 text-sm text-ink-200">
                 <MapPin size={16} className="text-signal-400 shrink-0 mt-0.5" />
                 <span>
-                  Kigali, Rwanda
-                  <br />
-                  <span className="text-ink-400">Rwanda · Burundi · DRC</span>
+                  Iriba House 1st Floor<br />
+                  Gikondo, Kigali Rwanda.
                 </span>
               </li>
               <li className="flex items-center gap-3 text-sm text-ink-200">
                 <Phone size={16} className="text-signal-400 shrink-0" />
-                <span>+250 (0) 123 456 789</span>
+                <span>+250796179826</span>
               </li>
               <li className="flex items-center gap-3 text-sm text-ink-200">
                 <Mail size={16} className="text-signal-400 shrink-0" />
                 <a
-                  href="mailto:info@mitdash.com"
+                  href="mailto:sales@mitdash.com"
                   className="hover:text-white transition-colors">
-                  
-                  info@mitdash.com
+                  sales@mitdash.com
                 </a>
               </li>
             </ul>
