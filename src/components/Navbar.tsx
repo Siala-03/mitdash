@@ -43,16 +43,8 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2.5 group">
-            <img src="/logo.avif" alt="MITDASH Logo" className="h-10 w-auto" />
-            <div className="flex flex-col leading-none">
-              <span className="font-bold text-xl tracking-tight text-slate-900">
-                MIT<span className="text-brand-600">·</span>DASH
-              </span>
-              <span className="text-[10px] text-slate-500 font-medium tracking-widest uppercase mt-0.5 hidden sm:block">
-                Medical Technology
-              </span>
-            </div>
+          <Link to="/" className="flex items-center group">
+            <img src="/logo.avif" alt="MITDASH Logo" className="h-14 w-auto" />
           </Link>
 
           {/* Desktop Nav */}

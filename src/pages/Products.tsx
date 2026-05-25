@@ -17,17 +17,23 @@ const categoryImageMap: Record<string, string[]> = {
     // Ventilator
     'https://images.pexels.com/photos/3844581/pexels-photo-3844581.jpeg?auto=compress&w=600&q=80',
     // Defibrillator
-    'https://images.pexels.com/photos/4226120/pexels-photo-4226120.jpeg?auto=compress&w=600&q=80'
+    'https://images.pexels.com/photos/305568/pexels-photo-305568.jpeg?auto=compress&w=600&q=80'
   ],
   'OB/GYN Equipment': [
-    'https://static.wixstatic.com/media/1d7592_5250e10eb380435e943678f35afa6d57~mv2.jpg/v1/fill/w_240,h_135,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/ob_gyn.jpg',
-    'https://static.wixstatic.com/media/1d7592_5250e10eb380435e943678f35afa6d57~mv2.jpg/v1/fill/w_240,h_135,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/ob_gyn.jpg',
-    'https://static.wixstatic.com/media/1d7592_5250e10eb380435e943678f35afa6d57~mv2.jpg/v1/fill/w_240,h_135,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/ob_gyn.jpg'
+    // Fetal Doppler
+    'https://images.pexels.com/photos/7088536/pexels-photo-7088536.jpeg?auto=compress&w=600&q=80',
+    // Fetal Monitor
+    'https://images.pexels.com/photos/7089337/pexels-photo-7089337.jpeg?auto=compress&w=600&q=80',
+    // Colposcope
+    'https://images.pexels.com/photos/7089406/pexels-photo-7089406.jpeg?auto=compress&w=600&q=80'
   ],
   'Diagnostic Equipment': [
-    'https://static.wixstatic.com/media/8607c7_3c8bef0a4c374cd581df13fd8290dbd0~mv2.jpg/v1/fill/w_240,h_135,fp_0.39_0.08,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/did-you-saw-when-your-neighbor-is-leave-his-house-suspicious-man-passes-lie-detector-offic.jpg',
-    'https://static.wixstatic.com/media/8607c7_3c8bef0a4c374cd581df13fd8290dbd0~mv2.jpg/v1/fill/w_240,h_135,fp_0.39_0.08,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/did-you-saw-when-your-neighbor-is-leave-his-house-suspicious-man-passes-lie-detector-offic.jpg',
-    'https://static.wixstatic.com/media/8607c7_3c8bef0a4c374cd581df13fd8290dbd0~mv2.jpg/v1/fill/w_240,h_135,fp_0.39_0.08,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/did-you-saw-when-your-neighbor-is-leave-his-house-suspicious-man-passes-lie-detector-offic.jpg'
+    // Vascular Doppler Detector
+    'https://images.pexels.com/photos/7089407/pexels-photo-7089407.jpeg?auto=compress&w=600&q=80',
+    // Ultrasound Scanner
+    'https://images.pexels.com/photos/7088537/pexels-photo-7088537.jpeg?auto=compress&w=600&q=80',
+    // Ophthalmic Ultrasound
+    'https://images.pexels.com/photos/7089408/pexels-photo-7089408.jpeg?auto=compress&w=600&q=80'
   ],
   'Sterilizer (Autoclave)': [
     'https://static.wixstatic.com/media/1d7592_93821719805c4de1a06ba1b1baeda2c3~mv2.jpg/v1/fill/w_240,h_135,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/sterilizerjpg.jpg',
