@@ -67,9 +67,13 @@ export function Contact() {
   return (
     <div className="pt-24 pb-24 min-h-screen bg-paper-100">
       <section className="relative bg-ink-950 text-white py-20 mb-12 overflow-hidden grain">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 -left-24 w-72 h-72 bg-signal-400/15 rounded-full blur-3xl" />
-          <div className="absolute -bottom-24 right-0 w-96 h-96 bg-signal-300/10 rounded-full blur-3xl" />
+        <div className="absolute inset-0">
+          <img
+            src="https://images.pexels.com/photos/236380/pexels-photo-236380.jpeg"
+            alt="Contact hero background"
+            className="w-full h-full object-cover opacity-30" />
+          <div className="absolute top-0 -left-24 w-72 h-72 bg-signal-400/15 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-24 right-0 w-96 h-96 bg-signal-300/10 rounded-full blur-3xl pointer-events-none" />
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

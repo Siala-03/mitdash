@@ -61,8 +61,12 @@ export function Solutions() {
   return (
     <div className="pt-24 pb-20 min-h-screen bg-paper-100">
       <section className="bg-ink-950 text-white py-16 mb-12 relative overflow-hidden grain">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-signal-400/15 rounded-full blur-3xl" />
+        <div className="absolute inset-0">
+          <img
+            src="https://images.pexels.com/photos/12081338/pexels-photo-12081338.jpeg"
+            alt="Services hero background"
+            className="w-full h-full object-cover opacity-30" />
+          <div className="absolute top-0 right-0 w-80 h-80 bg-signal-400/15 rounded-full blur-3xl pointer-events-none" />
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-3xl mx-auto">

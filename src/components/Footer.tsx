@@ -166,8 +166,8 @@ export function Footer() {
             © {new Date().getFullYear()} MIT-DASH Ltd. · Kigali, Rwanda
           </p>
           <div className="flex gap-6 text-xs text-ink-400">
-            <a href="#" className="hover:text-white transition-colors">
-              Privacy
+            <a href="/privacy-policy" className="hover:text-white transition-colors">
+              Privacy Policy
             </a>
             <a href="#" className="hover:text-white transition-colors">
               Terms

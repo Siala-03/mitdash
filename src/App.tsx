@@ -21,7 +21,8 @@ function RouteMeta() {
   useEffect(() => {
     const metaByPath: Record<string, { title: string; description: string }> = {
       '/': {
-        title: 'MIT-DASH | Medical Technology for East Africa',
+        title: 'MIT-DASH | Medical Technology for '
+          + '%cEast Africa',
         description:
           'MIT-DASH supplies certified medical equipment with turnkey installation, training, and lifecycle support across Rwanda, Burundi, and the DRC.'
       },
@@ -38,7 +39,8 @@ function RouteMeta() {
       '/cooperation': {
         title: 'Manufacturer Cooperation | MIT-DASH',
         description:
-          'Partner with MIT-DASH for market entry, regulatory support, and healthcare distribution across East Africa.'
+          'Partner with MIT-DASH for market entry, regulatory support, and healthcare distribution across '
+          + '%cEast Africa.'
       },
       '/contact': {
         title: 'Request a Quote | MIT-DASH',

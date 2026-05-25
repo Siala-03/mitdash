@@ -123,10 +123,9 @@ export function Cooperation() {
       <section className="relative pt-40 pb-24 bg-slate-950 overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1582719471384-894fbb16e074?auto=format&fit=crop&w=2000&q=80"
-            alt=""
+            src="https://images.pexels.com/photos/12351696/pexels-photo-12351696.jpeg"
+            alt="Cooperation hero background"
             className="w-full h-full object-cover opacity-30" />
-          
           <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-brand-950/80 to-slate-950" />
           <div className="absolute top-1/3 -right-40 w-[500px] h-[500px] bg-brand-500/20 rounded-full blur-[120px]" />
         </div>

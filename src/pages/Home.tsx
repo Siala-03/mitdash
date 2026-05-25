@@ -70,7 +70,7 @@ export function Home() {
       {/* ========================= HERO ========================= */}
       <section
         ref={heroRef}
-        className="relative min-h-screen flex items-end pb-20 lg:pb-32 overflow-hidden bg-ink-950 grain">
+        className="relative min-h-screen flex items-end pb-20 lg:pb-32 pt-32 md:pt-40 overflow-hidden bg-ink-950 grain">
         
         {/* Parallax background */}
         <motion.div
@@ -79,12 +79,10 @@ export function Home() {
             scale: imageScale
           }}
           className="absolute inset-0 -top-20 -bottom-20 z-0">
-          
           <img
-            src="https://images.unsplash.com/photo-1666214280557-f1b5022eb634?auto=format&fit=crop&w=2400&q=80"
-            alt=""
+            src="https://images.pexels.com/photos/13697732/pexels-photo-13697732.jpeg"
+            alt="MITDASH hero background"
             className="w-full h-full object-cover" />
-          
         </motion.div>
 
         {/* Overlays */}
@@ -241,7 +239,7 @@ export function Home() {
                 <span className="relative w-2 h-2 bg-signal-400 rounded-full" />
               </div>
               <span className="text-xs font-medium tracking-[0.25em] text-signal-300 uppercase">
-                Medical Technology · East Africa
+                Medical Technology · <span style={{color: '#143EAB'}}>East Africa</span>
               </span>
             </motion.div>
 
@@ -293,10 +291,10 @@ export function Home() {
               
               <Link
                 to="/contact"
-                className="group inline-flex items-center gap-3 bg-signal-400 hover:bg-signal-300 text-ink-950 pl-7 pr-3 py-2 rounded-full font-semibold transition-all">
+                className="group inline-flex items-center gap-3 bg-blue-100 hover:bg-blue-200 text-black pl-7 pr-3 py-2 rounded-full font-semibold transition-all">
                 
                 <span>Request a tailored quote</span>
-                <span className="bg-ink-950 text-signal-400 w-9 h-9 rounded-full flex items-center justify-center group-hover:rotate-45 transition-transform duration-500">
+                <span className="bg-black text-blue-100 w-9 h-9 rounded-full flex items-center justify-center group-hover:rotate-45 transition-transform duration-500">
                   <ArrowUpRight size={16} />
                 </span>
               </Link>

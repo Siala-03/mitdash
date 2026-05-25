@@ -9,7 +9,7 @@ html {
   background: #FBF9F2;
 }
 body {
-  @apply text-ink-900 bg-paper-100 antialiased font-sans;
+  @apply text-black bg-white antialiased font-sans;
   font-feature-settings: "ss01", "cv11";
 }
 
