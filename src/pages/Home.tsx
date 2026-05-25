@@ -156,40 +156,11 @@ export function Home() {
               }}
               className="absolute -left-16 lg:-left-24 bottom-10 bg-paper-50 rounded-2xl p-4 shadow-2xl w-56 border border-paper-300">
               
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-[10px] font-mono text-signal-700 uppercase tracking-widest">
-                  Live · OEM
-                </span>
-                <div className="flex gap-1">
-                  <span className="w-1.5 h-1.5 bg-signal-400 rounded-full animate-pulse" />
-                </div>
-              </div>
-              <div className="font-display text-lg text-ink-900 leading-tight font-semibold mb-1">
-                Portable Ultrasound
-              </div>
-              <div className="text-xs text-ink-500">
-                CE · FDA · 5-yr warranty
-              </div>
+              {/* Removed Live · OEM, CE, FDA, 5-yr warranty for minimalism */}
             </motion.div>
 
             {/* Floating tag */}
-            <motion.div
-              initial={{
-                opacity: 0,
-                scale: 0.5
-              }}
-              animate={{
-                opacity: 1,
-                scale: 1
-              }}
-              transition={{
-                delay: 1.8
-              }}
-              className="absolute -top-4 -right-4 bg-signal-400 text-ink-950 px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5">
-              
-              <span className="w-1.5 h-1.5 bg-ink-950 rounded-full" />
-              In-stock Kigali
-            </motion.div>
+            {/* Removed floating tag for minimalism */}
           </div>
         </motion.div>
 
@@ -200,25 +171,7 @@ export function Home() {
           }}
           className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full">
           
-          {/* Top meta row */}
-          <motion.div
-            initial={{
-              opacity: 0,
-              y: 20
-            }}
-            animate={{
-              opacity: 1,
-              y: 0
-            }}
-            transition={{
-              duration: 0.8,
-              delay: 0.2
-            }}
-            className="absolute top-32 left-4 sm:left-6 lg:left-8 flex items-center gap-6 text-white/60 text-xs font-mono uppercase tracking-widest">
-            
-            <span>MIT—DASH / 001</span>
-            <span className="hidden sm:inline">Est. Kigali · 2023</span>
-          </motion.div>
+          {/* Top meta row removed for minimalism */}
 
           <div className="max-w-5xl">
             <motion.div
@@ -234,10 +187,7 @@ export function Home() {
               }}
               className="inline-flex items-center gap-3 mb-10">
               
-              <div className="relative flex items-center justify-center">
-                <span className="absolute w-3 h-3 bg-signal-400 rounded-full animate-pulse-ring" />
-                <span className="relative w-2 h-2 bg-signal-400 rounded-full" />
-              </div>
+              {/* Decorative dots removed for minimalism */}
               <span className="text-xs font-medium tracking-[0.25em] text-signal-300 uppercase">
                 Medical Technology · <span style={{color: '#143EAB'}}>East Africa</span>
               </span>
@@ -584,7 +534,7 @@ export function Home() {
                       key={item}
                       className="text-sm text-white/50 flex items-center gap-2">
                       
-                          <span className="w-1 h-1 bg-signal-400 rounded-full" />
+                          <span className="w-1 h-1" style={{backgroundColor:'#143EAB', borderRadius:'9999px', display:'inline-block'}} />
                           {item}
                         </li>
                     )}
@@ -723,7 +673,7 @@ export function Home() {
       <section className="py-24 lg:py-32 bg-ink-950 relative overflow-hidden grain">
         <div className="absolute inset-0">
           <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-signal-500/15 rounded-full blur-[120px]" />
-          <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-signal-400/10 rounded-full blur-[100px]" />
+          <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px]" style={{backgroundColor:'#143EAB', opacity:0.1, borderRadius:'9999px', filter:'blur(100px)'}} />
         </div>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <motion.div
@@ -743,11 +693,11 @@ export function Home() {
             }}>
             
             <div className="inline-flex items-center gap-3 mb-8">
-              <div className="w-12 h-px bg-signal-400" />
+              <div className="w-12 h-px" style={{backgroundColor:'#143EAB'}} />
               <span className="font-mono text-xs tracking-[0.25em] text-signal-400 uppercase">
                 Let's Talk
               </span>
-              <div className="w-12 h-px bg-signal-400" />
+              <div className="w-12 h-px" style={{backgroundColor:'#143EAB'}} />
             </div>
             <h2 className="font-display text-4xl md:text-5xl lg:text-7xl font-light text-white mb-8 leading-[1.05]">
               Build the next chapter of{' '}

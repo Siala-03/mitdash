@@ -38,12 +38,7 @@ export function Footer() {
           {/* Brand */}
           <div className="col-span-2 lg:col-span-4 space-y-5">
             <Link to="/" className="flex items-center gap-2.5">
-              <div className="bg-signal-400 text-ink-950 p-1.5 rounded-lg">
-                <Activity size={20} strokeWidth={2.5} />
-              </div>
-              <span className="font-bold text-xl tracking-tight text-white">
-                MIT<span className="text-signal-400">·</span>DASH
-              </span>
+              <img src="/logo.avif" alt="MITDASH Logo" className="h-20 w-auto" />
             </Link>
             <p className="text-sm text-ink-300 leading-relaxed max-w-sm">
               A leading distributor of cutting-edge medical technology in East
