@@ -1,188 +1,215 @@
 import React, { useMemo, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import {
-  Search,
-  X,
-  ArrowUpRight,
-  Activity,
-  Stethoscope,
-  Microscope,
-  HeartPulse,
-  LayoutGrid,
-  Rows3,
-  Scale,
-  CheckCircle2
-} from 'lucide-react';
-import { categories, products, Product, technologyEquipmentIndex } from '../data/catalog';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Search, X, ArrowUpRight } from 'lucide-react';
+import { technologyEquipmentIndex } from '../data/catalog';
 
-const iconMap: Record<string, React.ReactNode> = {
-  Activity: <Activity size={18} />,
-  Stethoscope: <Stethoscope size={18} />,
-  Microscope: <Microscope size={18} />,
-  HeartPulse: <HeartPulse size={18} />
-};
-
-const budgetByCategory: Record<string, string[]> = {
-  imaging: ['USD 100k+', 'USD 25k-100k'],
-  surgical: ['USD 25k-100k', 'USD 100k+'],
-  laboratory: ['Below USD 25k', 'USD 25k-100k'],
-  'patient-care': ['Below USD 25k', 'USD 25k-100k']
-};
-
-const useCaseByCategory: Record<string, string[]> = {
-  imaging: ['Radiology', 'Emergency', 'Cardiology'],
-  surgical: ['Operating Theater', 'Minimally Invasive Surgery', 'Sterile Processing'],
-  laboratory: ['Routine Diagnostics', 'Microbiology', 'Molecular Testing'],
-  'patient-care': ['ICU', 'General Ward', 'Emergency Care']
-};
-
-function getProductBudget(product: Product): string[] {
-  return budgetByCategory[product.category] ?? ['USD 25k-100k'];
+interface EquipmentRow {
+  category: string;
+  name: string;
+  imageUrl?: string;
 }
 
-function getProductUseCases(product: Product): string[] {
-  return useCaseByCategory[product.category] ?? ['General Care'];
+const categoryImageMap: Record<string, string[]> = {
+  'Operating Theatre Equipment': [
+    'https://static.wixstatic.com/media/8607c7_47676f0c1f584960819144d9d6dd6450~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/interior-view-operating-room.jpg',
+    'https://static.wixstatic.com/media/8607c7_47676f0c1f584960819144d9d6dd6450~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/interior-view-operating-room.jpg',
+    'https://static.wixstatic.com/media/8607c7_47676f0c1f584960819144d9d6dd6450~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/interior-view-operating-room.jpg'
+  ],
+  'OB/GYN Equipment': [
+    'https://static.wixstatic.com/media/1d7592_5250e10eb380435e943678f35afa6d57~mv2.jpg/v1/fill/w_240,h_135,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/ob_gyn.jpg',
+    'https://static.wixstatic.com/media/1d7592_5250e10eb380435e943678f35afa6d57~mv2.jpg/v1/fill/w_240,h_135,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/ob_gyn.jpg',
+    'https://static.wixstatic.com/media/1d7592_5250e10eb380435e943678f35afa6d57~mv2.jpg/v1/fill/w_240,h_135,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/ob_gyn.jpg'
+  ],
+  'Diagnostic Equipment': [
+    'https://static.wixstatic.com/media/8607c7_3c8bef0a4c374cd581df13fd8290dbd0~mv2.jpg/v1/fill/w_240,h_135,fp_0.39_0.08,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/did-you-saw-when-your-neighbor-is-leave-his-house-suspicious-man-passes-lie-detector-offic.jpg',
+    'https://static.wixstatic.com/media/8607c7_3c8bef0a4c374cd581df13fd8290dbd0~mv2.jpg/v1/fill/w_240,h_135,fp_0.39_0.08,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/did-you-saw-when-your-neighbor-is-leave-his-house-suspicious-man-passes-lie-detector-offic.jpg',
+    'https://static.wixstatic.com/media/8607c7_3c8bef0a4c374cd581df13fd8290dbd0~mv2.jpg/v1/fill/w_240,h_135,fp_0.39_0.08,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/did-you-saw-when-your-neighbor-is-leave-his-house-suspicious-man-passes-lie-detector-offic.jpg'
+  ],
+  'Sterilizer (Autoclave)': [
+    'https://static.wixstatic.com/media/1d7592_93821719805c4de1a06ba1b1baeda2c3~mv2.jpg/v1/fill/w_240,h_135,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/sterilizerjpg.jpg',
+    'https://static.wixstatic.com/media/1d7592_93821719805c4de1a06ba1b1baeda2c3~mv2.jpg/v1/fill/w_240,h_135,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/sterilizerjpg.jpg',
+    'https://static.wixstatic.com/media/1d7592_93821719805c4de1a06ba1b1baeda2c3~mv2.jpg/v1/fill/w_240,h_135,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/sterilizerjpg.jpg'
+  ],
+  'Laboratory Equipment': [
+    'https://static.wixstatic.com/media/1d7592_ec2ac61a2b3d4b1794ea8b9ef4795a81~mv2.jpg/v1/fill/w_240,h_135,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/laboratory.jpg',
+    'https://static.wixstatic.com/media/1d7592_ec2ac61a2b3d4b1794ea8b9ef4795a81~mv2.jpg/v1/fill/w_240,h_135,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/laboratory.jpg',
+    'https://static.wixstatic.com/media/1d7592_ec2ac61a2b3d4b1794ea8b9ef4795a81~mv2.jpg/v1/fill/w_240,h_135,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/laboratory.jpg'
+  ],
+  'X-ray Series': [
+    'https://static.wixstatic.com/media/1d7592_f8861afa587d48a8bf112368530f7923~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/x-ray.jpg',
+    'https://static.wixstatic.com/media/1d7592_f8861afa587d48a8bf112368530f7923~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/x-ray.jpg',
+    'https://static.wixstatic.com/media/1d7592_f8861afa587d48a8bf112368530f7923~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/x-ray.jpg'
+  ],
+  'In-Vitro Diagnostics': [
+    'https://static.wixstatic.com/media/1d7592_5397c86e049b46a49dc660b38b1244ca~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/in-vitro.jpg',
+    'https://static.wixstatic.com/media/1d7592_5397c86e049b46a49dc660b38b1244ca~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/in-vitro.jpg',
+    'https://static.wixstatic.com/media/1d7592_5397c86e049b46a49dc660b38b1244ca~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/in-vitro.jpg'
+  ],
+  'Hemodialysis Equipment': [
+    'https://static.wixstatic.com/media/8607c7_031c044842174d55b1a6fd1343897d8d~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/medical-salon-ready-chemotherapy-treatment.jpg',
+    'https://static.wixstatic.com/media/8607c7_031c044842174d55b1a6fd1343897d8d~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/medical-salon-ready-chemotherapy-treatment.jpg',
+    'https://static.wixstatic.com/media/8607c7_031c044842174d55b1a6fd1343897d8d~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/medical-salon-ready-chemotherapy-treatment.jpg'
+  ],
+  'Hospital Furniture': [
+    'https://static.wixstatic.com/media/1d7592_beec64b8ec0d4323a93349674366de1c~mv2.jpg/v1/fill/w_147,h_83,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/hospital%20bed.jpg',
+    'https://static.wixstatic.com/media/1d7592_beec64b8ec0d4323a93349674366de1c~mv2.jpg/v1/fill/w_147,h_83,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/hospital%20bed.jpg',
+    'https://static.wixstatic.com/media/1d7592_beec64b8ec0d4323a93349674366de1c~mv2.jpg/v1/fill/w_147,h_83,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/hospital%20bed.jpg'
+  ],
+  'Walking Aids': [
+    'https://static.wixstatic.com/media/1d7592_c0a21e20766e46cba9bd96dd78844f5b~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/walk%20aids.jpg',
+    'https://static.wixstatic.com/media/1d7592_c0a21e20766e46cba9bd96dd78844f5b~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/walk%20aids.jpg',
+    'https://static.wixstatic.com/media/1d7592_c0a21e20766e46cba9bd96dd78844f5b~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/walk%20aids.jpg'
+  ],
+  'First-Aid Products': [
+    'https://static.wixstatic.com/media/1d7592_10b04f1896164ed091b32e0a349c0b4e~mv2.jpg/v1/crop/x_0,y_857,w_4907,h_2762/fill/w_147,h_83,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/first-aid.jpg',
+    'https://static.wixstatic.com/media/1d7592_10b04f1896164ed091b32e0a349c0b4e~mv2.jpg/v1/crop/x_0,y_857,w_4907,h_2762/fill/w_147,h_83,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/first-aid.jpg',
+    'https://static.wixstatic.com/media/1d7592_10b04f1896164ed091b32e0a349c0b4e~mv2.jpg/v1/crop/x_0,y_857,w_4907,h_2762/fill/w_147,h_83,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/first-aid.jpg'
+  ],
+  'Medical Human Model': [
+    'https://static.wixstatic.com/media/1d7592_3e5fbcb8698b42b0b5f27fefbaf2b7d7~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/model.jpg',
+    'https://static.wixstatic.com/media/1d7592_3e5fbcb8698b42b0b5f27fefbaf2b7d7~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/model.jpg',
+    'https://static.wixstatic.com/media/1d7592_3e5fbcb8698b42b0b5f27fefbaf2b7d7~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/model.jpg'
+  ],
+  'Ophthalmic Equipment': [
+    'https://static.wixstatic.com/media/1d7592_7340be8957344a489a6555ae6f9794ba~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/optimo.jpg',
+    'https://static.wixstatic.com/media/1d7592_7340be8957344a489a6555ae6f9794ba~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/optimo.jpg',
+    'https://static.wixstatic.com/media/1d7592_7340be8957344a489a6555ae6f9794ba~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/optimo.jpg'
+  ],
+  'Dental Equipment': [
+    'https://static.wixstatic.com/media/11062b_ba5e3a2b0bf54f568e207bb681d345ff~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/Dentist%20Chair.jpg',
+    'https://static.wixstatic.com/media/11062b_ba5e3a2b0bf54f568e207bb681d345ff~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/Dentist%20Chair.jpg',
+    'https://static.wixstatic.com/media/11062b_ba5e3a2b0bf54f568e207bb681d345ff~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/Dentist%20Chair.jpg'
+  ],
+  'ENT Equipment': [
+    'https://static.wixstatic.com/media/8607c7_89ff95ab0cc44bf6a27a59a612ef56fc~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/medical-stethoscope-white-surface.jpg',
+    'https://static.wixstatic.com/media/8607c7_89ff95ab0cc44bf6a27a59a612ef56fc~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/medical-stethoscope-white-surface.jpg',
+    'https://static.wixstatic.com/media/8607c7_89ff95ab0cc44bf6a27a59a612ef56fc~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/medical-stethoscope-white-surface.jpg'
+  ],
+  'Home Care Equipment': [
+    'https://static.wixstatic.com/media/11062b_bc1fa5955b4d457892efb751a0588eb0~mv2.jpeg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/Blood%20Pressure.jpeg',
+    'https://static.wixstatic.com/media/11062b_bc1fa5955b4d457892efb751a0588eb0~mv2.jpeg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/Blood%20Pressure.jpeg',
+    'https://static.wixstatic.com/media/11062b_bc1fa5955b4d457892efb751a0588eb0~mv2.jpeg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/Blood%20Pressure.jpeg'
+  ],
+  'Veterinary Equipment': [
+    'https://static.wixstatic.com/media/8607c7_ed7d42106d7f4a64be1c5cf67860aaa5~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/close-up-veterinarian-taking-care-dog.jpg',
+    'https://static.wixstatic.com/media/8607c7_ed7d42106d7f4a64be1c5cf67860aaa5~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/close-up-veterinarian-taking-care-dog.jpg',
+    'https://static.wixstatic.com/media/8607c7_ed7d42106d7f4a64be1c5cf67860aaa5~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/close-up-veterinarian-taking-care-dog.jpg'
+  ],
+  'Medical Consumables': [
+    'https://static.wixstatic.com/media/8607c7_f44d37b3e5ee41dca5d6fdbb2dc9fc5c~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/open-first-aid-kit-with-medical-equipments-blue-background.jpg',
+    'https://static.wixstatic.com/media/8607c7_f44d37b3e5ee41dca5d6fdbb2dc9fc5c~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/open-first-aid-kit-with-medical-equipments-blue-background.jpg',
+    'https://static.wixstatic.com/media/8607c7_f44d37b3e5ee41dca5d6fdbb2dc9fc5c~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/open-first-aid-kit-with-medical-equipments-blue-background.jpg'
+  ]
+};
+
+function getCategoryImage(category: string) {
+  return getCategoryImages(category)[0];
+}
+
+function getCategoryImages(category: string) {
+  return (
+    categoryImageMap[category] ??
+    [
+      'https://static.wixstatic.com/media/8607c7_47676f0c1f584960819144d9d6dd6450~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/interior-view-operating-room.jpg',
+      'https://static.wixstatic.com/media/8607c7_47676f0c1f584960819144d9d6dd6450~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/interior-view-operating-room.jpg',
+      'https://static.wixstatic.com/media/8607c7_47676f0c1f584960819144d9d6dd6450~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/interior-view-operating-room.jpg'
+    ]
+  );
+}
+
+function getEquipmentDescription(category: string, name: string) {
+  return `${name} listed under ${category} in the current MITDASH technology catalog.`;
 }
 
 export function Products() {
   const [activeCategory, setActiveCategory] = useState<string>('all');
-  const [activeSub, setActiveSub] = useState<string>('all');
-  const [activeBrand, setActiveBrand] = useState<string>('all');
-  const [activeBudget, setActiveBudget] = useState<string>('all');
-  const [activeUseCase, setActiveUseCase] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [view, setView] = useState<'grid' | 'list'>('grid');
-  const [selected, setSelected] = useState<Product | null>(null);
-  const [compareIds, setCompareIds] = useState<string[]>([]);
+  const [selectedItem, setSelectedItem] = useState<EquipmentRow | null>(null);
 
-  const currentCategory = categories.find((c) => c.slug === activeCategory);
-  const subcategoryOptions = currentCategory?.subcategories ?? [];
-
-  const brandOptions = useMemo(() => {
-    const scoped = activeCategory === 'all'
-      ? products
-      : products.filter((item) => item.category === activeCategory);
-    return Array.from(new Set(scoped.map((item) => item.brand))).sort();
-  }, [activeCategory]);
-
-  const useCaseOptions = useMemo(() => {
-    const scoped = activeCategory === 'all'
-      ? products
-      : products.filter((item) => item.category === activeCategory);
-    return Array.from(new Set(scoped.flatMap((item) => getProductUseCases(item))));
-  }, [activeCategory]);
-
-  const budgetOptions = ['Below USD 25k', 'USD 25k-100k', 'USD 100k+'];
-
-  const filtered = useMemo(() => {
-    return products.filter((p) => {
-      const matchCat = activeCategory === 'all' || p.category === activeCategory;
-      const matchSub = activeSub === 'all' || p.subcategory === activeSub;
-      const matchBrand = activeBrand === 'all' || p.brand === activeBrand;
-      const matchBudget = activeBudget === 'all' || getProductBudget(p).includes(activeBudget);
-      const matchUseCase = activeUseCase === 'all' || getProductUseCases(p).includes(activeUseCase);
-      const q = searchQuery.trim().toLowerCase();
-      const matchSearch =
-        !q ||
-        p.name.toLowerCase().includes(q) ||
-        p.brand.toLowerCase().includes(q) ||
-        p.description.toLowerCase().includes(q) ||
-        p.subcategory.toLowerCase().includes(q);
-
-      return matchCat && matchSub && matchBrand && matchBudget && matchUseCase && matchSearch;
-    });
-  }, [activeCategory, activeSub, activeBrand, activeBudget, activeUseCase, searchQuery]);
-
-  const compareProducts = useMemo(
-    () => products.filter((item) => compareIds.includes(item.id)),
-    [compareIds]
+  const categories = useMemo(
+    () => technologyEquipmentIndex.map((group) => group.name),
+    []
   );
 
-  const totalInventoryItems = useMemo(
+  const filteredRows = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase();
+
+    return technologyEquipmentIndex
+      .filter((group) => activeCategory === 'all' || group.name === activeCategory)
+      .flatMap((group) =>
+        group.items
+          .filter((item) => {
+            if (!q) return true;
+            return item.toLowerCase().includes(q) || group.name.toLowerCase().includes(q);
+          })
+          .map<EquipmentRow>((item) => ({
+            category: group.name,
+            name: item
+          }))
+      );
+  }, [activeCategory, searchQuery]);
+
+  const groupedRows = useMemo(() => {
+    const grouped: Record<string, string[]> = {};
+
+    filteredRows.forEach((row) => {
+      if (!grouped[row.category]) {
+        grouped[row.category] = [];
+      }
+      grouped[row.category].push(row.name);
+    });
+
+    return Object.entries(grouped).map(([name, items]) => ({ name, items }));
+  }, [filteredRows]);
+
+  const totalItems = useMemo(
     () => technologyEquipmentIndex.reduce((count, group) => count + group.items.length, 0),
     []
   );
 
-  const filteredInventory = useMemo(() => {
-    const q = searchQuery.trim().toLowerCase();
-    if (!q) {
-      return technologyEquipmentIndex;
-    }
-
-    return technologyEquipmentIndex
-      .map((group) => ({
-        ...group,
-        items: group.items.filter((item) => item.toLowerCase().includes(q))
-      }))
-      .filter((group) => group.items.length > 0 || group.name.toLowerCase().includes(q));
-  }, [searchQuery]);
-
-  const resetCategory = (slug: string) => {
-    setActiveCategory(slug);
-    setActiveSub('all');
-    setActiveBrand('all');
-    setActiveUseCase('all');
-    setActiveBudget('all');
-  };
-
-  const toggleCompare = (productId: string) => {
-    setCompareIds((prev) => {
-      if (prev.includes(productId)) {
-        return prev.filter((id) => id !== productId);
-      }
-      if (prev.length >= 3) {
-        return prev;
-      }
-      return [...prev, productId];
-    });
-  };
-
   return (
-    <div className="bg-paper-100 min-h-screen">
+    <div className="bg-white min-h-screen">
       <section className="relative pt-40 pb-16 bg-ink-950 overflow-hidden grain">
         <div className="absolute inset-0 z-0">
           <img
-            src={
-              currentCategory?.hero ??
-              'https://images.unsplash.com/photo-1551190822-a9333d879b1f?auto=format&fit=crop&w=2400&q=80'
-            }
+            src="https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?auto=format&fit=crop&w=2400&q=80"
             alt=""
-            className="w-full h-full object-cover opacity-35"
+            className="w-full h-full object-cover opacity-30"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/70 to-ink-950/50" />
+          <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/75 to-ink-950/55" />
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-4xl">
-            <p className="font-mono text-xs uppercase tracking-[0.25em] text-signal-300 mb-4">Smart Discovery Catalog</p>
-            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-light text-white leading-[1.05] mb-5">
-              Filter fast. Compare clearly. Procure confidently.
-            </h1>
-            <p className="text-white/75 text-lg max-w-2xl">
-              Explore certified equipment by department, brand, budget, and clinical use case. Build a shortlist and request a tailored quote in one flow.
-            </p>
-          </div>
+          <p className="font-mono text-xs uppercase tracking-[0.25em] text-signal-300 mb-4">MITDASH Technology Catalog</p>
+          {/* Heading and description removed as requested */}
         </div>
       </section>
 
-      <div className="sticky top-[72px] z-30 bg-paper-100/95 backdrop-blur-md border-b border-ink-100">
+      <div className="sticky top-[72px] z-30 bg-white/95 backdrop-blur-md border-b border-ink-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 -mb-2">
+          <div className="flex flex-wrap items-center gap-2">
             <button
-              onClick={() => resetCategory('all')}
-              className={`shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-colors ${activeCategory === 'all' ? 'bg-ink-950 text-white' : 'bg-paper-200 text-ink-700 hover:bg-paper-300'}`}
+              onClick={() => setActiveCategory('all')}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                activeCategory === 'all'
+                  ? 'bg-ink-950 text-white'
+                  : 'bg-white text-ink-700 hover:bg-ink-100 border border-ink-200'
+              }`}
             >
-              All Products
+              All Categories
             </button>
-            {categories.map((cat) => (
+            {categories.map((category) => (
               <button
-                key={cat.slug}
-                onClick={() => resetCategory(cat.slug)}
-                className={`shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-colors ${activeCategory === cat.slug ? 'bg-ink-950 text-white' : 'bg-paper-200 text-ink-700 hover:bg-paper-300'}`}
+                key={category}
+                onClick={() => setActiveCategory(category)}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                  activeCategory === category
+                    ? 'bg-ink-950 text-white'
+                    : 'bg-white text-ink-700 hover:bg-ink-100 border border-ink-200'
+                }`}
               >
-                <span className={activeCategory === cat.slug ? 'text-signal-400' : 'text-ink-500'}>{iconMap[cat.icon]}</span>
-                {cat.name}
+                {category}
               </button>
             ))}
           </div>
@@ -194,176 +221,123 @@ export function Products() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             <aside className="lg:col-span-3 bg-white border border-paper-300 rounded-3xl p-5 h-fit lg:sticky lg:top-28">
               <div className="mb-5">
-                <h2 className="font-display text-2xl text-ink-900">Filters</h2>
-                <p className="text-sm text-ink-500">Narrow by procurement constraints.</p>
+                <h2 className="font-display text-2xl text-ink-900">Search Catalog</h2>
+                <p className="text-sm text-ink-500">Filter by item name or category.</p>
               </div>
 
-              <div className="space-y-5">
-                <div>
-                  <label className="text-xs uppercase tracking-widest text-ink-500 font-semibold">Search</label>
-                  <div className="relative mt-2">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-400" size={16} />
-                    <input
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      placeholder="Product, brand, or type"
-                      className="w-full pl-10 pr-9 py-2.5 rounded-xl bg-paper-50 border border-paper-300 text-sm focus:outline-none focus:ring-2 focus:ring-signal-400"
-                    />
-                    {searchQuery && (
-                      <button
-                        onClick={() => setSearchQuery('')}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-ink-400 hover:text-ink-700"
-                      >
-                        <X size={14} />
-                      </button>
-                    )}
-                  </div>
-                </div>
-
-                {subcategoryOptions.length > 0 && (
-                  <div>
-                    <label className="text-xs uppercase tracking-widest text-ink-500 font-semibold">Subcategory</label>
-                    <select
-                      value={activeSub}
-                      onChange={(e) => setActiveSub(e.target.value)}
-                      className="mt-2 w-full px-3 py-2.5 rounded-xl border border-paper-300 bg-white text-sm"
+              <div>
+                <label className="text-xs uppercase tracking-widest text-ink-500 font-semibold">Search</label>
+                <div className="relative mt-2">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-400" size={16} />
+                  <input
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Search equipment"
+                    className="w-full pl-10 pr-9 py-2.5 rounded-xl bg-white border border-paper-300 text-sm focus:outline-none focus:ring-2 focus:ring-signal-400"
+                  />
+                  {searchQuery && (
+                    <button
+                      onClick={() => setSearchQuery('')}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-ink-400 hover:text-ink-700"
                     >
-                      <option value="all">All</option>
-                      {subcategoryOptions.map((sub) => (
-                        <option key={sub} value={sub}>{sub}</option>
-                      ))}
-                    </select>
-                  </div>
-                )}
-
-                <div>
-                  <label className="text-xs uppercase tracking-widest text-ink-500 font-semibold">Brand</label>
-                  <select
-                    value={activeBrand}
-                    onChange={(e) => setActiveBrand(e.target.value)}
-                    className="mt-2 w-full px-3 py-2.5 rounded-xl border border-paper-300 bg-white text-sm"
-                  >
-                    <option value="all">All Brands</option>
-                    {brandOptions.map((brand) => (
-                      <option key={brand} value={brand}>{brand}</option>
-                    ))}
-                  </select>
+                      <X size={14} />
+                    </button>
+                  )}
                 </div>
+              </div>
 
-                <div>
-                  <label className="text-xs uppercase tracking-widest text-ink-500 font-semibold">Budget</label>
-                  <select
-                    value={activeBudget}
-                    onChange={(e) => setActiveBudget(e.target.value)}
-                    className="mt-2 w-full px-3 py-2.5 rounded-xl border border-paper-300 bg-white text-sm"
-                  >
-                    <option value="all">All ranges</option>
-                    {budgetOptions.map((budget) => (
-                      <option key={budget} value={budget}>{budget}</option>
-                    ))}
-                  </select>
-                </div>
+              <button
+                onClick={() => {
+                  setSearchQuery('');
+                  setActiveCategory('all');
+                }}
+                className="mt-5 w-full rounded-xl border border-ink-200 py-2.5 text-sm font-medium text-ink-600 hover:text-ink-900"
+              >
+                Reset Filters
+              </button>
 
-                <div>
-                  <label className="text-xs uppercase tracking-widest text-ink-500 font-semibold">Clinical Use Case</label>
-                  <select
-                    value={activeUseCase}
-                    onChange={(e) => setActiveUseCase(e.target.value)}
-                    className="mt-2 w-full px-3 py-2.5 rounded-xl border border-paper-300 bg-white text-sm"
-                  >
-                    <option value="all">All use cases</option>
-                    {useCaseOptions.map((useCase) => (
-                      <option key={useCase} value={useCase}>{useCase}</option>
-                    ))}
-                  </select>
-                </div>
-
-                <button
-                  onClick={() => {
-                    setSearchQuery('');
-                    setActiveCategory('all');
-                    setActiveSub('all');
-                    setActiveBrand('all');
-                    setActiveBudget('all');
-                    setActiveUseCase('all');
-                  }}
-                  className="w-full rounded-xl border border-ink-200 py-2.5 text-sm font-medium text-ink-600 hover:text-ink-900"
-                >
-                  Reset All Filters
-                </button>
+              <div className="mt-6 rounded-2xl bg-white border border-paper-300 p-4">
+                <div className="font-mono text-xs uppercase tracking-wider text-ink-500">Indexed Equipment</div>
+                <div className="font-display text-3xl text-ink-900">{totalItems}</div>
               </div>
             </aside>
 
             <div className="lg:col-span-9">
-              <div className="flex items-center justify-between mb-5">
-                <p className="text-sm text-ink-500 font-mono">{filtered.length} {filtered.length === 1 ? 'result' : 'results'}</p>
-                <div className="flex bg-paper-200 rounded-full p-1">
-                  <button onClick={() => setView('grid')} className={`p-1.5 rounded-full ${view === 'grid' ? 'bg-white text-ink-900 shadow-sm' : 'text-ink-500'}`}>
-                    <LayoutGrid size={14} />
-                  </button>
-                  <button onClick={() => setView('list')} className={`p-1.5 rounded-full ${view === 'list' ? 'bg-white text-ink-900 shadow-sm' : 'text-ink-500'}`}>
-                    <Rows3 size={14} />
-                  </button>
-                </div>
+              <div className="mb-5">
+                <p className="text-sm text-ink-500 font-mono">
+                  {filteredRows.length} {filteredRows.length === 1 ? 'item' : 'items'} shown
+                </p>
               </div>
 
-              {filtered.length === 0 ? (
+              {groupedRows.length === 0 ? (
                 <div className="text-center py-20 bg-white rounded-3xl border border-dashed border-ink-200">
-                  <h3 className="font-display text-2xl text-ink-900 mb-2">No matching products</h3>
-                  <p className="text-ink-500">Try broadening your filters or clearing your search.</p>
+                  <h3 className="font-display text-2xl text-ink-900 mb-2">No matching equipment</h3>
+                  <p className="text-ink-500">Try broadening your search or selecting another category.</p>
                 </div>
               ) : (
-                <div className={view === 'grid' ? 'grid sm:grid-cols-2 gap-5' : 'flex flex-col gap-4'}>
-                  <AnimatePresence mode="popLayout">
-                    {filtered.map((p, i) => (
-                      <motion.div
-                        key={p.id}
-                        layout
-                        initial={{ opacity: 0, y: 16 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, scale: 0.98 }}
-                        transition={{ delay: i * 0.02 }}
-                        className={`group rounded-2xl border border-paper-300 bg-paper-50 overflow-hidden ${view === 'grid' ? '' : 'md:flex'}`}
-                      >
-                        <div className={`relative bg-paper-200 ${view === 'grid' ? 'aspect-[4/3]' : 'md:w-72 shrink-0 aspect-[4/3]'}`}>
-                          <img src={p.image} alt={p.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                          <button
-                            type="button"
-                            onClick={() => toggleCompare(p.id)}
-                            className={`absolute top-3 right-3 inline-flex items-center gap-1.5 px-2 py-1 rounded-full text-[11px] font-semibold ${compareIds.includes(p.id) ? 'bg-ink-950 text-white' : 'bg-white/90 text-ink-700'}`}
-                          >
-                            {compareIds.includes(p.id) ? <CheckCircle2 size={12} /> : <Scale size={12} />}
-                            {compareIds.includes(p.id) ? 'Added' : 'Compare'}
-                          </button>
-                        </div>
-                        <div className="p-5 flex flex-col flex-1">
-                          <div className="font-mono text-[10px] uppercase tracking-widest text-ink-500 mb-2">{p.brand} · {p.subcategory}</div>
-                          <h3 className="font-display text-xl text-ink-900 mb-2">{p.name}</h3>
-                          <p className="text-sm text-ink-600 line-clamp-2 mb-4">{p.description}</p>
-                          <div className="flex flex-wrap gap-2 mb-5">
-                            {getProductBudget(p).map((budget) => (
-                              <span key={budget} className="text-[10px] uppercase tracking-wider font-semibold bg-paper-200 text-ink-700 px-2 py-1 rounded-full">{budget}</span>
-                            ))}
-                            {getProductUseCases(p).slice(0, 2).map((useCase) => (
-                              <span key={useCase} className="text-[10px] uppercase tracking-wider font-semibold bg-signal-100 text-signal-900 px-2 py-1 rounded-full">{useCase}</span>
-                            ))}
-                          </div>
-                          <div className="mt-auto flex items-center gap-2">
+                <div className="space-y-6">
+                  {groupedRows.map((group, i) => (
+                    <motion.article
+                      key={group.name}
+                      initial={{ opacity: 0, y: 14 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: i * 0.03 }}
+                      className="rounded-2xl border border-paper-300 bg-white p-5"
+                    >
+                      <h3 className="font-display text-2xl text-ink-900 mb-4">{group.name}</h3>
+                      <div className="mb-4 grid gap-3 md:grid-cols-3">
+                        {group.items.slice(0, 3).map((item, imageIndex) => {
+                          const imageUrl = getCategoryImages(group.name)[imageIndex] ?? getCategoryImage(group.name);
+
+                          return (
                             <button
+                              key={`${group.name}-image-${item}`}
                               type="button"
-                              onClick={() => setSelected(p)}
-                              className="inline-flex items-center gap-2 bg-ink-950 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-ink-900"
+                              onClick={() =>
+                                setSelectedItem({
+                                  category: group.name,
+                                  name: item,
+                                  imageUrl
+                                })
+                              }
+                              className="group relative rounded-xl overflow-hidden border border-paper-300 bg-white aspect-[4/3] text-left"
                             >
-                              View Specs <ArrowUpRight size={13} />
+                              <img
+                                src={imageUrl}
+                                alt={item}
+                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                              />
+                              <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/55 to-transparent" />
+                              <div className="absolute inset-x-0 bottom-0 p-4">
+                                <div className="text-white font-semibold leading-tight mb-1">{item}</div>
+                                <div className="text-white/75 text-xs leading-relaxed">
+                                  {getEquipmentDescription(group.name, item)}
+                                </div>
+                              </div>
                             </button>
-                            <Link to="/contact" className="inline-flex items-center gap-2 text-sm text-ink-700 hover:text-ink-900">
-                              Request Quote
-                            </Link>
+                          );
+                        })}
+                      </div>
+                      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                        {group.items.slice(3).map((item) => (
+                          <div
+                            key={`${group.name}-${item}`}
+                            className="rounded-xl border border-paper-300 bg-white p-3 flex items-center justify-between gap-2"
+                          >
+                            <span className="text-sm text-ink-800 leading-snug">{item}</span>
+                            <div className="shrink-0 flex items-center gap-2">
+                              <Link
+                                to="/contact"
+                                className="inline-flex items-center gap-1 text-xs font-semibold text-ink-700 hover:text-ink-900"
+                              >
+                                Quote <ArrowUpRight size={12} />
+                              </Link>
+                            </div>
                           </div>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </AnimatePresence>
+                        ))}
+                      </div>
+                    </motion.article>
+                  ))}
                 </div>
               )}
             </div>
@@ -371,142 +345,55 @@ export function Products() {
         </div>
       </section>
 
-      <section className="pb-28">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="rounded-3xl border border-paper-300 bg-white p-6 md:p-8">
-            <div className="flex flex-wrap items-end justify-between gap-4 mb-6">
-              <div>
-                <p className="font-mono text-xs uppercase tracking-[0.25em] text-ink-500 mb-2">MITDASH Technology Coverage</p>
-                <h2 className="font-display text-3xl md:text-4xl text-ink-900">Complete Equipment Index</h2>
-                <p className="text-ink-600 mt-2 max-w-3xl">
-                  All equipment types listed on MITDASH technology are included below so procurement teams can quickly verify portfolio coverage, even when an image card is not shown yet.
-                </p>
-              </div>
-              <div className="rounded-2xl bg-paper-100 border border-paper-300 px-4 py-3 text-right">
-                <div className="font-mono text-xs uppercase tracking-wider text-ink-500">Indexed Equipment</div>
-                <div className="font-display text-3xl text-ink-900">{totalInventoryItems}</div>
-              </div>
-            </div>
-
-            {filteredInventory.length === 0 ? (
-              <div className="text-sm text-ink-500 rounded-xl border border-dashed border-paper-300 px-4 py-5">
-                No equipment names in the index match your current search.
-              </div>
-            ) : (
-              <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
-                {filteredInventory.map((group) => (
-                  <article key={group.name} className="rounded-2xl border border-paper-300 bg-paper-50 p-4">
-                    <h3 className="font-semibold text-ink-900 mb-3">{group.name}</h3>
-                    <ul className="space-y-1.5">
-                      {group.items.map((item) => (
-                        <li key={`${group.name}-${item}`} className="text-sm text-ink-700 leading-snug">
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </article>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-      </section>
-
       <AnimatePresence>
-        {selected && (
+        {selectedItem && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 bg-ink-950/80 backdrop-blur-sm p-4 overflow-y-auto"
-            onClick={() => setSelected(null)}
+            onClick={() => setSelectedItem(null)}
           >
             <motion.div
-              initial={{ opacity: 0, y: 20, scale: 0.98 }}
+              initial={{ opacity: 0, y: 18, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 20, scale: 0.98 }}
+              exit={{ opacity: 0, y: 18, scale: 0.98 }}
               onClick={(e) => e.stopPropagation()}
-              className="max-w-4xl mx-auto my-8 rounded-3xl overflow-hidden bg-white border border-paper-300"
+              className="max-w-3xl mx-auto my-8 rounded-3xl overflow-hidden bg-white border border-paper-300"
             >
-              <div className="grid md:grid-cols-2">
-                <div className="bg-paper-200">
-                  <img src={selected.image} alt={selected.name} className="w-full h-full object-cover" />
+              <div className="bg-white aspect-[16/9]">
+                <img
+                  src={selectedItem.imageUrl ?? getCategoryImage(selectedItem.category)}
+                  alt={selectedItem.name}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="p-6 md:p-8">
+                <div className="font-mono text-[11px] uppercase tracking-widest text-ink-500 mb-3">
+                  {selectedItem.category}
                 </div>
-                <div className="p-7 md:p-9">
-                  <div className="font-mono text-[11px] uppercase tracking-widest text-ink-500 mb-3">{selected.brand} · {selected.subcategory}</div>
-                  <h2 className="font-display text-3xl text-ink-900 mb-4">{selected.name}</h2>
-                  <p className="text-ink-600 mb-6">{selected.description}</p>
-
-                  <div className="border-t border-paper-300 pt-5 mb-6">
-                    <h3 className="text-xs uppercase tracking-widest text-ink-500 font-semibold mb-3">Quick Spec Snapshot</h3>
-                    <dl className="grid grid-cols-2 gap-x-4 gap-y-3">
-                      {selected.specs.map((spec) => (
-                        <div key={spec.label}>
-                          <dt className="text-xs text-ink-500">{spec.label}</dt>
-                          <dd className="text-sm font-semibold text-ink-900">{spec.value}</dd>
-                        </div>
-                      ))}
-                    </dl>
-                  </div>
-
-                  <div className="flex flex-wrap gap-3">
-                    <Link to="/contact" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-ink-950 text-white text-sm font-medium">
-                      Request Quote <ArrowUpRight size={13} />
-                    </Link>
-                    <button
-                      type="button"
-                      onClick={() => toggleCompare(selected.id)}
-                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-paper-300 text-sm font-medium text-ink-700"
-                    >
-                      <Scale size={14} />
-                      {compareIds.includes(selected.id) ? 'Remove From Compare' : 'Add To Compare'}
-                    </button>
-                  </div>
+                <h2 className="font-display text-3xl text-ink-900 mb-3">{selectedItem.name}</h2>
+                <p className="text-ink-600 mb-6">
+                  {getEquipmentDescription(selectedItem.category, selectedItem.name)} Contact our team for configuration and availability.
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  <Link
+                    to="/contact"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-ink-950 text-white text-sm font-medium"
+                    onClick={() => setSelectedItem(null)}
+                  >
+                    Request Quote <ArrowUpRight size={13} />
+                  </Link>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedItem(null)}
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-paper-300 text-sm font-medium text-ink-700"
+                  >
+                    Close
+                  </button>
                 </div>
               </div>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <AnimatePresence>
-        {compareProducts.length > 0 && (
-          <motion.div
-            initial={{ y: 90, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 90, opacity: 0 }}
-            className="fixed bottom-20 md:bottom-6 left-4 right-4 md:left-1/2 md:-translate-x-1/2 md:max-w-4xl z-40"
-          >
-            <div className="bg-ink-950 text-white rounded-2xl border border-white/10 p-4 md:p-5 shadow-2xl">
-              <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
-                <p className="text-sm font-semibold">Comparison Shortlist ({compareProducts.length}/3)</p>
-                <div className="flex items-center gap-2">
-                  <button
-                    type="button"
-                    onClick={() => setCompareIds([])}
-                    className="text-xs text-white/70 hover:text-white"
-                  >
-                    Clear
-                  </button>
-                  <Link
-                    to="/contact"
-                    className="inline-flex items-center gap-2 rounded-full bg-signal-400 text-ink-950 px-4 py-2 text-xs font-semibold"
-                  >
-                    Request Comparative Quote <ArrowUpRight size={12} />
-                  </Link>
-                </div>
-              </div>
-              <div className="grid gap-3 md:grid-cols-3">
-                {compareProducts.map((item) => (
-                  <div key={item.id} className="rounded-xl bg-white/5 border border-white/10 p-3">
-                    <div className="text-[10px] font-mono text-signal-300 uppercase tracking-widest mb-1">{item.brand}</div>
-                    <h4 className="text-sm font-semibold leading-tight mb-2">{item.name}</h4>
-                    <p className="text-xs text-white/70">{item.specs[0]?.label}: {item.specs[0]?.value}</p>
-                    <p className="text-xs text-white/70">{item.specs[1]?.label}: {item.specs[1]?.value}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
           </motion.div>
         )}
       </AnimatePresence>
