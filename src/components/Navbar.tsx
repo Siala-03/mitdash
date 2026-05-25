@@ -44,12 +44,7 @@ export function Navbar() {
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2.5 group">
-            <div className="relative">
-              <div className="bg-brand-900 text-white p-2 rounded-xl group-hover:bg-brand-800 transition-colors">
-                <Activity size={22} strokeWidth={2.5} />
-              </div>
-              <div className="absolute -inset-1 bg-brand-500/20 rounded-xl blur-md opacity-0 group-hover:opacity-100 transition-opacity -z-10" />
-            </div>
+            <img src="/logo.avif" alt="MITDASH Logo" className="h-10 w-auto" />
             <div className="flex flex-col leading-none">
               <span className="font-bold text-xl tracking-tight text-slate-900">
                 MIT<span className="text-brand-600">·</span>DASH

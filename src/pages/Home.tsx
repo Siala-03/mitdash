@@ -472,11 +472,8 @@ export function Home() {
               className="lg:col-span-6">
               
               <div className="inline-flex items-center gap-3 mb-8">
-                <span className="font-mono text-xs text-signal-700">[01]</span>
                 <div className="w-12 h-px bg-ink-300" />
-                <span className="text-xs font-semibold tracking-[0.25em] text-ink-600 uppercase">
-                  About
-                </span>
+                <span className="text-xs font-semibold tracking-[0.25em] text-ink-600 uppercase">About</span>
               </div>
 
               <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-ink-900 leading-[1.05] mb-8">
@@ -546,11 +543,8 @@ export function Home() {
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-16 gap-8">
             <div>
               <div className="inline-flex items-center gap-3 mb-6">
-                <span className="font-mono text-xs text-signal-400">[02]</span>
                 <div className="w-12 h-px bg-white/30" />
-                <span className="text-xs font-semibold tracking-[0.25em] text-signal-300 uppercase">
-                  Portfolio
-                </span>
+                <span className="text-xs font-semibold tracking-[0.25em] text-signal-300 uppercase">Portfolio</span>
               </div>
               <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-white leading-[1.05] max-w-3xl">
                 Equipment for every department,{' '}
@@ -676,11 +670,8 @@ export function Home() {
           <div className="grid lg:grid-cols-12 gap-12 mb-20">
             <div className="lg:col-span-5">
               <div className="inline-flex items-center gap-3 mb-6">
-                <span className="font-mono text-xs text-signal-700">[03]</span>
                 <div className="w-12 h-px bg-ink-300" />
-                <span className="text-xs font-semibold tracking-[0.25em] text-ink-600 uppercase">
-                  The Difference
-                </span>
+                <span className="text-xs font-semibold tracking-[0.25em] text-ink-600 uppercase">The Difference</span>
               </div>
               <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-ink-900 leading-[1.05]">
                 More than supply.{' '}

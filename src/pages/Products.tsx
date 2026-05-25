@@ -12,9 +12,12 @@ interface EquipmentRow {
 
 const categoryImageMap: Record<string, string[]> = {
   'Operating Theatre Equipment': [
-    'https://static.wixstatic.com/media/8607c7_47676f0c1f584960819144d9d6dd6450~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/interior-view-operating-room.jpg',
-    'https://static.wixstatic.com/media/8607c7_47676f0c1f584960819144d9d6dd6450~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/interior-view-operating-room.jpg',
-    'https://static.wixstatic.com/media/8607c7_47676f0c1f584960819144d9d6dd6450~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/interior-view-operating-room.jpg'
+    // Anaesthesia Machine
+    'https://images.pexels.com/photos/3845126/pexels-photo-3845126.jpeg?auto=compress&w=600&q=80',
+    // Ventilator
+    'https://images.pexels.com/photos/3844581/pexels-photo-3844581.jpeg?auto=compress&w=600&q=80',
+    // Defibrillator
+    'https://images.pexels.com/photos/4226120/pexels-photo-4226120.jpeg?auto=compress&w=600&q=80'
   ],
   'OB/GYN Equipment': [
     'https://static.wixstatic.com/media/1d7592_5250e10eb380435e943678f35afa6d57~mv2.jpg/v1/fill/w_240,h_135,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/ob_gyn.jpg',
@@ -118,8 +121,22 @@ function getCategoryImages(category: string) {
   );
 }
 
-function getEquipmentDescription(category: string, name: string) {
-  return `${name} listed under ${category} in the current MITDASH technology catalog.`;
+
+// Custom descriptions for the first 3 equipment
+const customDescriptions: Record<string, Record<string, string>> = {
+  'Operating Theatre Equipment': {
+    'Anaesthesia Machine': 'A modern anaesthesia machine designed for safe and precise delivery of anesthetic gases during surgery.',
+    'Ventilator': 'Advanced ventilator providing critical respiratory support for patients in operating rooms and intensive care units.',
+    'Defibrillator': 'Reliable defibrillator for rapid response to cardiac emergencies, ensuring patient safety during procedures.'
+  }
+  // Add more categories/items as needed
+};
+
+function getCustomDescription(category: string, name: string) {
+  if (customDescriptions[category] && customDescriptions[category][name]) {
+    return customDescriptions[category][name];
+  }
+  return 'Contact our team for configuration, availability, and detailed specifications.';
 }
 
 export function Products() {
@@ -219,48 +236,7 @@ export function Products() {
       <section className="py-10 pb-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            <aside className="lg:col-span-3 bg-white border border-paper-300 rounded-3xl p-5 h-fit lg:sticky lg:top-28">
-              <div className="mb-5">
-                <h2 className="font-display text-2xl text-ink-900">Search Catalog</h2>
-                <p className="text-sm text-ink-500">Filter by item name or category.</p>
-              </div>
-
-              <div>
-                <label className="text-xs uppercase tracking-widest text-ink-500 font-semibold">Search</label>
-                <div className="relative mt-2">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-400" size={16} />
-                  <input
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Search equipment"
-                    className="w-full pl-10 pr-9 py-2.5 rounded-xl bg-white border border-paper-300 text-sm focus:outline-none focus:ring-2 focus:ring-signal-400"
-                  />
-                  {searchQuery && (
-                    <button
-                      onClick={() => setSearchQuery('')}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-ink-400 hover:text-ink-700"
-                    >
-                      <X size={14} />
-                    </button>
-                  )}
-                </div>
-              </div>
-
-              <button
-                onClick={() => {
-                  setSearchQuery('');
-                  setActiveCategory('all');
-                }}
-                className="mt-5 w-full rounded-xl border border-ink-200 py-2.5 text-sm font-medium text-ink-600 hover:text-ink-900"
-              >
-                Reset Filters
-              </button>
-
-              <div className="mt-6 rounded-2xl bg-white border border-paper-300 p-4">
-                <div className="font-mono text-xs uppercase tracking-wider text-ink-500">Indexed Equipment</div>
-                <div className="font-display text-3xl text-ink-900">{totalItems}</div>
-              </div>
-            </aside>
+            {/* Sidebar removed as requested */}
 
             <div className="lg:col-span-9">
               <div className="mb-5">
@@ -311,7 +287,7 @@ export function Products() {
                               <div className="absolute inset-x-0 bottom-0 p-4">
                                 <div className="text-white font-semibold leading-tight mb-1">{item}</div>
                                 <div className="text-white/75 text-xs leading-relaxed">
-                                  {getEquipmentDescription(group.name, item)}
+
                                 </div>
                               </div>
                             </button>
@@ -373,9 +349,7 @@ export function Products() {
                   {selectedItem.category}
                 </div>
                 <h2 className="font-display text-3xl text-ink-900 mb-3">{selectedItem.name}</h2>
-                <p className="text-ink-600 mb-6">
-                  {getEquipmentDescription(selectedItem.category, selectedItem.name)} Contact our team for configuration and availability.
-                </p>
+
                 <div className="flex flex-wrap gap-3">
                   <Link
                     to="/contact"

@@ -229,9 +229,7 @@ export function Cooperation() {
           <div className="text-center max-w-2xl mx-auto mb-16">
             <div className="inline-flex items-center gap-2 mb-6">
               <div className="w-12 h-px bg-brand-600" />
-              <span className="text-xs font-semibold tracking-[0.2em] text-brand-700 uppercase">
-                Regional Reach
-              </span>
+              <span className="text-xs font-semibold tracking-[0.2em] text-brand-700 uppercase">Regional Reach</span>
               <div className="w-12 h-px bg-brand-600" />
             </div>
             <h2 className="font-display text-4xl lg:text-5xl font-medium text-slate-900 leading-tight">
@@ -418,33 +416,28 @@ export function Cooperation() {
           <div className="space-y-px bg-slate-200 rounded-2xl overflow-hidden">
             {[
             {
-              step: '01',
               title: 'Discovery Call',
               desc: 'We learn about your product portfolio, target markets and commercial expectations.'
             },
             {
-              step: '02',
               title: 'Market Assessment',
               desc: 'We deliver a market analysis with sizing, key accounts and competitive landscape.'
             },
             {
-              step: '03',
               title: 'Distribution Agreement',
               desc: 'We sign clear terms covering territory, targets, training and after-sales obligations.'
             },
             {
-              step: '04',
               title: 'Launch & Scale',
               desc: 'Co-funded launch campaigns, clinical demonstrations and KOL engagement programs.'
             },
             {
-              step: '05',
               title: 'Ongoing Partnership',
               desc: 'Quarterly business reviews, expansion planning and joint product development.'
-            }].
-            map((p, i) =>
+            }
+            ].map((p, i) =>
             <motion.div
-              key={p.step}
+              key={p.title}
               initial={{
                 opacity: 0,
                 x: -20
