@@ -1,23 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, X, ArrowUpRight, Download, FileText, Check } from 'lucide-react';
+import { Search, X, ArrowUpRight, Download, FileText } from 'lucide-react';
 import { technologyEquipmentIndex } from '../data/catalog';
-
-const BRANDS = ['Comen', 'Brownier', 'Neurosoft', 'Vatech', 'Runyes', 'Medispark', 'Dochem', 'GC Fuji'] as const;
-
-// Extract brand name from item name e.g. "CT Scan (Neurosoft)" → "Neurosoft"
-function parseBrand(itemName: string): string | null {
-  const match = itemName.match(/\(([^)]+)\)\s*$/);
-  if (!match) return null;
-  const candidate = match[1].trim();
-  return (BRANDS as readonly string[]).includes(candidate) ? candidate : null;
-}
-
-// Strip brand parenthetical from display name
-function displayName(itemName: string): string {
-  return itemName.replace(/\s*\([^)]+\)\s*$/, '').trim();
-}
 
 interface SelectedItem {
   category: string;
@@ -25,45 +10,69 @@ interface SelectedItem {
   imageUrl: string;
 }
 
-// Up to 4 images per category — aligned to the first 4 items in order.
-// Remaining items are shown as a text list below the grid.
-const categoryImages: Record<string, string[]> = {
-  'Surgical': [
-    'https://images.pexels.com/photos/3845126/pexels-photo-3845126.jpeg?auto=compress&cs=tinysrgb&w=800',
-  ],
-  'Imaging': [
-    // X-ray
-    'https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&w=800&q=80',
-    // Fluoroscopy — vascular / radiographic suite
-    'https://images.pexels.com/photos/7089407/pexels-photo-7089407.jpeg?auto=compress&cs=tinysrgb&w=800',
-    // CT Scan
-    'https://images.unsplash.com/photo-1666214280557-f1b5022eb634?auto=format&fit=crop&w=800&q=80',
-    // MRI
-    'https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=800&q=80',
-  ],
-  'Laboratory': [
-    // Haematology Analyzer
-    'https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=800&q=80',
-    // Biochemistry Analyzer
-    'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80',
-  ],
-  'Dental': [
-    // Integrated Dental Unit
-    'https://images.pexels.com/photos/4269694/pexels-photo-4269694.jpeg?auto=compress&cs=tinysrgb&w=800',
-    // Dental Chair
-    'https://images.pexels.com/photos/3845743/pexels-photo-3845743.jpeg?auto=compress&cs=tinysrgb&w=800',
-    // Dental X-Ray
-    'https://images.pexels.com/photos/1170979/pexels-photo-1170979.jpeg?auto=compress&cs=tinysrgb&w=800',
-    // Autoclave / CBCT
-    'https://images.unsplash.com/photo-1530497610245-94d3c16cda28?auto=format&fit=crop&w=800&q=80',
-  ],
+// Local images from /public — keyed by exact item name from the catalog.
+// Filenames with spaces/special chars are URL-encoded for safe use in src.
+const itemImages: Record<string, string> = {
+  // ── Surgical ──────────────────────────────────────────────────────────────
+  'Anaesthesia Mask':
+    '/anaesthesia%20mask-surgical.jpg',
+  'Bronchoscope':
+    '/bronchoscope%20endoscro-surgical.jpg',
+  'Clip Appliers':
+    '/clip%20appliers-surgical.jpg',
+  'Disposable Retrieval Devices':
+    '/disposable%20retrieval%20devices%20-%20surgical.jpg',
+  'Disposable Suction & Irrigation Devices':
+    '/disposable%20suction%20irrigation%20devices%20%20-%20surgical.jpg',
+  'Sterile Negative Pressure Suction Set':
+    '/sterile-negative-pressure-suction-set.png',
+
+  // ── Imaging ───────────────────────────────────────────────────────────────
+  'X-Ray':
+    '/x-ray-imaging-brownier.jfif',
+  'Fluoroscopy':
+    '/flouroscopy-imaging.jfif',
+  'CT Scan':
+    '/NeuViz%20Epoch%2B%20CT%20SCAN-imaging.jpg',
+  'MRI':
+    '/NeuMR%20Universal-imaging.jpg',
+
+  // ── Laboratory ────────────────────────────────────────────────────────────
+  '-150°C Cryo Freezer':
+    '/-150%C2%B0C%20Cryo%20Freezer-laboratory.jpg',
+  'Alcohol Prep Pad':
+    '/alcohol%20prep%20pad-laboratory.jpg',
+  'Automatic Fluorescence Immunoassay Analyzer':
+    '/Automatic%20Fluorescence%20Immunoassay%20Analyzer%20QD-S2000-laboratory.png',
+  'Automatic IHC Stainer':
+    '/Automatic%20IHC%20Stainer-laboratory.png',
+  'Burette Infusion Set':
+    '/burrete%20infusion%20set-laboratory.jpg',
+  'Fast-Response Digital Thermometer':
+    '/Fast%20-%20response%20digital%20thermometer-laboratory.jpg',
+
+  // ── Dental ────────────────────────────────────────────────────────────────
+  'Integrated Dental Unit':
+    '/integrated%20dental%20unit-dental.png',
+  'Dental X-Ray':
+    '/dental%20x-ray.jpg',
+  'Digital Sensor':
+    '/digital%20sensor-dental.png',
+  'Autoclave 53L':
+    '/Autoclave-53L%20-%20Runyes.jfif',
+  'CBCT':
+    '/cbct-dental.jfif',
+  '2D OPG':
+    '/2d-opg-dental.jfif',
+  'UP 3D Dental Digital Laboratory':
+    '/UP3D-Dental.jpg',
 };
 
 const fallbackImage =
-  'https://images.pexels.com/photos/3944405/pexels-photo-3944405.jpeg?auto=compress&cs=tinysrgb&w=800';
+  'https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?auto=format&fit=crop&w=800&q=80';
 
-function getItemImage(category: string, index: number): string {
-  return categoryImages[category]?.[index] ?? fallbackImage;
+function getImage(itemName: string): string {
+  return itemImages[itemName] ?? fallbackImage;
 }
 
 function getGridCols(count: number): string {
@@ -76,7 +85,6 @@ function getGridCols(count: number): string {
 export function Products() {
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [activeBrands, setActiveBrands] = useState<Set<string>>(new Set());
   const [selectedItem, setSelectedItem] = useState<SelectedItem | null>(null);
 
   const categories = useMemo(
@@ -84,33 +92,21 @@ export function Products() {
     []
   );
 
-  function toggleBrand(brand: string) {
-    setActiveBrands((prev) => {
-      const next = new Set(prev);
-      if (next.has(brand)) next.delete(brand);
-      else next.add(brand);
-      return next;
-    });
-  }
-
   const filteredGroups = useMemo(() => {
     const q = searchQuery.trim().toLowerCase();
     return technologyEquipmentIndex
       .filter((group) => activeCategory === 'all' || group.name === activeCategory)
       .map((group) => ({
         ...group,
-        items: group.items.filter((item) => {
-          if (q && !item.toLowerCase().includes(q) && !group.name.toLowerCase().includes(q)) return false;
-          if (activeBrands.size > 0) {
-            const brand = parseBrand(item);
-            // Items with no parseable brand are shown regardless of brand filter
-            if (brand && !activeBrands.has(brand)) return false;
-          }
-          return true;
-        }),
+        items: q
+          ? group.items.filter(
+              (item) =>
+                item.toLowerCase().includes(q) || group.name.toLowerCase().includes(q)
+            )
+          : group.items,
       }))
       .filter((group) => group.items.length > 0);
-  }, [activeCategory, searchQuery, activeBrands]);
+  }, [activeCategory, searchQuery]);
 
   const totalItems = useMemo(
     () => technologyEquipmentIndex.reduce((acc, g) => acc + g.items.length, 0),
@@ -188,9 +184,9 @@ export function Products() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
 
             {/* ── SIDEBAR ── */}
-            <aside className="lg:col-span-3 space-y-4">
-              <div className="bg-white border border-paper-300 rounded-3xl p-5 lg:sticky lg:top-28">
-                <div className="mb-5">
+            <aside className="lg:col-span-3">
+              <div className="bg-white border border-paper-300 rounded-3xl p-5 lg:sticky lg:top-28 space-y-5">
+                <div>
                   <h2 className="font-display text-xl text-ink-900">Search Catalog</h2>
                   <p className="text-sm text-ink-500 mt-1">Filter by item name or category.</p>
                 </div>
@@ -218,48 +214,14 @@ export function Products() {
                   </div>
                 </div>
 
-                {/* Brand filter */}
-                <div className="mt-5">
-                  <label className="text-xs uppercase tracking-widest text-ink-500 font-semibold">
-                    Filter by Brand
-                  </label>
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    {BRANDS.map((brand) => {
-                      const active = activeBrands.has(brand);
-                      return (
-                        <button
-                          key={brand}
-                          onClick={() => toggleBrand(brand)}
-                          className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border transition-all ${
-                            active
-                              ? 'bg-ink-950 text-white border-ink-950'
-                              : 'bg-white text-ink-600 border-ink-200 hover:border-ink-400'
-                          }`}
-                        >
-                          {active && <Check size={10} strokeWidth={3} />}
-                          {brand}
-                        </button>
-                      );
-                    })}
-                  </div>
-                  {activeBrands.size > 0 && (
-                    <button
-                      onClick={() => setActiveBrands(new Set())}
-                      className="mt-2 text-xs text-ink-400 hover:text-ink-700 transition-colors underline"
-                    >
-                      Clear brand filter
-                    </button>
-                  )}
-                </div>
-
                 <button
-                  onClick={() => { setSearchQuery(''); setActiveCategory('all'); setActiveBrands(new Set()); }}
-                  className="mt-4 w-full rounded-xl border border-ink-200 py-2.5 text-sm font-medium text-ink-600 hover:text-ink-900 transition-colors"
+                  onClick={() => { setSearchQuery(''); setActiveCategory('all'); }}
+                  className="w-full rounded-xl border border-ink-200 py-2.5 text-sm font-medium text-ink-600 hover:text-ink-900 transition-colors"
                 >
-                  Reset All Filters
+                  Reset Filters
                 </button>
 
-                <div className="mt-5 grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-2 gap-3">
                   <div className="rounded-2xl bg-paper-50 border border-paper-300 p-3 text-center">
                     <div className="font-mono text-[10px] uppercase tracking-wider text-ink-500">Total</div>
                     <div className="font-display text-3xl text-ink-900">{totalItems}</div>
@@ -270,7 +232,7 @@ export function Products() {
                   </div>
                 </div>
 
-                <div className="mt-5 rounded-2xl bg-ink-950 p-4">
+                <div className="rounded-2xl bg-ink-950 p-4">
                   <p className="text-xs text-white/70 leading-relaxed mb-3">
                     Don't see what you need? We procure any medical equipment on request.
                   </p>
@@ -318,15 +280,15 @@ export function Products() {
                             {group.items.length} {group.items.length === 1 ? 'product' : 'products'} available
                           </p>
                         </div>
-                        <span className="font-mono text-xs px-3 py-1 rounded-full bg-ink-50 border border-ink-100 text-ink-500">
-                          {group.name.toUpperCase()}
+                        <span className="font-mono text-xs px-3 py-1 rounded-full bg-ink-50 border border-ink-100 text-ink-500 uppercase">
+                          {group.name}
                         </span>
                       </div>
 
-                      {/* Image grid — up to 4 items */}
+                      {/* Image grid — first 4 items */}
                       <div className={`grid ${gridCols} gap-px bg-paper-200`}>
-                        {imageItems.map((item, idx) => {
-                          const imageUrl = getItemImage(group.name, idx);
+                        {imageItems.map((item) => {
+                          const imageUrl = getImage(item);
                           return (
                             <button
                               key={`${group.name}-img-${item}`}
@@ -345,13 +307,8 @@ export function Products() {
                               <div className="absolute inset-0 bg-gradient-to-t from-ink-950/80 via-ink-950/20 to-transparent" />
                               <div className="absolute inset-x-0 bottom-0 p-4">
                                 <p className="text-white text-sm font-semibold leading-tight line-clamp-2">
-                                  {displayName(item)}
+                                  {item}
                                 </p>
-                                {parseBrand(item) && (
-                                  <p className="text-white/60 text-[10px] font-mono uppercase tracking-wider mt-0.5">
-                                    {parseBrand(item)}
-                                  </p>
-                                )}
                               </div>
                               <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity bg-white/20 backdrop-blur-sm rounded-full p-1.5">
                                 <ArrowUpRight size={12} className="text-white" />
@@ -361,49 +318,39 @@ export function Products() {
                         })}
                       </div>
 
-                      {/* Remaining items as compact list */}
+                      {/* Remaining items as chip list */}
                       {listItems.length > 0 && (
                         <div className="px-6 py-4 border-t border-paper-200">
                           <p className="text-xs font-mono uppercase tracking-wider text-ink-400 mb-3">
                             Also available
                           </p>
                           <div className="flex flex-wrap gap-2">
-                            {listItems.map((item) => {
-                              const brand = parseBrand(item);
-                              return (
-                                <div
-                                  key={`${group.name}-list-${item}`}
-                                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-paper-300 bg-paper-50 text-sm text-ink-700"
+                            {listItems.map((item) => (
+                              <div
+                                key={`${group.name}-list-${item}`}
+                                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-paper-300 bg-paper-50 text-sm text-ink-700"
+                              >
+                                <span className="w-1.5 h-1.5 rounded-full bg-signal-500 shrink-0" />
+                                <span>{item}</span>
+                                <Link
+                                  to="/contact"
+                                  className="text-xs text-ink-400 hover:text-ink-700 transition-colors ml-0.5"
+                                  title="Request quote"
                                 >
-                                  <span className="w-1.5 h-1.5 rounded-full bg-signal-500 shrink-0" />
-                                  <span>{displayName(item)}</span>
-                                  {brand && (
-                                    <span className="text-[10px] font-mono text-ink-400 uppercase tracking-wide">
-                                      {brand}
-                                    </span>
-                                  )}
-                                  <Link
-                                    to="/contact"
-                                    className="text-xs text-ink-400 hover:text-ink-700 transition-colors ml-0.5"
-                                    title="Request quote"
-                                  >
-                                    <ArrowUpRight size={11} />
-                                  </Link>
-                                </div>
-                              );
-                            })}
+                                  <ArrowUpRight size={11} />
+                                </Link>
+                              </div>
+                            ))}
                           </div>
                         </div>
                       )}
 
-                      {/* Footer: Download catalogue + Quote */}
+                      {/* Footer: Download catalogue + Quote CTA */}
                       <div className="flex flex-wrap items-center justify-between gap-3 px-6 py-4 border-t border-paper-200 bg-paper-50">
                         <a
                           href={`/catalogues/${group.name.toLowerCase()}-catalogue.pdf`}
-                          download
                           className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-ink-950 hover:bg-ink-800 text-white text-sm font-semibold transition-colors"
                           onClick={(e) => {
-                            // PDF not yet attached — redirect to contact instead
                             e.preventDefault();
                             window.location.href = `/contact?catalogue=${encodeURIComponent(group.name)}`;
                           }}
@@ -435,10 +382,10 @@ export function Products() {
                 </div>
                 <Link
                   to="/contact"
-                  className="shrink-0 group inline-flex items-center gap-3 bg-signal-400 hover:bg-signal-300 text-ink-950 pl-6 pr-3 py-2.5 rounded-full font-semibold transition-all"
+                  className="shrink-0 group inline-flex items-center gap-3 bg-signal-400 hover:bg-signal-300 text-white pl-6 pr-3 py-2.5 rounded-full font-semibold transition-all"
                 >
                   <span>Make an enquiry</span>
-                  <span className="bg-ink-950 text-signal-400 w-9 h-9 rounded-full flex items-center justify-center group-hover:rotate-45 transition-transform duration-500">
+                  <span className="bg-white/20 w-9 h-9 rounded-full flex items-center justify-center group-hover:rotate-45 transition-transform duration-500">
                     <ArrowUpRight size={16} />
                   </span>
                 </Link>
@@ -476,18 +423,11 @@ export function Products() {
                 />
               </div>
               <div className="p-6 md:p-8">
-                <div className="flex items-center gap-3 mb-2">
-                  <p className="font-mono text-[11px] uppercase tracking-widest text-ink-500">
-                    {selectedItem.category}
-                  </p>
-                  {parseBrand(selectedItem.name) && (
-                    <span className="px-2 py-0.5 rounded-full bg-ink-100 text-ink-500 font-mono text-[10px] uppercase tracking-wide">
-                      {parseBrand(selectedItem.name)}
-                    </span>
-                  )}
-                </div>
+                <p className="font-mono text-[11px] uppercase tracking-widest text-ink-500 mb-2">
+                  {selectedItem.category}
+                </p>
                 <h2 className="font-display text-2xl md:text-3xl text-ink-900 mb-2">
-                  {displayName(selectedItem.name)}
+                  {selectedItem.name}
                 </h2>
                 <p className="text-ink-600 text-sm mb-6">
                   Contact our team for full specifications, pricing, and availability.
@@ -502,7 +442,6 @@ export function Products() {
                   </Link>
                   <a
                     href={`/catalogues/${selectedItem.category.toLowerCase()}-catalogue.pdf`}
-                    download
                     className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-paper-300 text-sm font-medium text-ink-700 hover:bg-paper-50 transition-colors"
                     onClick={(e) => {
                       e.preventDefault();

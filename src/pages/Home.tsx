@@ -188,7 +188,7 @@ export function Home() {
               
               {/* Decorative dots removed for minimalism */}
               <span className="text-xs font-medium tracking-[0.25em] text-signal-300 uppercase">
-                Medical Technology · <span style={{color: '#143EAB'}}>East Africa</span>
+                Medical Technology · <span style={{color: '#613298'}}>East Africa</span>
               </span>
             </motion.div>
 
@@ -536,7 +536,7 @@ export function Home() {
                       key={item}
                       className="text-sm text-white/50 flex items-center gap-2">
                       
-                          <span className="w-1 h-1" style={{backgroundColor:'#143EAB', borderRadius:'9999px', display:'inline-block'}} />
+                          <span className="w-1 h-1" style={{backgroundColor:'#613298', borderRadius:'9999px', display:'inline-block'}} />
                           {item}
                         </li>
                     )}
@@ -675,7 +675,7 @@ export function Home() {
       <section className="py-24 lg:py-32 bg-ink-950 relative overflow-hidden grain">
         <div className="absolute inset-0">
           <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-signal-500/15 rounded-full blur-[120px]" />
-          <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px]" style={{backgroundColor:'#143EAB', opacity:0.1, borderRadius:'9999px', filter:'blur(100px)'}} />
+          <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px]" style={{backgroundColor:'#613298', opacity:0.1, borderRadius:'9999px', filter:'blur(100px)'}} />
         </div>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <motion.div
@@ -695,11 +695,11 @@ export function Home() {
             }}>
             
             <div className="inline-flex items-center gap-3 mb-8">
-              <div className="w-12 h-px" style={{backgroundColor:'#143EAB'}} />
+              <div className="w-12 h-px" style={{backgroundColor:'#613298'}} />
               <span className="font-mono text-xs tracking-[0.25em] text-signal-400 uppercase">
                 Let's Talk
               </span>
-              <div className="w-12 h-px" style={{backgroundColor:'#143EAB'}} />
+              <div className="w-12 h-px" style={{backgroundColor:'#613298'}} />
             </div>
             <h2 className="font-display text-4xl md:text-5xl lg:text-7xl font-light text-white mb-8 leading-[1.05]">
               Build the next chapter of{' '}

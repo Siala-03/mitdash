@@ -38,7 +38,7 @@ export function Footer() {
           {/* Brand */}
           <div className="col-span-2 lg:col-span-4 space-y-5">
             <Link to="/" className="flex items-center gap-2.5">
-              <img src="/logo.avif" alt="MITDASH Logo" className="h-20 w-auto" />
+              <img src="/logo.jpeg" alt="MITDASH Logo" className="h-20 w-auto" />
             </Link>
              <p className="text-sm text-ink-300 leading-relaxed max-w-sm">
                We buy, sell and distribute world-class medical equipment from globally renowned manufacturers including Comen, Brownier, Neurosoft, Vatech, Runyes, Medispark, Dochem, and GC Fuji. Unlike traditional distributors, we ensure availability over margins — building long-term partnerships with deeply satisfied healthcare providers across East Africa.

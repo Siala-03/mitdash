@@ -336,36 +336,44 @@ export const technologyEquipmentIndex: EquipmentIndexCategory[] = [
   {
     name: 'Surgical',
     items: [
-      'Anaesthesia Machine'
+      'Anaesthesia Mask',
+      'Bronchoscope',
+      'Clip Appliers',
+      'Disposable Retrieval Devices',
+      'Disposable Suction & Irrigation Devices',
+      'Sterile Negative Pressure Suction Set',
     ]
   },
   {
     name: 'Imaging',
     items: [
-      'X-ray',
-      'Flouroscopy (Brownier)',
-      'CT Scan (Neurosoft)',
-      'MRI (Neurosoft)'
+      'X-Ray',
+      'Fluoroscopy',
+      'CT Scan',
+      'MRI',
     ]
   },
   {
     name: 'Laboratory',
     items: [
-      'Haematology Analyzer',
-      'Biochemistry Analyzer'
+      '-150°C Cryo Freezer',
+      'Alcohol Prep Pad',
+      'Automatic Fluorescence Immunoassay Analyzer',
+      'Automatic IHC Stainer',
+      'Burette Infusion Set',
+      'Fast-Response Digital Thermometer',
     ]
   },
   {
     name: 'Dental',
     items: [
-      'Integrated Dental Unit (Runyes)',
-      'Dental Chair (Runyes)',
-      'Dental X-Ray (Runyes)',
-      'Autoclave 53L (Runyes)',
-      'Digital Sensor (Runyes)',
-      'CBCT (Vatech)',
-      '2D OPG (Vatech)',
-      'UP 3D Dental Digital Laboratory (Vatech)'
+      'Integrated Dental Unit',
+      'Dental X-Ray',
+      'Digital Sensor',
+      'Autoclave 53L',
+      'CBCT',
+      '2D OPG',
+      'UP 3D Dental Digital Laboratory',
     ]
   }
 ];

@@ -37,10 +37,10 @@ body {
 ::-webkit-scrollbar-thumb:hover { background: #94A3C7; }
 ::selection {
   background: #0E1731;
-  color: #143EAB;
+  color: #613298;
 }
 *:focus-visible {
-  outline: 2px solid #143EAB;
+  outline: 2px solid #613298;
   outline-offset: 3px;
   border-radius: 4px;
 }
