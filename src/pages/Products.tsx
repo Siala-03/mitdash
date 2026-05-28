@@ -218,11 +218,45 @@ export function Products() {
                   </div>
                 </div>
 
+                {/* Brand filter */}
+                <div className="mt-5">
+                  <label className="text-xs uppercase tracking-widest text-ink-500 font-semibold">
+                    Filter by Brand
+                  </label>
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {BRANDS.map((brand) => {
+                      const active = activeBrands.has(brand);
+                      return (
+                        <button
+                          key={brand}
+                          onClick={() => toggleBrand(brand)}
+                          className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border transition-all ${
+                            active
+                              ? 'bg-ink-950 text-white border-ink-950'
+                              : 'bg-white text-ink-600 border-ink-200 hover:border-ink-400'
+                          }`}
+                        >
+                          {active && <Check size={10} strokeWidth={3} />}
+                          {brand}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  {activeBrands.size > 0 && (
+                    <button
+                      onClick={() => setActiveBrands(new Set())}
+                      className="mt-2 text-xs text-ink-400 hover:text-ink-700 transition-colors underline"
+                    >
+                      Clear brand filter
+                    </button>
+                  )}
+                </div>
+
                 <button
-                  onClick={() => { setSearchQuery(''); setActiveCategory('all'); }}
+                  onClick={() => { setSearchQuery(''); setActiveCategory('all'); setActiveBrands(new Set()); }}
                   className="mt-4 w-full rounded-xl border border-ink-200 py-2.5 text-sm font-medium text-ink-600 hover:text-ink-900 transition-colors"
                 >
-                  Reset Filters
+                  Reset All Filters
                 </button>
 
                 <div className="mt-5 grid grid-cols-2 gap-3">
@@ -311,8 +345,13 @@ export function Products() {
                               <div className="absolute inset-0 bg-gradient-to-t from-ink-950/80 via-ink-950/20 to-transparent" />
                               <div className="absolute inset-x-0 bottom-0 p-4">
                                 <p className="text-white text-sm font-semibold leading-tight line-clamp-2">
-                                  {item}
+                                  {displayName(item)}
                                 </p>
+                                {parseBrand(item) && (
+                                  <p className="text-white/60 text-[10px] font-mono uppercase tracking-wider mt-0.5">
+                                    {parseBrand(item)}
+                                  </p>
+                                )}
                               </div>
                               <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity bg-white/20 backdrop-blur-sm rounded-full p-1.5">
                                 <ArrowUpRight size={12} className="text-white" />
@@ -329,22 +368,30 @@ export function Products() {
                             Also available
                           </p>
                           <div className="flex flex-wrap gap-2">
-                            {listItems.map((item) => (
-                              <div
-                                key={`${group.name}-list-${item}`}
-                                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-paper-300 bg-paper-50 text-sm text-ink-700"
-                              >
-                                <span className="w-1.5 h-1.5 rounded-full bg-signal-500 shrink-0" />
-                                {item}
-                                <Link
-                                  to="/contact"
-                                  className="text-xs text-ink-400 hover:text-ink-700 transition-colors ml-1"
-                                  title="Request quote"
+                            {listItems.map((item) => {
+                              const brand = parseBrand(item);
+                              return (
+                                <div
+                                  key={`${group.name}-list-${item}`}
+                                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-paper-300 bg-paper-50 text-sm text-ink-700"
                                 >
-                                  <ArrowUpRight size={11} />
-                                </Link>
-                              </div>
-                            ))}
+                                  <span className="w-1.5 h-1.5 rounded-full bg-signal-500 shrink-0" />
+                                  <span>{displayName(item)}</span>
+                                  {brand && (
+                                    <span className="text-[10px] font-mono text-ink-400 uppercase tracking-wide">
+                                      {brand}
+                                    </span>
+                                  )}
+                                  <Link
+                                    to="/contact"
+                                    className="text-xs text-ink-400 hover:text-ink-700 transition-colors ml-0.5"
+                                    title="Request quote"
+                                  >
+                                    <ArrowUpRight size={11} />
+                                  </Link>
+                                </div>
+                              );
+                            })}
                           </div>
                         </div>
                       )}
@@ -429,11 +476,18 @@ export function Products() {
                 />
               </div>
               <div className="p-6 md:p-8">
-                <p className="font-mono text-[11px] uppercase tracking-widest text-ink-500 mb-2">
-                  {selectedItem.category}
-                </p>
+                <div className="flex items-center gap-3 mb-2">
+                  <p className="font-mono text-[11px] uppercase tracking-widest text-ink-500">
+                    {selectedItem.category}
+                  </p>
+                  {parseBrand(selectedItem.name) && (
+                    <span className="px-2 py-0.5 rounded-full bg-ink-100 text-ink-500 font-mono text-[10px] uppercase tracking-wide">
+                      {parseBrand(selectedItem.name)}
+                    </span>
+                  )}
+                </div>
                 <h2 className="font-display text-2xl md:text-3xl text-ink-900 mb-2">
-                  {selectedItem.name}
+                  {displayName(selectedItem.name)}
                 </h2>
                 <p className="text-ink-600 text-sm mb-6">
                   Contact our team for full specifications, pricing, and availability.

@@ -442,7 +442,7 @@ export function Cooperation() {
               className="group bg-white hover:bg-brand-50 p-8 flex flex-col md:flex-row gap-6 transition-colors duration-300">
               
                 <div className="font-display text-5xl font-medium text-brand-200 group-hover:text-brand-600 w-20 shrink-0 transition-colors">
-                  {p.step}
+                  {String(i + 1).padStart(2, '0')}
                 </div>
                 <div className="flex-1">
                   <h3 className="font-display text-2xl font-semibold text-slate-900 mb-2">
