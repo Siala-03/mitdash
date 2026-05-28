@@ -40,10 +40,9 @@ export function Footer() {
             <Link to="/" className="flex items-center gap-2.5">
               <img src="/logo.avif" alt="MITDASH Logo" className="h-20 w-auto" />
             </Link>
-            <p className="text-sm text-ink-300 leading-relaxed max-w-sm">
-              A leading distributor of cutting-edge medical technology in East
-              Africa. Established in Kigali, 2023.
-            </p>
+             <p className="text-sm text-ink-300 leading-relaxed max-w-sm">
+               We buy, sell and distribute world-class medical equipment from globally renowned manufacturers including Comen, Brownier, Neurosoft, Vatech, Runyes, Medispark, Dochem, and GC Fuji. Unlike traditional distributors, we ensure availability over margins — building long-term partnerships with deeply satisfied healthcare providers across East Africa.
+             </p>
             <div className="flex items-center gap-3 pt-2">
               {['Twitter', 'LinkedIn', 'Instagram'].map((s) =>
               <a

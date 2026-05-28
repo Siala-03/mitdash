@@ -59,27 +59,27 @@ const procurementSupport = [
 
 export function Solutions() {
   return (
-    <div className="pt-24 pb-20 min-h-screen bg-paper-100">
-      <section className="bg-ink-950 text-white py-16 mb-12 relative overflow-hidden grain">
-        <div className="absolute inset-0">
-          <img
-            src="https://images.pexels.com/photos/12081338/pexels-photo-12081338.jpeg"
-            alt="Services hero background"
-            className="w-full h-full object-cover opacity-30" />
-          <div className="absolute top-0 right-0 w-80 h-80 bg-signal-400/15 rounded-full blur-3xl pointer-events-none" />
-        </div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-3xl mx-auto">
-            <p className="font-mono text-xs tracking-[0.22em] text-signal-300 uppercase mb-4">End-To-End Healthcare Support</p>
-            <h1 className="font-display text-4xl md:text-6xl font-light mb-5 leading-[1.05]">
-              Services that keep clinical operations running reliably.
-            </h1>
-            <p className="text-white/75 text-lg">
-              Beyond equipment supply, MIT-DASH provides deployment, training, maintenance, and procurement support tailored to East African healthcare systems.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+     <div className="pt-24 pb-20 min-h-screen bg-paper-100">
+       <section className="bg-ink-950 text-white py-16 mb-12 relative overflow-hidden grain">
+         <div className="absolute inset-0">
+           <img
+             src="https://images.pexels.com/photos/12081338/pexels-photo-12081338.jpeg"
+             alt="Services hero background"
+             className="w-full h-full object-cover opacity-30" />
+           <div className="absolute top-0 right-0 w-80 h-80 bg-signal-400/15 rounded-full blur-3xl pointer-events-none" />
+         </div>
+         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-3xl mx-auto">
+             <p className="font-mono text-xs tracking-[0.22em] text-signal-300 uppercase mb-4">End-To-End Healthcare Support</p>
+             <h1 className="font-display text-4xl md:text-6xl font-light mb-5 leading-[1.05]">
+               Services built on our commitment to availability, affordability, and client satisfaction.
+             </h1>
+             <p className="text-white/75 text-lg">
+               Unlike traditional distributors, we ensure any medical equipment needed is available without considering margins — eliminating shortages. Our services are tailored for every client need, focused on building long-term partnerships with deeply satisfied healthcare providers.
+             </p>
+           </motion.div>
+         </div>
+       </section>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
         <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -108,7 +108,7 @@ export function Solutions() {
               <p className="font-mono text-xs tracking-[0.2em] text-signal-700 uppercase mb-4">Procurement Advisory</p>
               <h2 className="font-display text-4xl text-ink-900 leading-tight mb-4">From budget constraints to deployment, we help you buy smarter.</h2>
               <p className="text-ink-600 leading-relaxed">
-                Our team supports procurement leaders with practical financing, tender alignment, and service planning so projects launch on schedule and remain sustainable.
+                Every client comes with distinct needs, constraints and timelines. We don't apply one-size-fits-all packages — each engagement is tailored around your facility's specific requirements, from financing structures to delivery schedules, ensuring outcomes that are both affordable and sustainable long-term.
               </p>
             </div>
             <div className="lg:col-span-7 grid md:grid-cols-3 gap-4">

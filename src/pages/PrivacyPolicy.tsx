@@ -5,7 +5,7 @@ export default function PrivacyPolicy() {
     <div className="max-w-3xl mx-auto px-4 py-16 text-base text-ink-900 bg-white">
       <h1 className="text-3xl font-bold mb-6">Privacy Policy</h1>
       <p className="mb-4">Last updated: [Insert Date]</p>
-      <p className="mb-4">This Privacy Policy describes how Mitdash Ltd ("we", "us", or "our") collects, uses, and discloses your information when you use our website and services.</p>
+       <p className="mb-4">This Privacy Policy describes how Mitdash Ltd ("we", "us", or "our") collects, uses, and discloses your information when you use our website and services. We are a medical equipment distributor committed to buying, selling and distributing world-class medical equipment from globally renowned manufacturers including Comen, Brownier, Neurosoft, Vatech, Runyes, Medispark, Dochem, and GC Fuji. Unlike traditional distributors who only procure what has bigger margins or is convenient, we ensure any type of medical equipment needed is available without considering margins — eliminating shortages of frequently demanded products. Our goal is not to have 1000 clients but to have 100 that are greatly satisfied with our services, tailored to every client need.</p>
       <h2 className="text-xl font-semibold mt-8 mb-2">Information We Collect</h2>
       <ul className="list-disc pl-6 mb-4">
         <li>Personal identification information (Name, email address, phone number, etc.)</li>

@@ -14,7 +14,6 @@ import {
   ArrowRight } from
 'lucide-react';
 import { PartnerMarquee } from '../components/PartnerMarquee';
-import { AnimatedCounter } from '../components/AnimatedCounter';
 // Word-by-word reveal
 function RevealText({
   text,
@@ -205,24 +204,23 @@ export function Home() {
               </span>
             </h1>
 
-            <motion.p
-              initial={{
-                opacity: 0,
-                y: 20
-              }}
-              animate={{
-                opacity: 1,
-                y: 0
-              }}
-              transition={{
-                delay: 1.4,
-                duration: 0.8
-              }}
-              className="text-lg lg:text-xl text-white/70 mb-10 leading-relaxed max-w-xl">
-              
-              World-class medical equipment, turnkey installation and lifecycle
-              support — delivered to Rwanda, Burundi and the DRC.
-            </motion.p>
+             <motion.p
+               initial={{
+                 opacity: 0,
+                 y: 20
+               }}
+               animate={{
+                 opacity: 1,
+                 y: 0
+               }}
+               transition={{
+                 delay: 1.4,
+                 duration: 0.8
+               }}
+               className="text-lg lg:text-xl text-white/70 mb-10 leading-relaxed max-w-xl">
+               
+               We buy, sell and distribute world-class medical equipment from globally renowned manufacturers including Comen, Brownier, Neurosoft, Vatech, Runyes, Medispark, Dochem, and GC Fuji — ensuring affordability, accessibility, convenience, and reliability for medical partners across Rwanda, Burundi and the DRC.
+             </motion.p>
 
             <motion.div
               initial={{
@@ -395,14 +393,18 @@ export function Home() {
               </h2>
 
               <p className="text-lg text-ink-700 mb-6 leading-relaxed">
-                MIT-DASH Ltd. is a leading distributor of cutting-edge medical
-                technology, headquartered in Kigali and serving healthcare
-                providers across Rwanda, Burundi and the DRC.
+                MIT-DASH buys, sells and distributes world-class medical
+                equipment — not only what earns the biggest margins, but
+                whatever healthcare providers actually need. Headquartered in
+                Kigali, we serve hospitals, clinics and facilities across
+                Rwanda, Burundi and the DRC.
               </p>
               <p className="text-lg text-ink-600 mb-10 leading-relaxed">
-                We don't just sell equipment — we engineer outcomes. From
-                customs clearance to clinical training to lifelong service,
-                every engagement is built for the long term.
+                Traditional distributors skip frequently demanded products in
+                favour of convenience or profit — leaving real gaps in care.
+                We do the opposite: every product needed is made available,
+                every engagement is tailored to the specific client, and
+                long-term satisfaction always comes before short-term volume.
               </p>
 
               {/* Certifications and stats removed for minimalism */}
@@ -430,9 +432,9 @@ export function Home() {
                 <span className="text-xs font-semibold tracking-[0.25em] text-signal-300 uppercase">Portfolio</span>
               </div>
               <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-white leading-[1.05] max-w-3xl">
-                Equipment for every department,{' '}
+                Equipment for every department —{' '}
                 <span className="italic text-signal-300">
-                  every care setting.
+                  sourced without compromise.
                 </span>
               </h2>
             </div>
@@ -568,62 +570,62 @@ export function Home() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-px bg-ink-200 rounded-3xl overflow-hidden">
-            {[
-            {
-              num: '01',
-              title: 'Curated Quality',
-              desc: 'CE, FDA and ISO 13485 certified equipment, pre-validated for the East African operating context.',
-              icon: <ShieldCheck size={24} />
-            },
-            {
-              num: '02',
-              title: 'Turnkey Delivery',
-              desc: 'From customs clearance to commissioning and clinical training — fully ready-to-use installations.',
-              icon: <Sparkles size={24} />
-            },
-            {
-              num: '03',
-              title: 'Lifecycle Support',
-              desc: 'Biomedical engineers, genuine parts pipelines, and preventative maintenance contracts.',
-              icon: <Plus size={24} />
-            }].
-            map((item, i) =>
-            <motion.div
-              key={i}
-              initial={{
-                opacity: 0,
-                y: 30
-              }}
-              whileInView={{
-                opacity: 1,
-                y: 0
-              }}
-              viewport={{
-                once: true
-              }}
-              transition={{
-                delay: i * 0.12
-              }}
-              className="group bg-paper-100 hover:bg-ink-950 p-10 lg:p-12 transition-colors duration-700">
-              
-                <div className="flex items-start justify-between mb-10">
-                  <span className="font-mono text-sm text-ink-400 group-hover:text-signal-400 transition-colors">
-                    {item.num} / 03
-                  </span>
-                  <div className="text-ink-300 group-hover:text-signal-400 transition-colors">
-                    {item.icon}
-                  </div>
-                </div>
-                <h3 className="font-display text-3xl font-medium text-ink-900 group-hover:text-white mb-4 transition-colors">
-                  {item.title}
-                </h3>
-                <p className="text-ink-600 group-hover:text-white/70 leading-relaxed transition-colors">
-                  {item.desc}
-                </p>
-              </motion.div>
-            )}
-          </div>
+           <div className="grid md:grid-cols-3 gap-px bg-ink-200 rounded-3xl overflow-hidden">
+             {[
+             {
+               num: '01',
+               title: 'Uncompromising Availability',
+               desc: 'Unlike traditional distributors who only procure what has bigger margins or is convenient, we ensure any type of medical equipment needed is available without considering margins — eliminating shortages of frequently demanded products.',
+               icon: <ShieldCheck size={24} />
+             },
+             {
+               num: '02',
+               title: 'Client-Centric Service',
+               desc: 'Our goal is not to have 1000 clients but to have 100 that are greatly satisfied with our services. We tailor our services for every client needs, ensuring affordability, accessibility, convenience, and reliability.',
+               icon: <Sparkles size={24} />
+             },
+             {
+               num: '03',
+               title: 'Global Partnerships',
+               desc: 'We buy, sell and distribute world-class medical equipment from globally renowned manufacturers including Comen, Brownier, Neurosoft, Vatech, Runyes, Medispark, Dochem, and GC Fuji, bringing the best of global medical technology to East Africa.',
+               icon: <Plus size={24} />
+             }].
+             map((item, i) =>
+             <motion.div
+               key={i}
+               initial={{
+                 opacity: 0,
+                 y: 30
+               }}
+               whileInView={{
+                 opacity: 1,
+                 y: 0
+               }}
+               viewport={{
+                 once: true
+               }}
+               transition={{
+                 delay: i * 0.12
+               }}
+               className="group bg-paper-100 hover:bg-ink-950 p-10 lg:p-12 transition-colors duration-700">
+               
+               <div className="flex items-start justify-between mb-10">
+                 <span className="font-mono text-sm text-ink-400 group-hover:text-signal-400 transition-colors">
+                   {item.num} / 03
+                 </span>
+                 <div className="text-ink-300 group-hover:text-signal-400 transition-colors">
+                   {item.icon}
+                 </div>
+               </div>
+               <h3 className="font-display text-3xl font-medium text-ink-900 group-hover:text-white mb-4 transition-colors">
+                 {item.title}
+               </h3>
+               <p className="text-ink-600 group-hover:text-white/70 leading-relaxed transition-colors">
+                 {item.desc}
+               </p>
+             </motion.div>
+           )}
+           </div>
         </div>
       </section>
 
@@ -705,8 +707,10 @@ export function Home() {
               — with us.
             </h2>
             <p className="text-white/70 text-lg lg:text-xl mb-12 max-w-2xl mx-auto">
-              Whether you're equipping a new facility or modernizing an existing
-              one, our team is ready to design a solution that fits your needs.
+              Whether you're equipping a district clinic or a national referral
+              hospital, every engagement is tailored to your specific context —
+              because our goal is not volume, but partners who are genuinely
+              well-served.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Link

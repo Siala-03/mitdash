@@ -14,54 +14,44 @@ import {
 'lucide-react';
 const manufacturers = [
 {
-  name: 'Philips Healthcare',
+  name: 'Comen',
   focus: 'Imaging & Patient Care',
-  country: 'Netherlands'
-},
-{
-  name: 'Siemens Healthineers',
-  focus: 'Diagnostic Imaging',
-  country: 'Germany'
-},
-{
-  name: 'GE HealthCare',
-  focus: 'Imaging & Monitoring',
-  country: 'USA'
-},
-{
-  name: 'Mindray',
-  focus: 'Patient Monitoring & IVD',
   country: 'China'
 },
 {
-  name: 'Dräger',
-  focus: 'Anesthesia & ICU',
-  country: 'Germany'
+  name: 'Brownier',
+  focus: 'Diagnostic Imaging',
+  country: 'China'
 },
 {
-  name: 'B. Braun',
-  focus: 'Infusion & Surgical',
-  country: 'Germany'
+  name: 'Neurosoft',
+  focus: 'Imaging & Monitoring',
+  country: 'Russia'
 },
 {
-  name: 'Medtronic',
-  focus: 'Cardiac & Surgical',
-  country: 'Ireland / USA'
+  name: 'Vatech',
+  focus: 'Imaging & Monitoring',
+  country: 'South Korea'
 },
 {
-  name: 'Fujifilm Medical',
-  focus: 'Endoscopy & Imaging',
-  country: 'Japan'
+  name: 'Runyes',
+  focus: 'Surgical & Laboratory',
+  country: 'China'
 },
 {
-  name: 'Canon Medical',
-  focus: 'CT & Ultrasound',
-  country: 'Japan'
-},
-{
-  name: 'Roche Diagnostics',
+  name: 'Medispark',
   focus: 'Laboratory Diagnostics',
-  country: 'Switzerland'
+  country: 'India'
+},
+{
+  name: 'Dochem',
+  focus: 'Surgical Equipment',
+  country: 'India'
+},
+{
+  name: 'GC Fuji',
+  focus: 'Chemistry & Hematology',
+  country: 'Japan'
 }];
 
 const regions = [
@@ -87,8 +77,8 @@ const regions = [
 const benefits = [
 {
   icon: <Handshake size={24} />,
-  title: 'Exclusive Distribution',
-  desc: 'Become our exclusive country partner with protected territory rights and joint go-to-market planning.'
+  title: 'Availability-First Approach',
+  desc: 'We prioritize making equipment accessible over profit margins, ensuring that frequently demanded products are always available to healthcare providers.'
 },
 {
   icon: <TrendingUp size={24} />,
@@ -112,8 +102,8 @@ const benefits = [
 },
 {
   icon: <Sparkles size={24} />,
-  title: 'Co-marketing Support',
-  desc: 'Joint product launches, clinical demonstrations, and training events with key opinion leaders.'
+  title: 'Client Satisfaction Focus',
+  desc: 'Our goal is not volume but deeply satisfied clients — we aim for 100 highly satisfied partners rather than 1000 transactional relationships.'
 }];
 
 export function Cooperation() {
@@ -151,16 +141,14 @@ export function Cooperation() {
                     Cooperation
                   </span>
                 </div>
-                <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-medium text-white leading-[1.05] mb-6">
-                  Your gateway to{' '}
-                  <span className="italic text-brand-300">East African</span>{' '}
-                  healthcare.
-                </h1>
-                <p className="text-xl text-slate-300 leading-relaxed max-w-2xl mb-10">
-                  MIT-DASH partners with global medical technology manufacturers
-                  to bring world-class equipment to Rwanda, Burundi and the DRC
-                  — backed by local execution.
-                </p>
+              <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-medium text-white leading-[1.05] mb-6">
+                Your gateway to{' '}
+                <span className="italic text-brand-300">world-class medical equipment</span>{' '}
+                from globally renowned manufacturers.
+              </h1>
+              <p className="text-xl text-slate-300 leading-relaxed max-w-2xl mb-10">
+                MIT-DASH partners with leading manufacturers like Comen, Brownier, Neurosoft, Vatech, Runyes, Medispark, Dochem, and GC Fuji to bring world-class medical equipment to Rwanda, Burundi and the DRC — backed by local execution and our commitment to availability over margins.
+              </p>
                 <div className="flex flex-wrap gap-4">
                   <Link
                     to="/contact"
@@ -355,9 +343,9 @@ export function Cooperation() {
               </span>
               <div className="w-12 h-px bg-brand-600" />
             </div>
-            <h2 className="font-display text-4xl lg:text-5xl font-medium text-slate-900 leading-tight">
-              Built for manufacturers entering East Africa.
-            </h2>
+           <h2 className="font-display text-4xl lg:text-5xl font-medium text-slate-900 leading-tight">
+               Built for manufacturers who want their equipment accessible — not just profitable.
+           </h2>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">

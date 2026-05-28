@@ -1,199 +1,132 @@
 import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, X, ArrowUpRight } from 'lucide-react';
+import { Search, X, ArrowUpRight, Download, FileText, Check } from 'lucide-react';
 import { technologyEquipmentIndex } from '../data/catalog';
 
-interface EquipmentRow {
+const BRANDS = ['Comen', 'Brownier', 'Neurosoft', 'Vatech', 'Runyes', 'Medispark', 'Dochem', 'GC Fuji'] as const;
+
+// Extract brand name from item name e.g. "CT Scan (Neurosoft)" → "Neurosoft"
+function parseBrand(itemName: string): string | null {
+  const match = itemName.match(/\(([^)]+)\)\s*$/);
+  if (!match) return null;
+  const candidate = match[1].trim();
+  return (BRANDS as readonly string[]).includes(candidate) ? candidate : null;
+}
+
+// Strip brand parenthetical from display name
+function displayName(itemName: string): string {
+  return itemName.replace(/\s*\([^)]+\)\s*$/, '').trim();
+}
+
+interface SelectedItem {
   category: string;
   name: string;
-  imageUrl?: string;
+  imageUrl: string;
 }
 
-const categoryImageMap: Record<string, string[]> = {
-  'Operating Theatre Equipment': [
-    // Anaesthesia Machine
-    'https://images.pexels.com/photos/3845126/pexels-photo-3845126.jpeg?auto=compress&w=600&q=80',
-    // Ventilator
-    'https://images.pexels.com/photos/3844581/pexels-photo-3844581.jpeg?auto=compress&w=600&q=80',
-    // Defibrillator
-    'https://images.pexels.com/photos/305568/pexels-photo-305568.jpeg?auto=compress&w=600&q=80'
+// Up to 4 images per category — aligned to the first 4 items in order.
+// Remaining items are shown as a text list below the grid.
+const categoryImages: Record<string, string[]> = {
+  'Surgical': [
+    'https://images.pexels.com/photos/3845126/pexels-photo-3845126.jpeg?auto=compress&cs=tinysrgb&w=800',
   ],
-  'OB/GYN Equipment': [
-    // Fetal Doppler
-    'https://images.pexels.com/photos/7088536/pexels-photo-7088536.jpeg?auto=compress&w=600&q=80',
-    // Fetal Monitor
-    'https://images.pexels.com/photos/7089337/pexels-photo-7089337.jpeg?auto=compress&w=600&q=80',
-    // Colposcope
-    'https://images.pexels.com/photos/7089406/pexels-photo-7089406.jpeg?auto=compress&w=600&q=80'
+  'Imaging': [
+    // X-ray
+    'https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&w=800&q=80',
+    // Fluoroscopy — vascular / radiographic suite
+    'https://images.pexels.com/photos/7089407/pexels-photo-7089407.jpeg?auto=compress&cs=tinysrgb&w=800',
+    // CT Scan
+    'https://images.unsplash.com/photo-1666214280557-f1b5022eb634?auto=format&fit=crop&w=800&q=80',
+    // MRI
+    'https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=800&q=80',
   ],
-  'Diagnostic Equipment': [
-    // Vascular Doppler Detector
-    'https://images.pexels.com/photos/7089407/pexels-photo-7089407.jpeg?auto=compress&w=600&q=80',
-    // Ultrasound Scanner
-    'https://images.pexels.com/photos/7088537/pexels-photo-7088537.jpeg?auto=compress&w=600&q=80',
-    // Ophthalmic Ultrasound
-    'https://images.pexels.com/photos/7089408/pexels-photo-7089408.jpeg?auto=compress&w=600&q=80'
+  'Laboratory': [
+    // Haematology Analyzer
+    'https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=800&q=80',
+    // Biochemistry Analyzer
+    'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80',
   ],
-  'Sterilizer (Autoclave)': [
-    'https://static.wixstatic.com/media/1d7592_93821719805c4de1a06ba1b1baeda2c3~mv2.jpg/v1/fill/w_240,h_135,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/sterilizerjpg.jpg',
-    'https://static.wixstatic.com/media/1d7592_93821719805c4de1a06ba1b1baeda2c3~mv2.jpg/v1/fill/w_240,h_135,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/sterilizerjpg.jpg',
-    'https://static.wixstatic.com/media/1d7592_93821719805c4de1a06ba1b1baeda2c3~mv2.jpg/v1/fill/w_240,h_135,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/sterilizerjpg.jpg'
+  'Dental': [
+    // Integrated Dental Unit
+    'https://images.pexels.com/photos/4269694/pexels-photo-4269694.jpeg?auto=compress&cs=tinysrgb&w=800',
+    // Dental Chair
+    'https://images.pexels.com/photos/3845743/pexels-photo-3845743.jpeg?auto=compress&cs=tinysrgb&w=800',
+    // Dental X-Ray
+    'https://images.pexels.com/photos/1170979/pexels-photo-1170979.jpeg?auto=compress&cs=tinysrgb&w=800',
+    // Autoclave / CBCT
+    'https://images.unsplash.com/photo-1530497610245-94d3c16cda28?auto=format&fit=crop&w=800&q=80',
   ],
-  'Laboratory Equipment': [
-    'https://static.wixstatic.com/media/1d7592_ec2ac61a2b3d4b1794ea8b9ef4795a81~mv2.jpg/v1/fill/w_240,h_135,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/laboratory.jpg',
-    'https://static.wixstatic.com/media/1d7592_ec2ac61a2b3d4b1794ea8b9ef4795a81~mv2.jpg/v1/fill/w_240,h_135,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/laboratory.jpg',
-    'https://static.wixstatic.com/media/1d7592_ec2ac61a2b3d4b1794ea8b9ef4795a81~mv2.jpg/v1/fill/w_240,h_135,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/laboratory.jpg'
-  ],
-  'X-ray Series': [
-    'https://static.wixstatic.com/media/1d7592_f8861afa587d48a8bf112368530f7923~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/x-ray.jpg',
-    'https://static.wixstatic.com/media/1d7592_f8861afa587d48a8bf112368530f7923~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/x-ray.jpg',
-    'https://static.wixstatic.com/media/1d7592_f8861afa587d48a8bf112368530f7923~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/x-ray.jpg'
-  ],
-  'In-Vitro Diagnostics': [
-    'https://static.wixstatic.com/media/1d7592_5397c86e049b46a49dc660b38b1244ca~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/in-vitro.jpg',
-    'https://static.wixstatic.com/media/1d7592_5397c86e049b46a49dc660b38b1244ca~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/in-vitro.jpg',
-    'https://static.wixstatic.com/media/1d7592_5397c86e049b46a49dc660b38b1244ca~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/in-vitro.jpg'
-  ],
-  'Hemodialysis Equipment': [
-    'https://static.wixstatic.com/media/8607c7_031c044842174d55b1a6fd1343897d8d~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/medical-salon-ready-chemotherapy-treatment.jpg',
-    'https://static.wixstatic.com/media/8607c7_031c044842174d55b1a6fd1343897d8d~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/medical-salon-ready-chemotherapy-treatment.jpg',
-    'https://static.wixstatic.com/media/8607c7_031c044842174d55b1a6fd1343897d8d~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/medical-salon-ready-chemotherapy-treatment.jpg'
-  ],
-  'Hospital Furniture': [
-    'https://static.wixstatic.com/media/1d7592_beec64b8ec0d4323a93349674366de1c~mv2.jpg/v1/fill/w_147,h_83,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/hospital%20bed.jpg',
-    'https://static.wixstatic.com/media/1d7592_beec64b8ec0d4323a93349674366de1c~mv2.jpg/v1/fill/w_147,h_83,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/hospital%20bed.jpg',
-    'https://static.wixstatic.com/media/1d7592_beec64b8ec0d4323a93349674366de1c~mv2.jpg/v1/fill/w_147,h_83,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/hospital%20bed.jpg'
-  ],
-  'Walking Aids': [
-    'https://static.wixstatic.com/media/1d7592_c0a21e20766e46cba9bd96dd78844f5b~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/walk%20aids.jpg',
-    'https://static.wixstatic.com/media/1d7592_c0a21e20766e46cba9bd96dd78844f5b~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/walk%20aids.jpg',
-    'https://static.wixstatic.com/media/1d7592_c0a21e20766e46cba9bd96dd78844f5b~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/walk%20aids.jpg'
-  ],
-  'First-Aid Products': [
-    'https://static.wixstatic.com/media/1d7592_10b04f1896164ed091b32e0a349c0b4e~mv2.jpg/v1/crop/x_0,y_857,w_4907,h_2762/fill/w_147,h_83,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/first-aid.jpg',
-    'https://static.wixstatic.com/media/1d7592_10b04f1896164ed091b32e0a349c0b4e~mv2.jpg/v1/crop/x_0,y_857,w_4907,h_2762/fill/w_147,h_83,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/first-aid.jpg',
-    'https://static.wixstatic.com/media/1d7592_10b04f1896164ed091b32e0a349c0b4e~mv2.jpg/v1/crop/x_0,y_857,w_4907,h_2762/fill/w_147,h_83,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/first-aid.jpg'
-  ],
-  'Medical Human Model': [
-    'https://static.wixstatic.com/media/1d7592_3e5fbcb8698b42b0b5f27fefbaf2b7d7~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/model.jpg',
-    'https://static.wixstatic.com/media/1d7592_3e5fbcb8698b42b0b5f27fefbaf2b7d7~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/model.jpg',
-    'https://static.wixstatic.com/media/1d7592_3e5fbcb8698b42b0b5f27fefbaf2b7d7~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/model.jpg'
-  ],
-  'Ophthalmic Equipment': [
-    'https://static.wixstatic.com/media/1d7592_7340be8957344a489a6555ae6f9794ba~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/optimo.jpg',
-    'https://static.wixstatic.com/media/1d7592_7340be8957344a489a6555ae6f9794ba~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/optimo.jpg',
-    'https://static.wixstatic.com/media/1d7592_7340be8957344a489a6555ae6f9794ba~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/optimo.jpg'
-  ],
-  'Dental Equipment': [
-    'https://static.wixstatic.com/media/11062b_ba5e3a2b0bf54f568e207bb681d345ff~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/Dentist%20Chair.jpg',
-    'https://static.wixstatic.com/media/11062b_ba5e3a2b0bf54f568e207bb681d345ff~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/Dentist%20Chair.jpg',
-    'https://static.wixstatic.com/media/11062b_ba5e3a2b0bf54f568e207bb681d345ff~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/Dentist%20Chair.jpg'
-  ],
-  'ENT Equipment': [
-    'https://static.wixstatic.com/media/8607c7_89ff95ab0cc44bf6a27a59a612ef56fc~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/medical-stethoscope-white-surface.jpg',
-    'https://static.wixstatic.com/media/8607c7_89ff95ab0cc44bf6a27a59a612ef56fc~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/medical-stethoscope-white-surface.jpg',
-    'https://static.wixstatic.com/media/8607c7_89ff95ab0cc44bf6a27a59a612ef56fc~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/medical-stethoscope-white-surface.jpg'
-  ],
-  'Home Care Equipment': [
-    'https://static.wixstatic.com/media/11062b_bc1fa5955b4d457892efb751a0588eb0~mv2.jpeg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/Blood%20Pressure.jpeg',
-    'https://static.wixstatic.com/media/11062b_bc1fa5955b4d457892efb751a0588eb0~mv2.jpeg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/Blood%20Pressure.jpeg',
-    'https://static.wixstatic.com/media/11062b_bc1fa5955b4d457892efb751a0588eb0~mv2.jpeg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/Blood%20Pressure.jpeg'
-  ],
-  'Veterinary Equipment': [
-    'https://static.wixstatic.com/media/8607c7_ed7d42106d7f4a64be1c5cf67860aaa5~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/close-up-veterinarian-taking-care-dog.jpg',
-    'https://static.wixstatic.com/media/8607c7_ed7d42106d7f4a64be1c5cf67860aaa5~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/close-up-veterinarian-taking-care-dog.jpg',
-    'https://static.wixstatic.com/media/8607c7_ed7d42106d7f4a64be1c5cf67860aaa5~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/close-up-veterinarian-taking-care-dog.jpg'
-  ],
-  'Medical Consumables': [
-    'https://static.wixstatic.com/media/8607c7_f44d37b3e5ee41dca5d6fdbb2dc9fc5c~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/open-first-aid-kit-with-medical-equipments-blue-background.jpg',
-    'https://static.wixstatic.com/media/8607c7_f44d37b3e5ee41dca5d6fdbb2dc9fc5c~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/open-first-aid-kit-with-medical-equipments-blue-background.jpg',
-    'https://static.wixstatic.com/media/8607c7_f44d37b3e5ee41dca5d6fdbb2dc9fc5c~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/open-first-aid-kit-with-medical-equipments-blue-background.jpg'
-  ]
 };
 
-function getCategoryImage(category: string) {
-  return getCategoryImages(category)[0];
+const fallbackImage =
+  'https://images.pexels.com/photos/3944405/pexels-photo-3944405.jpeg?auto=compress&cs=tinysrgb&w=800';
+
+function getItemImage(category: string, index: number): string {
+  return categoryImages[category]?.[index] ?? fallbackImage;
 }
 
-function getCategoryImages(category: string) {
-  return (
-    categoryImageMap[category] ??
-    [
-      'https://static.wixstatic.com/media/8607c7_47676f0c1f584960819144d9d6dd6450~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/interior-view-operating-room.jpg',
-      'https://static.wixstatic.com/media/8607c7_47676f0c1f584960819144d9d6dd6450~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/interior-view-operating-room.jpg',
-      'https://static.wixstatic.com/media/8607c7_47676f0c1f584960819144d9d6dd6450~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/interior-view-operating-room.jpg'
-    ]
-  );
-}
-
-
-// Custom descriptions for the first 3 equipment
-const customDescriptions: Record<string, Record<string, string>> = {
-  'Operating Theatre Equipment': {
-    'Anaesthesia Machine': 'A modern anaesthesia machine designed for safe and precise delivery of anesthetic gases during surgery.',
-    'Ventilator': 'Advanced ventilator providing critical respiratory support for patients in operating rooms and intensive care units.',
-    'Defibrillator': 'Reliable defibrillator for rapid response to cardiac emergencies, ensuring patient safety during procedures.'
-  }
-  // Add more categories/items as needed
-};
-
-function getCustomDescription(category: string, name: string) {
-  if (customDescriptions[category] && customDescriptions[category][name]) {
-    return customDescriptions[category][name];
-  }
-  return 'Contact our team for configuration, availability, and detailed specifications.';
+function getGridCols(count: number): string {
+  if (count === 1) return 'grid-cols-1';
+  if (count === 2) return 'grid-cols-2';
+  if (count === 3) return 'grid-cols-2 md:grid-cols-3';
+  return 'grid-cols-2 md:grid-cols-4';
 }
 
 export function Products() {
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedItem, setSelectedItem] = useState<EquipmentRow | null>(null);
+  const [activeBrands, setActiveBrands] = useState<Set<string>>(new Set());
+  const [selectedItem, setSelectedItem] = useState<SelectedItem | null>(null);
 
   const categories = useMemo(
     () => technologyEquipmentIndex.map((group) => group.name),
     []
   );
 
-  const filteredRows = useMemo(() => {
-    const q = searchQuery.trim().toLowerCase();
+  function toggleBrand(brand: string) {
+    setActiveBrands((prev) => {
+      const next = new Set(prev);
+      if (next.has(brand)) next.delete(brand);
+      else next.add(brand);
+      return next;
+    });
+  }
 
+  const filteredGroups = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase();
     return technologyEquipmentIndex
       .filter((group) => activeCategory === 'all' || group.name === activeCategory)
-      .flatMap((group) =>
-        group.items
-          .filter((item) => {
-            if (!q) return true;
-            return item.toLowerCase().includes(q) || group.name.toLowerCase().includes(q);
-          })
-          .map<EquipmentRow>((item) => ({
-            category: group.name,
-            name: item
-          }))
-      );
-  }, [activeCategory, searchQuery]);
-
-  const groupedRows = useMemo(() => {
-    const grouped: Record<string, string[]> = {};
-
-    filteredRows.forEach((row) => {
-      if (!grouped[row.category]) {
-        grouped[row.category] = [];
-      }
-      grouped[row.category].push(row.name);
-    });
-
-    return Object.entries(grouped).map(([name, items]) => ({ name, items }));
-  }, [filteredRows]);
+      .map((group) => ({
+        ...group,
+        items: group.items.filter((item) => {
+          if (q && !item.toLowerCase().includes(q) && !group.name.toLowerCase().includes(q)) return false;
+          if (activeBrands.size > 0) {
+            const brand = parseBrand(item);
+            // Items with no parseable brand are shown regardless of brand filter
+            if (brand && !activeBrands.has(brand)) return false;
+          }
+          return true;
+        }),
+      }))
+      .filter((group) => group.items.length > 0);
+  }, [activeCategory, searchQuery, activeBrands]);
 
   const totalItems = useMemo(
-    () => technologyEquipmentIndex.reduce((count, group) => count + group.items.length, 0),
+    () => technologyEquipmentIndex.reduce((acc, g) => acc + g.items.length, 0),
     []
+  );
+
+  const filteredCount = useMemo(
+    () => filteredGroups.reduce((acc, g) => acc + g.items.length, 0),
+    [filteredGroups]
   );
 
   return (
     <div className="bg-white min-h-screen">
-      <section className="relative pt-40 pb-16 bg-ink-950 overflow-hidden grain">
+
+      {/* ── HERO ── */}
+      <section className="relative pt-40 pb-20 bg-ink-950 overflow-hidden grain">
         <div className="absolute inset-0 z-0">
           <img
             src="https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?auto=format&fit=crop&w=2400&q=80"
@@ -202,15 +135,25 @@ export function Products() {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/75 to-ink-950/55" />
         </div>
-
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <p className="font-mono text-xs uppercase tracking-[0.25em] text-signal-300 mb-4">MITDASH Technology Catalog</p>
-          {/* Heading and description removed as requested */}
+          <p className="font-mono text-xs uppercase tracking-[0.25em] text-signal-300 mb-4">
+            MITDASH Technology Catalog
+          </p>
+          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-white mb-6 leading-[1.05]">
+            World-class equipment from global manufacturers,{' '}
+            <span className="italic text-signal-300">available when you need it.</span>
+          </h1>
+          <p className="text-white/70 text-lg max-w-2xl">
+            We source and distribute from globally renowned manufacturers — Comen, Brownier,
+            Neurosoft, Vatech, Runyes, Medispark, Dochem, and GC Fuji — without letting margins
+            dictate what's available. If your facility needs it, we make it accessible.
+          </p>
         </div>
       </section>
 
+      {/* ── STICKY CATEGORY TABS ── */}
       <div className="sticky top-[72px] z-30 bg-white/95 backdrop-blur-md border-b border-ink-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
           <div className="flex flex-wrap items-center gap-2">
             <button
               onClick={() => setActiveCategory('all')}
@@ -239,176 +182,287 @@ export function Products() {
         </div>
       </div>
 
-      <section className="py-10 pb-24">
+      {/* ── MAIN CONTENT ── */}
+      <section className="py-10 pb-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            <aside className="lg:col-span-3 bg-white border border-paper-300 rounded-3xl p-5 h-fit lg:sticky lg:top-28">
-              <div className="mb-5">
-                <h2 className="font-display text-2xl text-ink-900">Search Catalog</h2>
-                <p className="text-sm text-ink-500">Filter by item name or category.</p>
-              </div>
 
-              <div>
-                <label className="text-xs uppercase tracking-widest text-ink-500 font-semibold">Search</label>
-                <div className="relative mt-2">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-400" size={16} />
-                  <input
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Search equipment"
-                    className="w-full pl-10 pr-9 py-2.5 rounded-xl bg-white border border-paper-300 text-sm focus:outline-none focus:ring-2 focus:ring-signal-400"
-                  />
-                  {searchQuery && (
-                    <button
-                      onClick={() => setSearchQuery('')}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-ink-400 hover:text-ink-700"
-                    >
-                      <X size={14} />
-                    </button>
-                  )}
+            {/* ── SIDEBAR ── */}
+            <aside className="lg:col-span-3 space-y-4">
+              <div className="bg-white border border-paper-300 rounded-3xl p-5 lg:sticky lg:top-28">
+                <div className="mb-5">
+                  <h2 className="font-display text-xl text-ink-900">Search Catalog</h2>
+                  <p className="text-sm text-ink-500 mt-1">Filter by item name or category.</p>
                 </div>
-              </div>
 
-              <button
-                onClick={() => {
-                  setSearchQuery('');
-                  setActiveCategory('all');
-                }}
-                className="mt-5 w-full rounded-xl border border-ink-200 py-2.5 text-sm font-medium text-ink-600 hover:text-ink-900"
-              >
-                Reset Filters
-              </button>
+                <div>
+                  <label className="text-xs uppercase tracking-widest text-ink-500 font-semibold">
+                    Search
+                  </label>
+                  <div className="relative mt-2">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-400" size={16} />
+                    <input
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      placeholder="Search equipment…"
+                      className="w-full pl-10 pr-9 py-2.5 rounded-xl bg-white border border-paper-300 text-sm focus:outline-none focus:ring-2 focus:ring-signal-400"
+                    />
+                    {searchQuery && (
+                      <button
+                        onClick={() => setSearchQuery('')}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-ink-400 hover:text-ink-700"
+                      >
+                        <X size={14} />
+                      </button>
+                    )}
+                  </div>
+                </div>
 
-              <div className="mt-6 rounded-2xl bg-white border border-paper-300 p-4">
-                <div className="font-mono text-xs uppercase tracking-wider text-ink-500">Indexed Equipment</div>
-                <div className="font-display text-3xl text-ink-900">{totalItems}</div>
+                <button
+                  onClick={() => { setSearchQuery(''); setActiveCategory('all'); }}
+                  className="mt-4 w-full rounded-xl border border-ink-200 py-2.5 text-sm font-medium text-ink-600 hover:text-ink-900 transition-colors"
+                >
+                  Reset Filters
+                </button>
+
+                <div className="mt-5 grid grid-cols-2 gap-3">
+                  <div className="rounded-2xl bg-paper-50 border border-paper-300 p-3 text-center">
+                    <div className="font-mono text-[10px] uppercase tracking-wider text-ink-500">Total</div>
+                    <div className="font-display text-3xl text-ink-900">{totalItems}</div>
+                  </div>
+                  <div className="rounded-2xl bg-paper-50 border border-paper-300 p-3 text-center">
+                    <div className="font-mono text-[10px] uppercase tracking-wider text-ink-500">Shown</div>
+                    <div className="font-display text-3xl text-ink-900">{filteredCount}</div>
+                  </div>
+                </div>
+
+                <div className="mt-5 rounded-2xl bg-ink-950 p-4">
+                  <p className="text-xs text-white/70 leading-relaxed mb-3">
+                    Don't see what you need? We procure any medical equipment on request.
+                  </p>
+                  <Link
+                    to="/contact"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-signal-300 hover:text-signal-200 transition-colors"
+                  >
+                    Contact us <ArrowUpRight size={12} />
+                  </Link>
+                </div>
               </div>
             </aside>
 
-            <div className="lg:col-span-9">
-              <div className="mb-5">
-                <p className="text-sm text-ink-500 font-mono">
-                  {filteredRows.length} {filteredRows.length === 1 ? 'item' : 'items'} shown
-                </p>
-              </div>
+            {/* ── CATALOG GROUPS ── */}
+            <div className="lg:col-span-9 space-y-8">
+              <p className="text-sm text-ink-500 font-mono">
+                {filteredCount} {filteredCount === 1 ? 'item' : 'items'} across{' '}
+                {filteredGroups.length} {filteredGroups.length === 1 ? 'category' : 'categories'}
+              </p>
 
-              {groupedRows.length === 0 ? (
+              {filteredGroups.length === 0 ? (
                 <div className="text-center py-20 bg-white rounded-3xl border border-dashed border-ink-200">
                   <h3 className="font-display text-2xl text-ink-900 mb-2">No matching equipment</h3>
                   <p className="text-ink-500">Try broadening your search or selecting another category.</p>
                 </div>
               ) : (
-                <div className="space-y-6">
-                  {groupedRows.map((group, i) => (
+                filteredGroups.map((group, i) => {
+                  const imageItems = group.items.slice(0, 4);
+                  const listItems = group.items.slice(4);
+                  const gridCols = getGridCols(imageItems.length);
+
+                  return (
                     <motion.article
                       key={group.name}
-                      initial={{ opacity: 0, y: 14 }}
+                      initial={{ opacity: 0, y: 16 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: i * 0.03 }}
-                      className="rounded-2xl border border-paper-300 bg-white p-5"
+                      transition={{ delay: i * 0.05 }}
+                      className="rounded-3xl border border-paper-300 bg-white overflow-hidden"
                     >
-                      <h3 className="font-display text-2xl text-ink-900 mb-4">{group.name}</h3>
-                      <div className="mb-4 grid gap-3 md:grid-cols-3">
-                        {group.items.slice(0, 3).map((item, imageIndex) => {
-                          const imageUrl = getCategoryImages(group.name)[imageIndex] ?? getCategoryImage(group.name);
+                      {/* Category header */}
+                      <div className="flex items-center justify-between px-6 pt-6 pb-5 border-b border-paper-200">
+                        <div>
+                          <h3 className="font-display text-2xl text-ink-900">{group.name}</h3>
+                          <p className="text-sm text-ink-500 mt-0.5">
+                            {group.items.length} {group.items.length === 1 ? 'product' : 'products'} available
+                          </p>
+                        </div>
+                        <span className="font-mono text-xs px-3 py-1 rounded-full bg-ink-50 border border-ink-100 text-ink-500">
+                          {group.name.toUpperCase()}
+                        </span>
+                      </div>
 
+                      {/* Image grid — up to 4 items */}
+                      <div className={`grid ${gridCols} gap-px bg-paper-200`}>
+                        {imageItems.map((item, idx) => {
+                          const imageUrl = getItemImage(group.name, idx);
                           return (
                             <button
-                              key={`${group.name}-image-${item}`}
+                              key={`${group.name}-img-${item}`}
                               type="button"
-                              onClick={() =>
-                                setSelectedItem({
-                                  category: group.name,
-                                  name: item,
-                                  imageUrl
-                                })
-                              }
-                              className="group relative rounded-xl overflow-hidden border border-paper-300 bg-white aspect-[4/3] text-left"
+                              onClick={() => setSelectedItem({ category: group.name, name: item, imageUrl })}
+                              className="group relative aspect-[4/3] overflow-hidden bg-ink-100 text-left"
                             >
                               <img
                                 src={imageUrl}
                                 alt={item}
-                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                onError={(e) => {
+                                  (e.currentTarget as HTMLImageElement).src = fallbackImage;
+                                }}
                               />
-                              <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/55 to-transparent" />
+                              <div className="absolute inset-0 bg-gradient-to-t from-ink-950/80 via-ink-950/20 to-transparent" />
                               <div className="absolute inset-x-0 bottom-0 p-4">
-                                <div className="text-white font-semibold leading-tight mb-1">{item}</div>
-                                <div className="text-white/75 text-xs leading-relaxed">
-
-                                </div>
+                                <p className="text-white text-sm font-semibold leading-tight line-clamp-2">
+                                  {item}
+                                </p>
+                              </div>
+                              <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity bg-white/20 backdrop-blur-sm rounded-full p-1.5">
+                                <ArrowUpRight size={12} className="text-white" />
                               </div>
                             </button>
                           );
                         })}
                       </div>
-                      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                        {group.items.slice(3).map((item) => (
-                          <div
-                            key={`${group.name}-${item}`}
-                            className="rounded-xl border border-paper-300 bg-white p-3 flex items-center justify-between gap-2"
-                          >
-                            <span className="text-sm text-ink-800 leading-snug">{item}</span>
-                            <div className="shrink-0 flex items-center gap-2">
-                              <Link
-                                to="/contact"
-                                className="inline-flex items-center gap-1 text-xs font-semibold text-ink-700 hover:text-ink-900"
+
+                      {/* Remaining items as compact list */}
+                      {listItems.length > 0 && (
+                        <div className="px-6 py-4 border-t border-paper-200">
+                          <p className="text-xs font-mono uppercase tracking-wider text-ink-400 mb-3">
+                            Also available
+                          </p>
+                          <div className="flex flex-wrap gap-2">
+                            {listItems.map((item) => (
+                              <div
+                                key={`${group.name}-list-${item}`}
+                                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-paper-300 bg-paper-50 text-sm text-ink-700"
                               >
-                                Quote <ArrowUpRight size={12} />
-                              </Link>
-                            </div>
+                                <span className="w-1.5 h-1.5 rounded-full bg-signal-500 shrink-0" />
+                                {item}
+                                <Link
+                                  to="/contact"
+                                  className="text-xs text-ink-400 hover:text-ink-700 transition-colors ml-1"
+                                  title="Request quote"
+                                >
+                                  <ArrowUpRight size={11} />
+                                </Link>
+                              </div>
+                            ))}
                           </div>
-                        ))}
+                        </div>
+                      )}
+
+                      {/* Footer: Download catalogue + Quote */}
+                      <div className="flex flex-wrap items-center justify-between gap-3 px-6 py-4 border-t border-paper-200 bg-paper-50">
+                        <a
+                          href={`/catalogues/${group.name.toLowerCase()}-catalogue.pdf`}
+                          download
+                          className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-ink-950 hover:bg-ink-800 text-white text-sm font-semibold transition-colors"
+                          onClick={(e) => {
+                            // PDF not yet attached — redirect to contact instead
+                            e.preventDefault();
+                            window.location.href = `/contact?catalogue=${encodeURIComponent(group.name)}`;
+                          }}
+                        >
+                          <Download size={14} />
+                          Download {group.name} Catalogue
+                        </a>
+                        <Link
+                          to="/contact"
+                          className="inline-flex items-center gap-1.5 text-sm font-medium text-ink-600 hover:text-ink-900 transition-colors"
+                        >
+                          Request a quote <ArrowUpRight size={14} />
+                        </Link>
                       </div>
                     </motion.article>
-                  ))}
-                </div>
+                  );
+                })
               )}
+
+              {/* Bottom CTA */}
+              <div className="rounded-3xl bg-ink-950 p-8 md:p-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                <div>
+                  <p className="font-mono text-xs tracking-[0.2em] text-signal-300 uppercase mb-2">
+                    Need something specific?
+                  </p>
+                  <h3 className="font-display text-2xl md:text-3xl font-light text-white leading-tight">
+                    Don't see the equipment you need? We procure anything on request.
+                  </h3>
+                </div>
+                <Link
+                  to="/contact"
+                  className="shrink-0 group inline-flex items-center gap-3 bg-signal-400 hover:bg-signal-300 text-ink-950 pl-6 pr-3 py-2.5 rounded-full font-semibold transition-all"
+                >
+                  <span>Make an enquiry</span>
+                  <span className="bg-ink-950 text-signal-400 w-9 h-9 rounded-full flex items-center justify-center group-hover:rotate-45 transition-transform duration-500">
+                    <ArrowUpRight size={16} />
+                  </span>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
+      {/* ── ITEM DETAIL MODAL ── */}
       <AnimatePresence>
         {selectedItem && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-ink-950/80 backdrop-blur-sm p-4 overflow-y-auto"
+            className="fixed inset-0 z-50 bg-ink-950/80 backdrop-blur-sm p-4 overflow-y-auto flex items-center justify-center"
             onClick={() => setSelectedItem(null)}
           >
             <motion.div
-              initial={{ opacity: 0, y: 18, scale: 0.98 }}
+              initial={{ opacity: 0, y: 20, scale: 0.97 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 18, scale: 0.98 }}
+              exit={{ opacity: 0, y: 20, scale: 0.97 }}
               onClick={(e) => e.stopPropagation()}
-              className="max-w-3xl mx-auto my-8 rounded-3xl overflow-hidden bg-white border border-paper-300"
+              className="w-full max-w-2xl rounded-3xl overflow-hidden bg-white border border-paper-300 shadow-2xl"
             >
-              <div className="bg-white aspect-[16/9]">
+              <div className="aspect-[16/9] bg-ink-100">
                 <img
-                  src={selectedItem.imageUrl ?? getCategoryImage(selectedItem.category)}
+                  src={selectedItem.imageUrl}
                   alt={selectedItem.name}
                   className="w-full h-full object-cover"
+                  onError={(e) => {
+                    (e.currentTarget as HTMLImageElement).src = fallbackImage;
+                  }}
                 />
               </div>
               <div className="p-6 md:p-8">
-                <div className="font-mono text-[11px] uppercase tracking-widest text-ink-500 mb-3">
+                <p className="font-mono text-[11px] uppercase tracking-widest text-ink-500 mb-2">
                   {selectedItem.category}
-                </div>
-                <h2 className="font-display text-3xl text-ink-900 mb-3">{selectedItem.name}</h2>
-
+                </p>
+                <h2 className="font-display text-2xl md:text-3xl text-ink-900 mb-2">
+                  {selectedItem.name}
+                </h2>
+                <p className="text-ink-600 text-sm mb-6">
+                  Contact our team for full specifications, pricing, and availability.
+                </p>
                 <div className="flex flex-wrap gap-3">
                   <Link
                     to="/contact"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-ink-950 text-white text-sm font-medium"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-ink-950 text-white text-sm font-semibold"
                     onClick={() => setSelectedItem(null)}
                   >
                     Request Quote <ArrowUpRight size={13} />
                   </Link>
+                  <a
+                    href={`/catalogues/${selectedItem.category.toLowerCase()}-catalogue.pdf`}
+                    download
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-paper-300 text-sm font-medium text-ink-700 hover:bg-paper-50 transition-colors"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      window.location.href = `/contact?catalogue=${encodeURIComponent(selectedItem.category)}`;
+                      setSelectedItem(null);
+                    }}
+                  >
+                    <FileText size={13} />
+                    Download Catalogue
+                  </a>
                   <button
                     type="button"
                     onClick={() => setSelectedItem(null)}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-paper-300 text-sm font-medium text-ink-700"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-paper-300 text-sm font-medium text-ink-500 hover:text-ink-900 transition-colors"
                   >
                     Close
                   </button>
