@@ -27,11 +27,11 @@ const itemImages: Record<string, string> = {
 
   // ── Imaging ───────────────────────────────────────────────────────────────
   'X-Ray':
-    '/x-ray-imaging-brownier.jfif',
+    '/x-ray-imaging.png',
   'Fluoroscopy':
-    '/flouroscopy-imaging.jfif',
+    '/flouroscopy-imaging.jpg',
   'CT Scan':
-    '/NeuViz%20Epoch%2B%20CT%20SCAN-imaging.jpg',
+    '/ct-scan-imaging.png',
   'MRI':
     '/NeuMR%20Universal-imaging.jpg',
 
@@ -57,11 +57,11 @@ const itemImages: Record<string, string> = {
   'Digital Sensor':
     '/digital%20sensor-dental.png',
   'Autoclave 53L':
-    '/Autoclave-53L%20-%20Runyes.jfif',
+    '/autoclave%2053L%20-%20dental.jpg',
   'CBCT':
-    '/cbct-dental.jfif',
+    '/CBCT-dental.jpg',
   '2D OPG':
-    '/2d-opg-dental.jfif',
+    '/2d-opg-dental.png',
   'UP 3D Dental Digital Laboratory':
     '/UP3D-Dental.jpg',
 };
