@@ -110,6 +110,8 @@ export function Products() {
           <img
             src="https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?auto=format&fit=crop&w=2400&q=80"
             alt=""
+            fetchpriority="high"
+            decoding="async"
             className="w-full h-full object-cover opacity-30"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/75 to-ink-950/55" />
@@ -228,6 +230,8 @@ export function Products() {
                         <img
                           src={imageUrl}
                           alt={item}
+                          loading="lazy"
+                          decoding="async"
                           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                           onError={(e) => {
                             (e.currentTarget as HTMLImageElement).src = fallbackImage;
@@ -313,6 +317,7 @@ export function Products() {
                 <img
                   src={selectedItem.imageUrl}
                   alt={selectedItem.name}
+                  decoding="async"
                   className="w-full h-full object-cover"
                   onError={(e) => {
                     (e.currentTarget as HTMLImageElement).src = fallbackImage;

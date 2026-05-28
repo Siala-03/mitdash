@@ -113,6 +113,8 @@ export function Contact() {
           <img
             src="https://images.pexels.com/photos/236380/pexels-photo-236380.jpeg"
             alt="Contact hero background"
+            fetchpriority="high"
+            decoding="async"
             className="w-full h-full object-cover opacity-30"
           />
           <div className="absolute top-0 -left-24 w-72 h-72 bg-signal-400/15 rounded-full blur-3xl pointer-events-none" />

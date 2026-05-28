@@ -81,6 +81,8 @@ export function Home() {
           <img
             src="https://images.pexels.com/photos/13697732/pexels-photo-13697732.jpeg"
             alt="MITDASH hero background"
+            fetchpriority="high"
+            decoding="async"
             className="w-full h-full object-cover" />
         </motion.div>
 
@@ -135,6 +137,8 @@ export function Home() {
               <img
                 src="https://images.unsplash.com/photo-1530497610245-94d3c16cda28?auto=format&fit=crop&w=900&q=80"
                 alt="Medical imaging equipment"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover" />
               
             </motion.div>
@@ -311,6 +315,8 @@ export function Home() {
                 <img
                   src="https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&w=1400&q=80"
                   alt="Operating room"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover" />
                 
               </motion.div>
@@ -336,6 +342,8 @@ export function Home() {
                 <img
                   src="https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?auto=format&fit=crop&w=800&q=80"
                   alt="Clinical staff"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover" />
                 
               </motion.div>
@@ -512,6 +520,8 @@ export function Home() {
                     <img
                     src={cat.img}
                     alt={cat.title}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover opacity-50 group-hover:opacity-80 group-hover:scale-110 transition-all duration-700" />
                   
                     <div className="absolute inset-0 bg-gradient-to-t from-ink-900 via-ink-900/40 to-transparent" />

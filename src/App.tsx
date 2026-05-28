@@ -21,32 +21,35 @@ function RouteMeta() {
    useEffect(() => {
      const metaByPath: Record<string, { title: string; description: string }> = {
        '/': {
-         title: 'MIT-DASH | Medical Technology for '
-           + '%cEast Africa',
+         title: 'MIT-DASH | Medical Equipment Distributor — Rwanda, Burundi & DRC',
          description:
-           'MIT-DASH buys, sells and distributes world-class medical equipment from globally renowned manufacturers, ensuring availability over margins to eliminate shortages of frequently demanded products. We tailor our services for every client need, aiming for deeply satisfied partnerships rather than volume.'
+           'MIT-DASH buys, sells and distributes world-class medical equipment from globally renowned manufacturers, ensuring availability over margins. We tailor every engagement to the specific client need across Rwanda, Burundi and the DRC.',
+       },
+       '/home': {
+         title: 'MIT-DASH | Medical Equipment Distributor — Rwanda, Burundi & DRC',
+         description:
+           'MIT-DASH buys, sells and distributes world-class medical equipment from globally renowned manufacturers, ensuring availability over margins. We tailor every engagement to the specific client need across Rwanda, Burundi and the DRC.',
        },
        '/products': {
          title: 'Product Catalog | MIT-DASH',
          description:
-           'Browse imaging, surgical, laboratory, and patient care equipment from global OEM manufacturers including Comen, Brownier, Neurosoft, Vatech, Runyes, Medispark, Dochem, and GC Fuji. We ensure availability of frequently demanded products without considering margins.'
+           'Browse imaging, surgical, laboratory, and dental equipment from global manufacturers including Comen, Brownier, Neurosoft, Vatech, Runyes, Medispark, Dochem, and GC Fuji. Availability without margin compromise.',
        },
        '/solutions': {
          title: 'Healthcare Solutions | MIT-DASH',
          description:
-           'Installation, calibration, maintenance, financing, and biomedical training services designed for reliable clinical operations. Our services are tailored to every client need, focused on building long-term partnerships with deeply satisfied healthcare providers.'
+           'Installation, calibration, maintenance, financing, and biomedical training services designed for reliable clinical operations. Every service tailored to the specific needs of your facility.',
        },
        '/cooperation': {
          title: 'Manufacturer Cooperation | MIT-DASH',
          description:
-           'Partner with MIT-DASH for market entry, regulatory support, and healthcare distribution across '
-           + '%cEast Africa. We represent world-class manufacturers like Comen, Brownier, Neurosoft, Vatech, Runyes, Medispark, Dochem, and GC Fuji, prioritizing availability over profit margins.'
+           'Partner with MIT-DASH for market entry, regulatory support, and healthcare distribution across East Africa. We represent world-class manufacturers, prioritizing availability over profit margins.',
        },
        '/contact': {
          title: 'Request a Quote | MIT-DASH',
          description:
-           'Submit a quote request for medical equipment and receive a tailored response from our team. We ensure availability of frequently demanded products without considering margins, building long-term partnerships with deeply satisfied healthcare providers.'
-       }
+           'Submit a quote request for medical equipment and receive a tailored response within 2 business hours. Call +250 796 179 826 or WhatsApp us.',
+       },
      };
 
     const fallback = metaByPath['/'];
@@ -83,6 +86,7 @@ export function App() {
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Home />} />
             <Route path="/products" element={<Products />} />
             <Route path="/solutions" element={<Solutions />} />
             <Route path="/cooperation" element={<Cooperation />} />

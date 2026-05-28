@@ -65,6 +65,8 @@ export function Solutions() {
            <img
              src="https://images.pexels.com/photos/12081338/pexels-photo-12081338.jpeg"
              alt="Services hero background"
+             fetchpriority="high"
+             decoding="async"
              className="w-full h-full object-cover opacity-30" />
            <div className="absolute top-0 right-0 w-80 h-80 bg-signal-400/15 rounded-full blur-3xl pointer-events-none" />
          </div>
