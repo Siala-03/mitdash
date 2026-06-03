@@ -105,7 +105,7 @@ export function Products() {
     <div className="bg-white min-h-screen">
 
       {/* ── HERO ── */}
-      <section className="relative pt-40 pb-16 bg-ink-950 overflow-hidden grain">
+      <section className="relative pt-40 pb-16 bg-brand-900 overflow-hidden grain">
         <div className="absolute inset-0 z-0">
           <img
             src="https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?auto=format&fit=crop&w=2400&q=80"
@@ -114,7 +114,7 @@ export function Products() {
             decoding="async"
             className="w-full h-full object-cover opacity-30"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/75 to-ink-950/55" />
+          <div className="absolute inset-0 bg-gradient-to-t from-brand-900 via-brand-900/75 to-brand-900/55" />
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <p className="font-mono text-xs uppercase tracking-[0.25em] text-signal-300 mb-4">
@@ -172,7 +172,7 @@ export function Products() {
               onClick={() => setActiveCategory('all')}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                 activeCategory === 'all'
-                  ? 'bg-ink-950 text-white'
+                  ? 'bg-signal-700 text-white'
                   : 'bg-white text-ink-700 hover:bg-ink-100 border border-ink-200'
               }`}
             >
@@ -254,7 +254,7 @@ export function Products() {
                 {/* Footer: Download catalogue + Quote */}
                 <div className="flex flex-wrap items-center justify-between gap-3 px-6 py-4 border-t border-paper-200 bg-paper-50">
                   <button
-                    className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-ink-950 hover:bg-ink-800 text-white text-sm font-semibold transition-colors"
+                    className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-signal-700 hover:bg-signal-600 text-white text-sm font-semibold transition-colors"
                     onClick={() => {
                       window.location.href = `/contact?catalogue=${encodeURIComponent(group.name)}`;
                     }}
@@ -274,7 +274,7 @@ export function Products() {
           })}
 
           {/* Bottom CTA */}
-          <div className="rounded-3xl bg-ink-950 p-8 md:p-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+          <div className="rounded-3xl bg-brand-900 p-8 md:p-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div>
               <p className="font-mono text-xs tracking-[0.2em] text-signal-300 uppercase mb-2">
                 Need something specific?
@@ -337,7 +337,7 @@ export function Products() {
                 <div className="flex flex-wrap gap-3">
                   <Link
                     to="/contact"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-ink-950 text-white text-sm font-semibold"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-signal-700 text-white text-sm font-semibold"
                     onClick={() => setSelectedItem(null)}
                   >
                     Request Quote <ArrowUpRight size={13} />

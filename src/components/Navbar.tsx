@@ -74,7 +74,7 @@ export function Navbar() {
           <div className="hidden lg:flex items-center gap-3">
             <Link
               to="/contact"
-              className="group inline-flex items-center gap-2 bg-slate-900 hover:bg-brand-900 text-white px-5 py-2.5 rounded-full text-sm font-medium transition-all shadow-sm">
+              className="group inline-flex items-center gap-2 bg-signal-700 hover:bg-signal-600 text-white px-5 py-2.5 rounded-full text-sm font-medium transition-all shadow-sm">
               
               Request a Quote
               <span className="inline-block transition-transform group-hover:translate-x-0.5">
@@ -123,7 +123,7 @@ export function Navbar() {
             )}
               <Link
               to="/contact"
-              className="mt-2 bg-brand-900 text-white text-center font-medium px-4 py-3 rounded-xl">
+              className="mt-2 bg-signal-700 text-white text-center font-medium px-4 py-3 rounded-xl">
               
                 Request a Quote
               </Link>

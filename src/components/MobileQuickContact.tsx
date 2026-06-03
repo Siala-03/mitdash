@@ -12,7 +12,7 @@ export function MobileQuickContact() {
         <div className="grid grid-cols-2 gap-2">
           <a
             href={`tel:${PHONE}`}
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-ink-950 text-white py-3 text-sm font-semibold hover:bg-ink-900 transition-colors"
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-signal-700 text-white py-3 text-sm font-semibold hover:bg-signal-600 transition-colors"
           >
             <Phone size={15} />
             Call Now

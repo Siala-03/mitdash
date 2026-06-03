@@ -69,7 +69,7 @@ export function Home() {
       {/* ========================= HERO ========================= */}
       <section
         ref={heroRef}
-        className="relative min-h-screen flex items-end pb-20 lg:pb-32 pt-32 md:pt-40 overflow-hidden bg-ink-950 grain">
+        className="relative min-h-screen flex items-end pb-20 lg:pb-32 pt-32 md:pt-40 overflow-hidden bg-brand-900 grain">
         
         {/* Parallax background */}
         <motion.div
@@ -91,9 +91,9 @@ export function Home() {
           style={{
             opacity: overlayOpacity
           }}
-          className="absolute inset-0 bg-gradient-to-b from-ink-950/70 via-ink-950/40 to-ink-950 z-10" />
+          className="absolute inset-0 bg-gradient-to-b from-brand-900/70 via-brand-900/40 to-brand-900 z-10" />
         
-        <div className="absolute inset-0 z-10 bg-gradient-to-r from-ink-950/80 via-transparent to-transparent" />
+        <div className="absolute inset-0 z-10 bg-gradient-to-r from-brand-900/80 via-transparent to-transparent" />
 
         {/* Decorative grid */}
         <div
@@ -278,7 +278,7 @@ export function Home() {
             delay: 1.8,
             duration: 1
           }}
-          className="absolute bottom-0 inset-x-0 z-20 border-t border-white/10 backdrop-blur-md bg-ink-950/40">
+          className="absolute bottom-0 inset-x-0 z-20 border-t border-white/10 backdrop-blur-md bg-brand-900/40">
           
           {/* Stats section removed for minimalism */}
         </motion.div>
@@ -363,7 +363,7 @@ export function Home() {
                 transition={{
                   delay: 0.4
                 }}
-                className="absolute top-8 -left-4 lg:-left-8 bg-ink-950 text-white px-4 py-3 rounded-full text-xs font-mono uppercase tracking-widest">
+                className="absolute top-8 -left-4 lg:-left-8 bg-brand-800 text-white px-4 py-3 rounded-full text-xs font-mono uppercase tracking-widest">
                 
                 Est. 2023 — Kigali
               </motion.div>
@@ -422,7 +422,7 @@ export function Home() {
       </section>
 
       {/* ========================= CATEGORIES — EDITORIAL ========================= */}
-      <section className="py-24 lg:py-32 bg-ink-950 grain relative overflow-hidden">
+      <section className="py-24 lg:py-32 bg-brand-900 grain relative overflow-hidden">
         <div
           className="absolute inset-0 opacity-[0.05]"
           style={{
@@ -514,7 +514,7 @@ export function Home() {
               
                 <Link
                 to="/products"
-                className="group block bg-ink-900 hover:bg-ink-800 transition-all duration-500 h-full">
+                className="group block bg-brand-800 hover:bg-brand-700 transition-all duration-500 h-full">
                 
                   <div className="aspect-square overflow-hidden relative">
                     <img
@@ -524,7 +524,7 @@ export function Home() {
                     decoding="async"
                     className="w-full h-full object-cover opacity-50 group-hover:opacity-80 group-hover:scale-110 transition-all duration-700" />
                   
-                    <div className="absolute inset-0 bg-gradient-to-t from-ink-900 via-ink-900/40 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-brand-900 via-brand-800/40 to-transparent" />
                     <div className="absolute top-4 left-4 text-signal-300">
                       {cat.icon}
                     </div>
@@ -617,7 +617,7 @@ export function Home() {
                transition={{
                  delay: i * 0.12
                }}
-               className="group bg-paper-100 hover:bg-ink-950 p-10 lg:p-12 transition-colors duration-700">
+               className="group bg-paper-100 hover:bg-brand-900 p-10 lg:p-12 transition-colors duration-700">
                
                <div className="flex items-start justify-between mb-10">
                  <span className="font-mono text-sm text-ink-400 group-hover:text-signal-400 transition-colors">
@@ -667,7 +667,7 @@ export function Home() {
               <span className="italic">"</span>
             </blockquote>
             <div className="flex items-center justify-center gap-4">
-              <div className="w-16 h-16 rounded-full bg-ink-900 flex items-center justify-center text-signal-300 font-display font-medium text-xl">
+              <div className="w-16 h-16 rounded-full bg-brand-800 flex items-center justify-center text-signal-300 font-display font-medium text-xl">
                 R
               </div>
               <div className="text-left">
@@ -682,7 +682,7 @@ export function Home() {
       </section>
 
       {/* ========================= CTA ========================= */}
-      <section className="py-24 lg:py-32 bg-ink-950 relative overflow-hidden grain">
+      <section className="py-24 lg:py-32 bg-brand-900 relative overflow-hidden grain">
         <div className="absolute inset-0">
           <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-signal-500/15 rounded-full blur-[120px]" />
           <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px]" style={{backgroundColor:'#613298', opacity:0.1, borderRadius:'9999px', filter:'blur(100px)'}} />
@@ -728,7 +728,7 @@ export function Home() {
                 className="group inline-flex items-center gap-3 bg-signal-400 hover:bg-signal-300 text-ink-950 pl-7 pr-3 py-2 rounded-full font-semibold transition-all">
                 
                 Request a consultation
-                <span className="bg-ink-950 text-signal-400 w-9 h-9 rounded-full flex items-center justify-center group-hover:rotate-45 transition-transform duration-500">
+                <span className="bg-brand-950 text-signal-400 w-9 h-9 rounded-full flex items-center justify-center group-hover:rotate-45 transition-transform duration-500">
                   <ArrowUpRight size={16} />
                 </span>
               </Link>

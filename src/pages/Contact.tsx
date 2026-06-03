@@ -108,7 +108,7 @@ export function Contact() {
   return (
     <div className="pt-24 pb-24 min-h-screen bg-paper-100">
       {/* ── HERO ── */}
-      <section className="relative bg-ink-950 text-white py-20 mb-12 overflow-hidden grain">
+      <section className="relative bg-brand-900 text-white py-20 mb-12 overflow-hidden grain">
         <div className="absolute inset-0">
           <img
             src="https://images.pexels.com/photos/236380/pexels-photo-236380.jpeg"
@@ -191,7 +191,7 @@ export function Contact() {
                   <div className="flex flex-wrap gap-2">
                     <a
                       href={`tel:${PHONE}`}
-                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-ink-950 text-white text-xs font-semibold hover:bg-ink-800 transition-colors"
+                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-signal-700 text-white text-xs font-semibold hover:bg-signal-600 transition-colors"
                     >
                       <Phone size={12} />
                       Call Now
@@ -371,7 +371,7 @@ export function Contact() {
                     <button
                       type="button"
                       onClick={nextStep}
-                      className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-ink-950 text-white font-semibold hover:bg-ink-900 transition-colors"
+                      className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-signal-700 text-white font-semibold hover:bg-signal-600 transition-colors"
                     >
                       Continue
                     </button>

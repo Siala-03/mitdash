@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react';
+import { Mail, Phone, MapPin } from 'lucide-react';
 
 export function Footer() {
   return (
-    <footer className="bg-ink-950 text-ink-200 pt-12 md:pt-20 lg:pt-24 pb-10 relative overflow-hidden grain">
+    <footer className="bg-brand-900 text-ink-200 pt-12 md:pt-20 lg:pt-24 pb-10 relative overflow-hidden grain">
       {/* Subtle grid overlay */}
       <div
         className="absolute inset-0 opacity-[0.04]"
@@ -16,26 +16,6 @@ export function Footer() {
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-
-        {/* Big headline + CTA */}
-        <div className="mb-12 md:mb-20 pb-10 md:pb-16 border-b border-white/10">
-          <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start lg:items-end justify-between">
-            <h2 className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-light text-white leading-[0.95]">
-              Empowering Africa,
-              <br />
-              <span className="italic text-signal-300">innovating care.</span>
-            </h2>
-            <Link
-              to="/contact"
-              className="group shrink-0 inline-flex items-center gap-3 bg-signal-400 hover:bg-signal-300 text-white pl-7 pr-3 py-3 rounded-full font-semibold transition-all"
-            >
-              Get in touch
-              <span className="bg-white/20 w-9 h-9 rounded-full flex items-center justify-center group-hover:rotate-45 transition-transform duration-500">
-                <ArrowUpRight size={16} />
-              </span>
-            </Link>
-          </div>
-        </div>
 
         {/* Link columns */}
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-12 gap-8 lg:gap-12 mb-12 md:mb-16">

@@ -110,7 +110,7 @@ export function Cooperation() {
   return (
     <div className="bg-white">
       {/* ============== HERO ============== */}
-      <section className="relative pt-40 pb-24 bg-slate-950 overflow-hidden">
+      <section className="relative pt-40 pb-24 bg-brand-900 overflow-hidden">
         <div className="absolute inset-0">
           <img
             src="https://images.pexels.com/photos/12351696/pexels-photo-12351696.jpeg"
@@ -118,7 +118,7 @@ export function Cooperation() {
             fetchpriority="high"
             decoding="async"
             className="w-full h-full object-cover opacity-30" />
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-brand-950/80 to-slate-950" />
+          <div className="absolute inset-0 bg-gradient-to-br from-brand-900 via-brand-950/80 to-brand-900" />
           <div className="absolute top-1/3 -right-40 w-[500px] h-[500px] bg-brand-500/20 rounded-full blur-[120px]" />
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">

@@ -60,7 +60,7 @@ const procurementSupport = [
 export function Solutions() {
   return (
      <div className="pt-24 pb-20 min-h-screen bg-paper-100">
-       <section className="bg-ink-950 text-white py-16 mb-12 relative overflow-hidden grain">
+       <section className="bg-brand-900 text-white py-16 mb-12 relative overflow-hidden grain">
          <div className="absolute inset-0">
            <img
              src="https://images.pexels.com/photos/12081338/pexels-photo-12081338.jpeg"
@@ -127,7 +127,7 @@ export function Solutions() {
           </div>
         </section>
 
-        <section className="bg-ink-950 text-white rounded-3xl p-8 md:p-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+        <section className="bg-brand-900 text-white rounded-3xl p-8 md:p-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div>
             <p className="font-mono text-xs tracking-[0.2em] text-signal-300 uppercase mb-3">Service Coverage</p>
             <h2 className="font-display text-3xl md:text-4xl font-light leading-tight">
