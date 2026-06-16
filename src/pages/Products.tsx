@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowUpRight, Download, FileText, Users, Handshake } from 'lucide-react';
+import { ArrowUpRight, FileText, Users, Handshake } from 'lucide-react';
 import { technologyEquipmentIndex } from '../data/catalog';
 
 interface SelectedItem {
@@ -20,14 +20,18 @@ const itemImages: Record<string, string> = {
   'Ultra-portable X-Ray Imaging': '/ultra-portable%20x-ray%20imaging%20-surgical.png',
 
   // ── Imaging ───────────────────────────────────────────────────────────────
-  'X-Ray':
-    '/x-ray-imaging.png',
   'Fluoroscopy':
     '/flouroscopy-imaging.jpg',
   'CT Scan':
     '/ct-scan-imaging.png',
   'MRI':
     '/NeuMR%20Universal-imaging.jpg',
+  'NeuAngio Ceiling Series':
+    '/NeuAngio%20Ceiling%20Series-imaging.png',
+  'NeuEcho9 US Series':
+    '/NeuEcho9%20US%20series%20-%20imaging.png',
+  'NeuAngio Floor Series':
+    '/NeuAngio%20Floor%20Series-imaging.png',
 
   // ── Laboratory ────────────────────────────────────────────────────────────
   '-150°C Cryo Freezer':
@@ -44,20 +48,22 @@ const itemImages: Record<string, string> = {
     '/Fast%20-%20response%20digital%20thermometer-laboratory.jpg',
 
   // ── Dental ────────────────────────────────────────────────────────────────
-  'Integrated Dental Unit':
-    '/integrated%20dental%20unit-dental.png',
   'Dental X-Ray':
     '/dental%20x-ray.jpg',
   'Digital Sensor':
     '/digital%20sensor-dental.png',
-  'Autoclave 53L':
-    '/autoclave%2053L%20-%20dental.jpg',
-  'CBCT':
-    '/CBCT-dental.jpg',
   '2D OPG':
     '/2d-opg-dental.png',
   'UP 3D Dental Digital Laboratory':
     '/UP3D-Dental.jpg',
+  'Pax-i3D Green':
+    '/Pax-i3D%20Green-dental.jpg',
+  'PA-i3D Smartdental':
+    '/pa-i3d%20Smartdental.jpg',
+  'Smart Plus':
+    '/smart%20Plus-dental.jpg',
+  'Vatech A9':
+    '/vatech%20A9-dental.jpg',
 };
 
 const fallbackImage =
@@ -245,17 +251,9 @@ export function Products() {
                   })}
                 </div>
 
-                {/* Footer: Download catalogue + Quote */}
+                {/* Footer: Quote action */}
                 <div className="flex flex-wrap items-center justify-between gap-3 px-6 py-4 border-t border-paper-200 bg-paper-50">
-                  <button
-                    className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-signal-700 hover:bg-signal-600 text-white text-sm font-semibold transition-colors"
-                    onClick={() => {
-                      window.location.href = `/contact?catalogue=${encodeURIComponent(group.name)}`;
-                    }}
-                  >
-                    <Download size={14} />
-                    Download {group.name} Catalogue
-                  </button>
+                  <div />
                   <Link
                     to="/contact"
                     className="inline-flex items-center gap-1.5 text-sm font-medium text-ink-600 hover:text-ink-900 transition-colors"
@@ -336,17 +334,7 @@ export function Products() {
                   >
                     Request Quote <ArrowUpRight size={13} />
                   </Link>
-                  <button
-                    type="button"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-paper-300 text-sm font-medium text-ink-700 hover:bg-paper-50 transition-colors"
-                    onClick={() => {
-                      window.location.href = `/contact?catalogue=${encodeURIComponent(selectedItem.category)}`;
-                      setSelectedItem(null);
-                    }}
-                  >
-                    <FileText size={13} />
-                    Download Catalogue
-                  </button>
+
                   <button
                     type="button"
                     onClick={() => setSelectedItem(null)}

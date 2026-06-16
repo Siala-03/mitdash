@@ -347,10 +347,12 @@ export const technologyEquipmentIndex: EquipmentIndexCategory[] = [
   {
     name: 'Imaging',
     items: [
-      'X-Ray',
       'Fluoroscopy',
       'CT Scan',
       'MRI',
+      'NeuAngio Ceiling Series',
+      'NeuEcho9 US Series',
+      'NeuAngio Floor Series',
     ]
   },
   {
@@ -367,13 +369,14 @@ export const technologyEquipmentIndex: EquipmentIndexCategory[] = [
   {
     name: 'Dental',
     items: [
-      'Integrated Dental Unit',
       'Dental X-Ray',
       'Digital Sensor',
-      'Autoclave 53L',
-      'CBCT',
       '2D OPG',
       'UP 3D Dental Digital Laboratory',
+      'Pax-i3D Green',
+      'PA-i3D Smartdental',
+      'Smart Plus',
+      'Vatech A9',
     ]
   }
 ];
