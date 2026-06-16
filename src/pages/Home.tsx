@@ -153,7 +153,7 @@ export function Home() {
               <span className="block">
                 <RevealText text="Africa," delay={0.1} />
               </span>
-              <span className="block italic font-normal text-signal-300">
+              <span className="block font-normal text-signal-300">
                 <RevealText text="innovating&nbsp;care." delay={0.4} />
               </span>
             </h1>
@@ -345,7 +345,7 @@ export function Home() {
 
               <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-ink-900 leading-[1.05] mb-8">
                 A new standard for medical technology in{' '}
-                <span className="italic text-signal-600">
+                <span className="text-signal-600">
                   East&nbsp;Africa.
                 </span>
               </h2>
@@ -384,7 +384,7 @@ export function Home() {
               </div>
               <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-ink-900 leading-[1.05]">
                 More than supply.{' '}
-                <span className="italic text-signal-600">Partnership.</span>
+                <span className="text-signal-600">Partnership.</span>
               </h2>
             </div>
             <p className="lg:col-span-6 lg:col-start-7 text-lg text-ink-600 leading-relaxed self-end">
@@ -475,10 +475,10 @@ export function Home() {
             
             <Quote size={56} className="text-signal-400 mx-auto mb-10" />
             <blockquote className="font-display text-3xl md:text-4xl lg:text-5xl text-ink-900 leading-[1.2] mb-12 font-light">
-              <span className="italic">"</span>MIT-DASH didn't just deliver our
+              <span>"</span>MIT-DASH didn't just deliver our
               diagnostic imaging suite — they installed it, trained our
               radiographers, and have kept it running flawlessly ever since.
-              <span className="italic">"</span>
+              <span>"</span>
             </blockquote>
             <div className="flex items-center justify-center gap-4">
               <div className="w-16 h-16 rounded-full bg-brand-800 flex items-center justify-center text-signal-300 font-display font-medium text-xl">
@@ -527,7 +527,7 @@ export function Home() {
             </div>
             <h2 className="font-display text-4xl md:text-5xl lg:text-7xl font-light text-white mb-8 leading-[1.05]">
               Build the next chapter of{' '}
-              <span className="italic text-signal-300">African healthcare</span>{' '}
+              <span className="text-signal-300">African healthcare</span>{' '}
               — with us.
             </h2>
             <p className="text-white/70 text-lg lg:text-xl mb-12 max-w-2xl mx-auto">

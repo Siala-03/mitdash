@@ -145,7 +145,7 @@ export function Cooperation() {
                 </div>
               <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-medium text-white leading-[1.05] mb-6">
                 Your gateway to{' '}
-                <span className="italic text-brand-300">world-class medical equipment</span>{' '}
+                <span className="text-brand-300">world-class medical equipment</span>{' '}
                 from globally renowned manufacturers.
               </h1>
               <p className="text-xl text-slate-300 leading-relaxed max-w-2xl mb-10">

@@ -134,7 +134,7 @@ export function Products() {
           </p>
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-white mb-6 leading-[1.05]">
             World-class equipment from global manufacturers,{' '}
-            <span className="italic text-signal-300">available when you need it.</span>
+            <span className="text-signal-300">available when you need it.</span>
           </h1>
           <p className="text-white/70 text-lg max-w-2xl">
             We source and distribute from globally renowned manufacturers — Comen, Brownier,
