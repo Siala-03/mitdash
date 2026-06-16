@@ -36,16 +36,26 @@ const itemImages: Record<string, string> = {
   // ── Laboratory ────────────────────────────────────────────────────────────
   '-150°C Cryo Freezer':
     '/-150%C2%B0C%20Cryo%20Freezer-laboratory.jpg',
-  'Alcohol Prep Pad':
-    '/alcohol%20prep%20pad-laboratory.jpg',
-  'Automatic Fluorescence Immunoassay Analyzer':
+  'Automatic Fluorescence Immunoassay Analyzer QD-S2000':
     '/Automatic%20Fluorescence%20Immunoassay%20Analyzer%20QD-S2000-laboratory.png',
   'Automatic IHC Stainer':
     '/Automatic%20IHC%20Stainer-laboratory.png',
-  'Burette Infusion Set':
-    '/burrete%20infusion%20set-laboratory.jpg',
-  'Fast-Response Digital Thermometer':
-    '/Fast%20-%20response%20digital%20thermometer-laboratory.jpg',
+  'BF-730 Flow Cytometer':
+    '/BF-730%20Flow%20Cytometer-laboratory.png',
+  'BH-7080 Automatic Haematology Analyzer':
+    '/BH-7080%20Automatic%20Haematology%20Analyzer-laboratory.png',
+  'BS-8000 Haematology Analyzer':
+    '/BS-8000%20Haematology%20Analyzer%20-%20laboratory.png',
+  'CA-640A Automatic Chemistry Analyzer':
+    '/CA-640A%20Automatic%20Chemistry%20Analyzer-Laboratory.jpg',
+  'URIT-560 Urine Analyzer':
+    '/URIT-560%20Urine%20Analyzer-laboratory.jpg',
+  'US-1000 AI-Libre Urinalysis Analyzer':
+    '/US-1000%20AI-Libre%20Urinalysis%20Analyzer-laboratory.png',
+  'US-2000 AI Modular Urinalysis':
+    '/US-2000%20AI%20Modular%20Urinalysis-laboratory.jpg',
+  'VRN-Q5 Ultrasonic Scaler':
+    '/VRN-Q5%20Ultrasonic%20Scaler-laboratory.png',
 
   // ── Dental ────────────────────────────────────────────────────────────────
   'Dental X-Ray':

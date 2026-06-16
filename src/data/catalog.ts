@@ -359,11 +359,16 @@ export const technologyEquipmentIndex: EquipmentIndexCategory[] = [
     name: 'Laboratory',
     items: [
       '-150°C Cryo Freezer',
-      'Alcohol Prep Pad',
-      'Automatic Fluorescence Immunoassay Analyzer',
+      'Automatic Fluorescence Immunoassay Analyzer QD-S2000',
       'Automatic IHC Stainer',
-      'Burette Infusion Set',
-      'Fast-Response Digital Thermometer',
+      'BF-730 Flow Cytometer',
+      'BH-7080 Automatic Haematology Analyzer',
+      'BS-8000 Haematology Analyzer',
+      'CA-640A Automatic Chemistry Analyzer',
+      'URIT-560 Urine Analyzer',
+      'US-1000 AI-Libre Urinalysis Analyzer',
+      'US-2000 AI Modular Urinalysis',
+      'VRN-Q5 Ultrasonic Scaler',
     ]
   },
   {
