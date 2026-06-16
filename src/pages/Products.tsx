@@ -50,6 +50,8 @@ const itemImages: Record<string, string> = {
     '/CA-640A%20Automatic%20Chemistry%20Analyzer-Laboratory.jpg',
   'URIT-560 Urine Analyzer':
     '/URIT-560%20Urine%20Analyzer-laboratory.jpg',
+  'URIT-910C Plus Electrolyte Analyzer':
+    '/URIT-910C%20Plus%20Electrolyte%20Analyzer-laboratory.jpg',
   'US-1000 AI-Libre Urinalysis Analyzer':
     '/US-1000%20AI-Libre%20Urinalysis%20Analyzer-laboratory.png',
   'US-2000 AI Modular Urinalysis':

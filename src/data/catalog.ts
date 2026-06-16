@@ -366,6 +366,7 @@ export const technologyEquipmentIndex: EquipmentIndexCategory[] = [
       'BS-8000 Haematology Analyzer',
       'CA-640A Automatic Chemistry Analyzer',
       'URIT-560 Urine Analyzer',
+      'URIT-910C Plus Electrolyte Analyzer',
       'US-1000 AI-Libre Urinalysis Analyzer',
       'US-2000 AI Modular Urinalysis',
       'VRN-Q5 Ultrasonic Scaler',
