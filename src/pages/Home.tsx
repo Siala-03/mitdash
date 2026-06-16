@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import React from 'react';
+import { motion, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import {
   ArrowUpRight,
@@ -55,43 +55,24 @@ function RevealText({
 
 }
 export function Home() {
-  const heroRef = useRef<HTMLElement>(null);
-  const { scrollYProgress: heroProgress } = useScroll({
-    target: heroRef,
-    offset: ['start start', 'end start']
-  });
-  const imageY = useTransform(heroProgress, [0, 1], ['0%', '30%']);
-  const imageScale = useTransform(heroProgress, [0, 1], [1, 1.15]);
-  const overlayOpacity = useTransform(heroProgress, [0, 0.8], [0.4, 0.85]);
-  const heroTextY = useTransform(heroProgress, [0, 1], ['0%', '-20%']);
   return (
     <div className="flex flex-col bg-paper-100">
       {/* ========================= HERO ========================= */}
       <section
-        ref={heroRef}
         className="relative min-h-screen flex items-end pb-20 lg:pb-32 pt-32 md:pt-40 overflow-hidden bg-brand-900 grain">
         
-        {/* Parallax background */}
-        <motion.div
-          style={{
-            y: imageY,
-            scale: imageScale
-          }}
-          className="absolute inset-0 -top-20 -bottom-20 z-0">
+        {/* Static background */}
+        <div className="absolute inset-0 z-0">
           <img
             src="https://images.pexels.com/photos/36101262/pexels-photo-36101262.jpeg"
             alt="MITDASH hero background"
             fetchpriority="high"
             decoding="async"
             className="w-full h-full object-cover" />
-        </motion.div>
+        </div>
 
         {/* Overlays */}
-        <motion.div
-          style={{
-            opacity: overlayOpacity
-          }}
-          className="absolute inset-0 bg-gradient-to-b from-brand-900/70 via-brand-900/40 to-brand-900 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-brand-900/70 via-brand-900/40 to-brand-900 z-10" />
         
         <div className="absolute inset-0 z-10 bg-gradient-to-r from-brand-900/80 via-transparent to-transparent" />
 
@@ -118,11 +99,7 @@ export function Home() {
         </div>
 
         {/* Hero copy */}
-        <motion.div
-          style={{
-            y: heroTextY
-          }}
-          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full">
           
           {/* Top meta row removed for minimalism */}
 
@@ -212,7 +189,7 @@ export function Home() {
               </Link>
             </motion.div>
           </div>
-        </motion.div>
+        </div>
 
         {/* Bottom KPI strip */}
         <motion.div
