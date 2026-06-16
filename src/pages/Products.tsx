@@ -12,18 +12,12 @@ interface SelectedItem {
 
 const itemImages: Record<string, string> = {
   // ── Surgical ──────────────────────────────────────────────────────────────
-  'Anaesthesia Mask':
-    '/anaesthesia%20mask-surgical.jpg',
-  'Bronchoscope':
-    '/bronchoscope%20endoscro-surgical.jpg',
-  'Clip Appliers':
-    '/clip%20appliers-surgical.jpg',
-  'Disposable Retrieval Devices':
-    '/disposable%20retrieval%20devices%20-%20surgical.jpg',
-  'Disposable Suction & Irrigation Devices':
-    '/disposable%20suction%20irrigation%20devices%20%20-%20surgical.jpg',
-  'Sterile Negative Pressure Suction Set':
-    '/sterile-negative-pressure-suction-set.png',
+  'Mobile X-ray Machine': '/Mobile%20X-ray%20machine-surgical.png',
+  'Mobile C-Arm with FPD': '/Mobile%20c-arm%20with%20fpd-surgical.png',
+  'Table Digital Radiography': '/Table%20Digital%20Radiography-surgical.png',
+  'Anaesthesia Machine': '/anaesthesia%20machine-surgical.png',
+  'Mobile X-Ray': '/mobile%20x-ray-surgical.png',
+  'Ultra-portable X-Ray Imaging': '/ultra-portable%20x-ray%20imaging%20-surgical.png',
 
   // ── Imaging ───────────────────────────────────────────────────────────────
   'X-Ray':

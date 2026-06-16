@@ -336,12 +336,12 @@ export const technologyEquipmentIndex: EquipmentIndexCategory[] = [
   {
     name: 'Surgical',
     items: [
-      'Anaesthesia Mask',
-      'Bronchoscope',
-      'Clip Appliers',
-      'Disposable Retrieval Devices',
-      'Disposable Suction & Irrigation Devices',
-      'Sterile Negative Pressure Suction Set',
+      'Mobile X-ray Machine',
+      'Mobile C-Arm with FPD',
+      'Table Digital Radiography',
+      'Anaesthesia Machine',
+      'Mobile X-Ray',
+      'Ultra-portable X-Ray Imaging',
     ]
   },
   {

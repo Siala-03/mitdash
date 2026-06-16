@@ -79,7 +79,7 @@ export function Home() {
           }}
           className="absolute inset-0 -top-20 -bottom-20 z-0">
           <img
-            src="https://images.pexels.com/photos/13697732/pexels-photo-13697732.jpeg"
+            src="https://images.pexels.com/photos/36101262/pexels-photo-36101262.jpeg"
             alt="MITDASH hero background"
             fetchpriority="high"
             decoding="async"
