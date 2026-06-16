@@ -30,7 +30,7 @@ function RevealText({
       {words.map((word, i) =>
       <span
         key={i}
-        className="inline-block overflow-hidden align-bottom mr-[0.25em]">
+        className="inline-block overflow-visible align-top mr-[0.25em]">
         
           <motion.span
           initial={{
@@ -146,7 +146,7 @@ export function Home() {
               </span>
             </motion.div>
 
-            <h1 className="font-display text-[clamp(2.5rem,8vw,7.5rem)] font-light text-white leading-[1.1] mb-10 tracking-tight">
+            <h1 className="font-display text-[clamp(2.5rem,8vw,7.5rem)] font-light text-white leading-[1.3] mb-10 tracking-tight">
               <span className="block">
                 <RevealText text="Empowering" />
               </span>
