@@ -15,42 +15,34 @@ import {
 const manufacturers = [
 {
   name: 'Comen',
-  focus: 'Imaging & Patient Care',
   country: 'China'
 },
 {
   name: 'Brownier',
-  focus: 'Diagnostic Imaging',
   country: 'China'
 },
 {
   name: 'Neurosoft',
-  focus: 'Imaging & Monitoring',
   country: 'Russia'
 },
 {
   name: 'Vatech',
-  focus: 'Imaging & Monitoring',
   country: 'South Korea'
 },
 {
   name: 'Runyes',
-  focus: 'Surgical & Laboratory',
   country: 'China'
 },
 {
   name: 'Medispark',
-  focus: 'Laboratory Diagnostics',
   country: 'India'
 },
 {
   name: 'Dochem',
-  focus: 'Surgical Equipment',
   country: 'India'
 },
 {
   name: 'GC Fuji',
-  focus: 'Chemistry & Hematology',
   country: 'Japan'
 }];
 
@@ -324,7 +316,6 @@ export function Cooperation() {
                   className="text-brand-600 shrink-0 mt-1" />
                 
                 </div>
-                <div className="text-sm text-slate-600 mb-1">{m.focus}</div>
                 <div className="text-xs text-slate-400 uppercase tracking-wider">
                   {m.country}
                 </div>
