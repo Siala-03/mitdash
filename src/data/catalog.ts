@@ -347,42 +347,43 @@ export const technologyEquipmentIndex: EquipmentIndexCategory[] = [
   {
     name: 'Imaging',
     items: [
-      'Fluoroscopy',
-      'CT Scan',
       'MRI',
       'NeuAngio Ceiling Series',
       'NeuEcho9 US Series',
       'NeuAngio Floor Series',
+      'Ultrasound',
+      'Ultrasound S22',
+      'Ultrasound S8 EXP',
+      'General X-Ray',
+      'C-Arm',
     ]
   },
   {
     name: 'Laboratory',
     items: [
-      '-150°C Cryo Freezer',
-      'Automatic Fluorescence Immunoassay Analyzer QD-S2000',
-      'Automatic IHC Stainer',
+      'URIT-910C Plus Electrolyte Analyzer',
       'BF-730 Flow Cytometer',
-      'BH-7080 Automatic Haematology Analyzer',
-      'BS-8000 Haematology Analyzer',
       'CA-640A Automatic Chemistry Analyzer',
       'URIT-560 Urine Analyzer',
-      'URIT-910C Plus Electrolyte Analyzer',
       'US-1000 AI-Libre Urinalysis Analyzer',
-      'US-2000 AI Modular Urinalysis',
-      'VRN-Q5 Ultrasonic Scaler',
+      '5-Part Diff Hematology Analyzer',
+      'Chemistry Analyzer',
+      'Urinalysis Analyzer',
+      'Microplate Reader',
     ]
   },
   {
     name: 'Dental',
     items: [
-      'Dental X-Ray',
-      'Digital Sensor',
-      '2D OPG',
-      'UP 3D Dental Digital Laboratory',
       'Pax-i3D Green',
       'PA-i3D Smartdental',
       'Smart Plus',
       'Vatech A9',
+      '3D CBCT',
+      '3D CBCT Vatech',
+      'Panoramic X-Ray',
+      'Mobile X-Ray',
+      'Handheld X-Ray',
     ]
   }
 ];

@@ -20,10 +20,6 @@ const itemImages: Record<string, string> = {
   'Patient Monitor': '/k22%20patient%20monitor-surgical.png',
 
   // ── Imaging ───────────────────────────────────────────────────────────────
-  'Fluoroscopy':
-    '/flouroscopy-imaging.jpg',
-  'CT Scan':
-    '/ct-scan-imaging.png',
   'MRI':
     '/NeuMR%20Universal-imaging.jpg',
   'NeuAngio Ceiling Series':
@@ -32,42 +28,38 @@ const itemImages: Record<string, string> = {
     '/NeuEcho9%20US%20series%20-%20imaging.png',
   'NeuAngio Floor Series':
     '/NeuAngio%20Floor%20Series-imaging.png',
+  'Ultrasound':
+    '/ultrasound-imaging.jpg',
+  'Ultrasound S22':
+    '/Ultrasound%20s22-imaging.jpg',
+  'Ultrasound S8 EXP':
+    '/ultrasound%20s8%20exp-imaging.jpg',
+  'General X-Ray':
+    '/General%20X-ray-imaging.png',
+  'C-Arm':
+    '/C-arm-imaging.png',
 
   // ── Laboratory ────────────────────────────────────────────────────────────
-  '-150°C Cryo Freezer':
-    '/-150%C2%B0C%20Cryo%20Freezer-laboratory.jpg',
-  'Automatic Fluorescence Immunoassay Analyzer QD-S2000':
-    '/Automatic%20Fluorescence%20Immunoassay%20Analyzer%20QD-S2000-laboratory.png',
-  'Automatic IHC Stainer':
-    '/Automatic%20IHC%20Stainer-laboratory.png',
+  'URIT-910C Plus Electrolyte Analyzer':
+    '/URIT-910C%20Plus%20Electrolyte%20Analyzer-laboratory.jpg',
   'BF-730 Flow Cytometer':
     '/BF-730%20Flow%20Cytometer-laboratory.png',
-  'BH-7080 Automatic Haematology Analyzer':
-    '/BH-7080%20Automatic%20Haematology%20Analyzer-laboratory.png',
-  'BS-8000 Haematology Analyzer':
-    '/BS-8000%20Haematology%20Analyzer%20-%20laboratory.png',
   'CA-640A Automatic Chemistry Analyzer':
     '/CA-640A%20Automatic%20Chemistry%20Analyzer-Laboratory.jpg',
   'URIT-560 Urine Analyzer':
     '/URIT-560%20Urine%20Analyzer-laboratory.jpg',
-  'URIT-910C Plus Electrolyte Analyzer':
-    '/URIT-910C%20Plus%20Electrolyte%20Analyzer-laboratory.jpg',
   'US-1000 AI-Libre Urinalysis Analyzer':
     '/US-1000%20AI-Libre%20Urinalysis%20Analyzer-laboratory.png',
-  'US-2000 AI Modular Urinalysis':
-    '/US-2000%20AI%20Modular%20Urinalysis-laboratory.jpg',
-  'VRN-Q5 Ultrasonic Scaler':
-    '/VRN-Q5%20Ultrasonic%20Scaler-laboratory.png',
+  '5-Part Diff Hematology Analyzer':
+    '/5-part-diff%20hematology%20analyzer-laboratory.png',
+  'Chemistry Analyzer':
+    '/chemistry%20analyzer-laboratory.jpg',
+  'Urinalysis Analyzer':
+    '/urinalysis%20analyzer-laboratory.jpg',
+  'Microplate Reader':
+    '/microplate%20reader-laboratory.jpg',
 
   // ── Dental ────────────────────────────────────────────────────────────────
-  'Dental X-Ray':
-    '/dental%20x-ray.jpg',
-  'Digital Sensor':
-    '/digital%20sensor-dental.png',
-  '2D OPG':
-    '/2d-opg-dental.png',
-  'UP 3D Dental Digital Laboratory':
-    '/UP3D-Dental.jpg',
   'Pax-i3D Green':
     '/Pax-i3D%20Green-dental.jpg',
   'PA-i3D Smartdental':
@@ -76,6 +68,16 @@ const itemImages: Record<string, string> = {
     '/smart%20Plus-dental.jpg',
   'Vatech A9':
     '/vatech%20A9-dental.jpg',
+  '3D CBCT':
+    '/3d%20cbct-dental.jpg',
+  '3D CBCT Vatech':
+    '/3d%20cbct%20vatech-dental.webp',
+  'Panoramic X-Ray':
+    '/pano-dental.webp',
+  'Mobile X-Ray':
+    '/mobile%20-ray-dental.jpg',
+  'Handheld X-Ray':
+    '/handheld%20x-ray-dental.png',
 };
 
 const fallbackImage =
