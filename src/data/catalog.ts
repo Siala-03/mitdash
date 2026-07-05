@@ -336,12 +336,12 @@ export const technologyEquipmentIndex: EquipmentIndexCategory[] = [
   {
     name: 'Surgical',
     items: [
-      'Mobile X-ray Machine',
-      'Mobile C-Arm with FPD',
-      'Table Digital Radiography',
-      'Anaesthesia Machine',
-      'Mobile X-Ray',
-      'Ultra-portable X-Ray Imaging',
+      'Electrohydraulic Operating Table',
+      'Surgical Light',
+      'Infusion Pump',
+      'Infant Radiant Warmer',
+      'Ventilator',
+      'Patient Monitor',
     ]
   },
   {

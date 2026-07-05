@@ -12,12 +12,12 @@ interface SelectedItem {
 
 const itemImages: Record<string, string> = {
   // ── Surgical ──────────────────────────────────────────────────────────────
-  'Mobile X-ray Machine': '/Mobile%20X-ray%20machine-surgical.png',
-  'Mobile C-Arm with FPD': '/Mobile%20c-arm%20with%20fpd-surgical.png',
-  'Table Digital Radiography': '/Table%20Digital%20Radiography-surgical.png',
-  'Anaesthesia Machine': '/anaesthesia%20machine-surgical.png',
-  'Mobile X-Ray': '/mobile%20x-ray-surgical.png',
-  'Ultra-portable X-Ray Imaging': '/ultra-portable%20x-ray%20imaging%20-surgical.png',
+  'Electrohydraulic Operating Table': '/Electrohydraulic%20Operating%20table-surgical.png',
+  'Surgical Light': '/surgical%20light-surgical.png',
+  'Infusion Pump': '/Infusion%20Pump-surgical.png',
+  'Infant Radiant Warmer': '/Infant%20Radiant%20Warmer-surgical.png',
+  'Ventilator': '/ventilator-surgical.png',
+  'Patient Monitor': '/k22%20patient%20monitor-surgical.png',
 
   // ── Imaging ───────────────────────────────────────────────────────────────
   'Fluoroscopy':
