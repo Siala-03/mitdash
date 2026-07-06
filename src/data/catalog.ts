@@ -348,9 +348,7 @@ export const technologyEquipmentIndex: EquipmentIndexCategory[] = [
     name: 'Imaging',
     items: [
       'MRI',
-      'NeuAngio Ceiling Series',
       'NeuEcho9 US Series',
-      'NeuAngio Floor Series',
       'Ultrasound',
       'Ultrasound S22',
       'Ultrasound S8 EXP',
@@ -376,14 +374,14 @@ export const technologyEquipmentIndex: EquipmentIndexCategory[] = [
     name: 'Dental',
     items: [
       'Pax-i3D Green',
-      'PA-i3D Smartdental',
-      'Smart Plus',
-      'Vatech A9',
       '3D CBCT',
       '3D CBCT Vatech',
-      'Panoramic X-Ray',
       'Mobile X-Ray',
       'Handheld X-Ray',
+      'Green21',
+      'Pax-i3D',
+      'Green X',
+      'Dental X-Ray',
     ]
   }
 ];

@@ -59,22 +59,22 @@ const teamMembers = [
   {
     name: 'Alex Muema Musyoka',
     role: 'Chief Executive Officer',
-    image: '/Alex.jpeg'
+    image: '/Alex.webp'
   },
   {
     name: 'Mpabwanimana Peninah',
     role: 'Sales Representative',
-    image: '/peninah.jpeg'
+    image: '/peninah.webp'
   },
   {
     name: 'Irabona Frederic',
     role: 'Biomedical Engineer',
-    image: '/irabona.jpeg'
+    image: '/irabona.webp'
   },
   {
     name: 'Ishimwe Régine',
     role: 'Sales Director',
-    image: '/ishimwe.jpeg'
+    image: '/ishimwe.webp'
   }
 ];
 

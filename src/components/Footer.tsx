@@ -24,7 +24,7 @@ export function Footer() {
           <div className="col-span-2 md:col-span-4 lg:col-span-4 space-y-5">
             <Link to="/" className="flex items-center">
               <img
-                src="/logo.jpeg"
+                src="/logo.webp"
                 alt="MITDASH Logo"
                 className="h-12 w-auto max-w-[160px] object-contain"
                 loading="lazy"

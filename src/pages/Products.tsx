@@ -12,72 +12,68 @@ interface SelectedItem {
 
 const itemImages: Record<string, string> = {
   // ── Surgical ──────────────────────────────────────────────────────────────
-  'Electrohydraulic Operating Table': '/Electrohydraulic%20Operating%20table-surgical.png',
-  'Surgical Light': '/surgical%20light-surgical.png',
-  'Infusion Pump': '/Infusion%20Pump-surgical.png',
-  'Infant Radiant Warmer': '/Infant%20Radiant%20Warmer-surgical.png',
-  'Ventilator': '/ventilator-surgical.png',
-  'Patient Monitor': '/k22%20patient%20monitor-surgical.png',
+  'Electrohydraulic Operating Table': '/Electrohydraulic%20Operating%20table-surgical.webp',
+  'Surgical Light': '/surgical%20light-surgical.webp',
+  'Infusion Pump': '/Infusion%20Pump-surgical.webp',
+  'Infant Radiant Warmer': '/Infant%20Radiant%20Warmer-surgical.webp',
+  'Ventilator': '/ventilator-surgical.webp',
+  'Patient Monitor': '/k22%20patient%20monitor-surgical.webp',
 
   // ── Imaging ───────────────────────────────────────────────────────────────
   'MRI':
-    '/NeuMR%20Universal-imaging.jpg',
-  'NeuAngio Ceiling Series':
-    '/NeuAngio%20Ceiling%20Series-imaging.png',
+    '/NeuMR%20Universal-imaging.webp',
   'NeuEcho9 US Series':
-    '/NeuEcho9%20US%20series%20-%20imaging.png',
-  'NeuAngio Floor Series':
-    '/NeuAngio%20Floor%20Series-imaging.png',
+    '/NeuEcho9%20US%20series%20-%20imaging.webp',
   'Ultrasound':
-    '/ultrasound-imaging.jpg',
+    '/ultrasound-imaging.webp',
   'Ultrasound S22':
-    '/Ultrasound%20s22-imaging.jpg',
+    '/Ultrasound%20s22-imaging.webp',
   'Ultrasound S8 EXP':
-    '/ultrasound%20s8%20exp-imaging.jpg',
+    '/ultrasound%20s8%20exp-imaging.webp',
   'General X-Ray':
-    '/General%20X-ray-imaging.png',
+    '/General%20X-ray-imaging.webp',
   'C-Arm':
-    '/C-arm-imaging.png',
+    '/C-arm-imaging.webp',
 
   // ── Laboratory ────────────────────────────────────────────────────────────
   'URIT-910C Plus Electrolyte Analyzer':
-    '/URIT-910C%20Plus%20Electrolyte%20Analyzer-laboratory.jpg',
+    '/URIT-910C%20Plus%20Electrolyte%20Analyzer-laboratory.webp',
   'BF-730 Flow Cytometer':
-    '/BF-730%20Flow%20Cytometer-laboratory.png',
+    '/BF-730%20Flow%20Cytometer-laboratory.webp',
   'CA-640A Automatic Chemistry Analyzer':
-    '/CA-640A%20Automatic%20Chemistry%20Analyzer-Laboratory.jpg',
+    '/CA-640A%20Automatic%20Chemistry%20Analyzer-Laboratory.webp',
   'URIT-560 Urine Analyzer':
-    '/URIT-560%20Urine%20Analyzer-laboratory.jpg',
+    '/URIT-560%20Urine%20Analyzer-laboratory.webp',
   'US-1000 AI-Libre Urinalysis Analyzer':
-    '/US-1000%20AI-Libre%20Urinalysis%20Analyzer-laboratory.png',
+    '/US-1000%20AI-Libre%20Urinalysis%20Analyzer-laboratory.webp',
   '5-Part Diff Hematology Analyzer':
-    '/5-part-diff%20hematology%20analyzer-laboratory.png',
+    '/5-part-diff%20hematology%20analyzer-laboratory.webp',
   'Chemistry Analyzer':
-    '/chemistry%20analyzer-laboratory.jpg',
+    '/chemistry%20analyzer-laboratory.webp',
   'Urinalysis Analyzer':
-    '/urinalysis%20analyzer-laboratory.jpg',
+    '/urinalysis%20analyzer-laboratory.webp',
   'Microplate Reader':
-    '/microplate%20reader-laboratory.jpg',
+    '/microplate%20reader-laboratory.webp',
 
   // ── Dental ────────────────────────────────────────────────────────────────
   'Pax-i3D Green':
-    '/Pax-i3D%20Green-dental.jpg',
-  'PA-i3D Smartdental':
-    '/pa-i3d%20Smartdental.jpg',
-  'Smart Plus':
-    '/smart%20Plus-dental.jpg',
-  'Vatech A9':
-    '/vatech%20A9-dental.jpg',
+    '/Pax-i3D%20Green-dental.webp',
   '3D CBCT':
-    '/3d%20cbct-dental.jpg',
+    '/3d%20cbct-dental.webp',
   '3D CBCT Vatech':
     '/3d%20cbct%20vatech-dental.webp',
-  'Panoramic X-Ray':
-    '/pano-dental.webp',
   'Mobile X-Ray':
-    '/mobile%20-ray-dental.jpg',
+    '/mobile%20-ray-dental.webp',
   'Handheld X-Ray':
-    '/handheld%20x-ray-dental.png',
+    '/handheld%20x-ray-dental.webp',
+  'Green21':
+    '/green21-dental.webp',
+  'Pax-i3D':
+    '/pax-i3d-dental.webp',
+  'Green X':
+    '/green%20x-dental.webp',
+  'Dental X-Ray':
+    '/dental%20x-ray.webp',
 };
 
 const fallbackImage =
