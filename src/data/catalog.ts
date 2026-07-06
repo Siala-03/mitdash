@@ -342,6 +342,8 @@ export const technologyEquipmentIndex: EquipmentIndexCategory[] = [
       'Infant Radiant Warmer',
       'Ventilator',
       'Patient Monitor',
+      '3-in-1 Trinity Incubator',
+      'Gastrointestinal Electronic Endoscope',
     ]
   },
   {
@@ -378,9 +380,7 @@ export const technologyEquipmentIndex: EquipmentIndexCategory[] = [
       '3D CBCT Vatech',
       'Mobile X-Ray',
       'Handheld X-Ray',
-      'Green21',
       'Pax-i3D',
-      'Green X',
       'Dental X-Ray',
     ]
   }

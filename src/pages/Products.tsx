@@ -18,6 +18,8 @@ const itemImages: Record<string, string> = {
   'Infant Radiant Warmer': '/Infant%20Radiant%20Warmer-surgical.webp',
   'Ventilator': '/ventilator-surgical.webp',
   'Patient Monitor': '/k22%20patient%20monitor-surgical.webp',
+  '3-in-1 Trinity Incubator': '/3-in-1%20Trinity%20Incubator-surgical.webp',
+  'Gastrointestinal Electronic Endoscope': '/Gastrointestinal%20Electronic%20Endoscope-surgical.webp',
 
   // ── Imaging ───────────────────────────────────────────────────────────────
   'MRI':
@@ -66,12 +68,8 @@ const itemImages: Record<string, string> = {
     '/mobile%20-ray-dental.webp',
   'Handheld X-Ray':
     '/handheld%20x-ray-dental.webp',
-  'Green21':
-    '/green21-dental.webp',
   'Pax-i3D':
     '/pax-i3d-dental.webp',
-  'Green X':
-    '/green%20x-dental.webp',
   'Dental X-Ray':
     '/dental%20x-ray.webp',
 };
