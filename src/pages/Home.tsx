@@ -55,29 +55,6 @@ function RevealText({
 
 }
 
-const teamMembers = [
-  {
-    name: 'Alex Muema Musyoka',
-    role: 'Chief Executive Officer',
-    image: '/Alex.webp'
-  },
-  {
-    name: 'Mpabwanimana Peninah',
-    role: 'Sales Representative',
-    image: '/peninah.webp'
-  },
-  {
-    name: 'Irabona Frederic',
-    role: 'Biomedical Engineer',
-    image: '/irabona.webp'
-  },
-  {
-    name: 'Ishimwe Régine',
-    role: 'Sales Director',
-    image: '/ishimwe.webp'
-  }
-];
-
 export function Home() {
   return (
     <div className="flex flex-col bg-paper-100">
@@ -374,48 +351,28 @@ export function Home() {
 
       <section className="py-20 lg:py-28 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl mb-12">
-            <div className="inline-flex items-center gap-3 mb-6">
-              <div className="w-12 h-px bg-ink-300" />
-              <span className="text-xs font-semibold tracking-[0.25em] text-ink-600 uppercase">Our Team</span>
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
+            <div className="max-w-2xl">
+              <div className="inline-flex items-center gap-3 mb-6">
+                <div className="w-12 h-px bg-ink-300" />
+                <span className="text-xs font-semibold tracking-[0.25em] text-ink-600 uppercase">Our Team</span>
+              </div>
+              <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-ink-900 leading-[1.05] mb-5">
+                People driving dependable medical solutions.
+              </h2>
+              <p className="text-lg text-ink-600 leading-relaxed">
+                Our team combines leadership, clinical understanding, commercial expertise, and long-term support to help every client access the equipment they need.
+              </p>
             </div>
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-ink-900 leading-[1.05] mb-5">
-              People driving dependable medical solutions.
-            </h2>
-            <p className="text-lg text-ink-600 leading-relaxed">
-              Our team combines leadership, clinical understanding, commercial expertise, and long-term support to help every client access the equipment they need.
-            </p>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-            {teamMembers.map((member, index) => (
-              <motion.div
-                key={member.name}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.08, duration: 0.5 }}
-                className="group bg-paper-100 rounded-3xl overflow-hidden border border-ink-100 shadow-sm hover:shadow-xl transition-all duration-500"
-              >
-                <div className="aspect-[4/5] overflow-hidden">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    loading="lazy"
-                    decoding="async"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="font-display text-2xl font-medium text-ink-900 mb-2">
-                    {member.name}
-                  </h3>
-                  <p className="text-sm font-medium uppercase tracking-[0.2em] text-signal-600">
-                    {member.role}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
+            <Link
+              to="/team"
+              className="group inline-flex items-center gap-3 bg-ink-900 hover:bg-ink-800 text-white pl-7 pr-3 py-2 rounded-full font-semibold transition-all shrink-0"
+            >
+              <span>Meet the team</span>
+              <span className="bg-white text-ink-900 w-9 h-9 rounded-full flex items-center justify-center group-hover:rotate-45 transition-transform duration-500">
+                <ArrowUpRight size={16} />
+              </span>
+            </Link>
           </div>
         </div>
       </section>

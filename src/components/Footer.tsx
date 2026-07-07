@@ -60,6 +60,7 @@ export function Footer() {
                 { name: 'Home', path: '/' },
                 { name: 'Products', path: '/products' },
                 { name: 'Solutions', path: '/solutions' },
+                { name: 'Team', path: '/team' },
                 { name: 'Cooperation', path: '/cooperation' },
                 { name: 'Contact', path: '/contact' },
               ].map((item) => (

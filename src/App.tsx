@@ -13,6 +13,7 @@ import { Products } from './pages/Products';
 import { Contact } from './pages/Contact';
 import { Solutions } from './pages/Solutions';
 import { Cooperation } from './pages/Cooperation';
+import { Team } from './pages/Team';
 import { MobileQuickContact } from './components/MobileQuickContact';
 
 function RouteMeta() {
@@ -44,6 +45,11 @@ function RouteMeta() {
          title: 'Manufacturer Cooperation | MIT-DASH',
          description:
            'Partner with MIT-DASH for market entry, regulatory support, and healthcare distribution across East Africa. We represent world-class manufacturers, prioritizing availability over profit margins.',
+       },
+       '/team': {
+         title: 'Our Team | MIT-DASH',
+         description:
+           'Meet the leadership, sales, and biomedical engineering team behind MIT-DASH, driving dependable medical equipment access across Rwanda, Burundi and the DRC.',
        },
        '/contact': {
          title: 'Request a Quote | MIT-DASH',
@@ -89,6 +95,7 @@ export function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/products" element={<Products />} />
             <Route path="/solutions" element={<Solutions />} />
+            <Route path="/team" element={<Team />} />
             <Route path="/cooperation" element={<Cooperation />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>

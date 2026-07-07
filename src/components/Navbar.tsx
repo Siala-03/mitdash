@@ -28,6 +28,10 @@ export function Navbar() {
     path: '/solutions'
   },
   {
+    name: 'Team',
+    path: '/team'
+  },
+  {
     name: 'Cooperation',
     path: '/cooperation'
   },
