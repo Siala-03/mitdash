@@ -70,6 +70,8 @@ const itemImages: Record<string, string> = {
     '/pax-i3d-dental.webp',
   'Dental X-Ray':
     '/dental%20x-ray.webp',
+  'Dental Chair':
+    '/dental%20chair%20-%20dental.webp',
 };
 
 const fallbackImage =
@@ -238,7 +240,7 @@ export function Products() {
                           alt={item}
                           loading="lazy"
                           decoding="async"
-                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                          className="w-full h-full object-contain p-3 transition-transform duration-700 group-hover:scale-105"
                           onError={(e) => {
                             (e.currentTarget as HTMLImageElement).src = fallbackImage;
                           }}
@@ -316,7 +318,7 @@ export function Products() {
                   src={selectedItem.imageUrl}
                   alt={selectedItem.name}
                   decoding="async"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain p-6"
                   onError={(e) => {
                     (e.currentTarget as HTMLImageElement).src = fallbackImage;
                   }}

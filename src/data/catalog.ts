@@ -381,6 +381,7 @@ export const technologyEquipmentIndex: EquipmentIndexCategory[] = [
       'Handheld X-Ray',
       'Pax-i3D',
       'Dental X-Ray',
+      'Dental Chair',
     ]
   }
 ];
