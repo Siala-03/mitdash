@@ -62,10 +62,8 @@ const itemImages: Record<string, string> = {
     '/Pax-i3D%20Green-dental.webp',
   '3D CBCT':
     '/3d%20cbct-dental.webp',
-  '3D CBCT Vatech':
-    '/3d%20cbct%20vatech-dental.webp',
-  'Mobile X-Ray':
-    '/mobile%20-ray-dental.webp',
+  '2D Pax-i Plus':
+    '/2d-opg-dental.webp',
   'Handheld X-Ray':
     '/handheld%20x-ray-dental.webp',
   'Pax-i3D':

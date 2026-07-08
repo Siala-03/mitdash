@@ -377,8 +377,7 @@ export const technologyEquipmentIndex: EquipmentIndexCategory[] = [
     items: [
       'Pax-i3D Green',
       '3D CBCT',
-      '3D CBCT Vatech',
-      'Mobile X-Ray',
+      '2D Pax-i Plus',
       'Handheld X-Ray',
       'Pax-i3D',
       'Dental X-Ray',
