@@ -358,7 +358,6 @@ export const technologyEquipmentIndex: EquipmentIndexCategory[] = [
     name: 'Imaging',
     items: [
       'MRI',
-      'NeuEcho9 US Series',
       'Ultrasound',
       'Ultrasound S22',
       'Ultrasound S8 EXP',

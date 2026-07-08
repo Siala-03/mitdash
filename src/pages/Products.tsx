@@ -24,8 +24,6 @@ const itemImages: Record<string, string> = {
   // ── Imaging ───────────────────────────────────────────────────────────────
   'MRI':
     '/NeuMR%20Universal-imaging.webp',
-  'NeuEcho9 US Series':
-    '/NeuEcho9%20US%20series%20-%20imaging.webp',
   'Ultrasound':
     '/ultrasound-imaging.webp',
   'Ultrasound S22':
