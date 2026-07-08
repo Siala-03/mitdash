@@ -358,10 +358,10 @@ export const technologyEquipmentIndex: EquipmentIndexCategory[] = [
     name: 'Imaging',
     items: [
       'MRI',
-      'Ultrasound',
+      'P20',
       'Ultrasound S22',
       'Ultrasound S8 EXP',
-      'General X-Ray',
+      'General X-Ray Perfox 3000A Classic',
       'C-Arm',
     ]
   },
@@ -386,7 +386,6 @@ export const technologyEquipmentIndex: EquipmentIndexCategory[] = [
       '3D CBCT',
       '2D Pax-i Plus',
       'Handheld X-Ray',
-      'Pax-i3D',
       'Dental X-Ray',
       'Dental Chair',
     ],

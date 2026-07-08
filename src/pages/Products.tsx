@@ -24,13 +24,13 @@ const itemImages: Record<string, string> = {
   // ── Imaging ───────────────────────────────────────────────────────────────
   'MRI':
     '/NeuMR%20Universal-imaging.webp',
-  'Ultrasound':
+  'P20':
     '/ultrasound-imaging.webp',
   'Ultrasound S22':
     '/Ultrasound%20s22-imaging.webp',
   'Ultrasound S8 EXP':
     '/ultrasound%20s8%20exp-imaging.webp',
-  'General X-Ray':
+  'General X-Ray Perfox 3000A Classic':
     '/General%20X-ray-imaging.webp',
   'C-Arm':
     '/C-arm-imaging.webp',
@@ -64,8 +64,6 @@ const itemImages: Record<string, string> = {
     '/2d%20pax-i-imaging.jpg',
   'Handheld X-Ray':
     '/handheld%20x-ray-dental.webp',
-  'Pax-i3D':
-    '/pax-i3d-dental.webp',
   'Dental X-Ray':
     '/dental%20x-ray.webp',
   'Dental Chair':
