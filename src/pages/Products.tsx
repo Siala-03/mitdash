@@ -63,7 +63,7 @@ const itemImages: Record<string, string> = {
   '3D CBCT':
     '/3d%20cbct-dental.webp',
   '2D Pax-i Plus':
-    '/2d-opg-dental.webp',
+    '/2d%20pax-i-imaging.jpg',
   'Handheld X-Ray':
     '/handheld%20x-ray-dental.webp',
   'Pax-i3D':
@@ -88,15 +88,15 @@ const itemImages: Record<string, string> = {
     '/implant%20motor.jpeg',
 
   // ── Digital Dental Laboratory ───────────────────────────────────────────
-  'UP3D P42 Plus':
+  'P42 Plus':
     '/p42plus-dental%20digital%20laboratory.webp',
-  'UP3D P53-DC Milling Machine':
+  'P53-DC Milling Machine':
     '/up3d-p53dc-dental-milling-machine-dental%20digital%20laboratory.webp',
-  'UP3D P55D Milling Machine':
+  'P55D Milling Machine':
     '/up3d-p55d-dental-milling-machine-dental%20digital%20laboratory.png',
-  'UP3D UP560HD Lab Scanner':
+  'UP560HD Lab Scanner':
     '/up3d-up560hd-dental-lab-scanner-dental%20digital%20laboratory.webp',
-  'UP3D UP610 Intraoral Scanner':
+  'UP610 Intraoral Scanner':
     '/up3d-up610-intraoral-scanner-dental%20digital%20laboratory.webp',
 };
 
@@ -122,10 +122,12 @@ function ItemGrid({
   items,
   categoryLabel,
   onSelect,
+  aspect = 'aspect-[4/3]',
 }: {
   items: string[];
   categoryLabel: string;
   onSelect: (item: SelectedItem) => void;
+  aspect?: string;
 }) {
   const gridCols = getGridCols(items.length);
   return (
@@ -137,7 +139,7 @@ function ItemGrid({
             key={`${categoryLabel}-${item}`}
             type="button"
             onClick={() => onSelect({ category: categoryLabel, name: item, imageUrl })}
-            className="group relative aspect-[4/3] overflow-hidden bg-ink-100 text-left"
+            className={`group relative ${aspect} overflow-hidden bg-ink-100 text-left`}
           >
             <img
               src={imageUrl}
@@ -306,6 +308,7 @@ export function Products() {
                       items={subgroup.items}
                       categoryLabel={subgroup.name}
                       onSelect={setSelectedItem}
+                      aspect={subgroup.aspect}
                     />
                   </div>
                 ))}

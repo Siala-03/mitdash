@@ -25,6 +25,8 @@ export interface Category {
 export interface EquipmentIndexSubgroup {
   name: string;
   items: string[];
+  /** Tailwind aspect-ratio class for this subgroup's image tiles, e.g. 'aspect-[3/4]' for portrait shots */
+  aspect?: string;
 }
 
 export interface EquipmentIndexCategory {
@@ -404,12 +406,13 @@ export const technologyEquipmentIndex: EquipmentIndexCategory[] = [
       {
         name: 'Digital Dental Laboratory',
         items: [
-          'UP3D P42 Plus',
-          'UP3D P53-DC Milling Machine',
-          'UP3D P55D Milling Machine',
-          'UP3D UP560HD Lab Scanner',
-          'UP3D UP610 Intraoral Scanner',
-        ]
+          'P42 Plus',
+          'P53-DC Milling Machine',
+          'P55D Milling Machine',
+          'UP560HD Lab Scanner',
+          'UP610 Intraoral Scanner',
+        ],
+        aspect: 'aspect-[3/4]'
       }
     ]
   }
