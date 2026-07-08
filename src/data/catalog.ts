@@ -347,10 +347,8 @@ export const technologyEquipmentIndex: EquipmentIndexCategory[] = [
       'Electrohydraulic Operating Table',
       'Surgical Light',
       'Infusion Pump',
-      'Infant Radiant Warmer',
       'Ventilator',
       'Patient Monitor',
-      '3-in-1 Trinity Incubator',
       'Gastrointestinal Electronic Endoscope',
     ]
   },

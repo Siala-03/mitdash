@@ -10,6 +10,16 @@ const teamMembers = [
     image: '/Alex.webp'
   },
   {
+    name: 'Ishimwe Régine',
+    role: 'Sales Director',
+    image: '/ishimwe.webp'
+  },
+  {
+    name: 'Madeleine Niwemubyeyi',
+    role: 'Accountant',
+    image: '/MADELEINE.jpeg'
+  },
+  {
     name: 'Mpabwanimana Peninah',
     role: 'Sales Representative',
     image: '/peninah.webp'
@@ -20,9 +30,9 @@ const teamMembers = [
     image: '/irabona.webp'
   },
   {
-    name: 'Ishimwe Régine',
-    role: 'Sales Director',
-    image: '/ishimwe.webp'
+    name: 'Usama Iyamuremye',
+    role: 'Office Assistant',
+    image: '/usama.jpeg'
   }
 ];
 
@@ -59,7 +69,7 @@ export function Team() {
       {/* ============== TEAM GRID ============== */}
       <section className="py-20 lg:py-28 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {teamMembers.map((member, index) => (
               <motion.div
                 key={member.name}

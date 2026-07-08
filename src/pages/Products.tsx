@@ -15,10 +15,8 @@ const itemImages: Record<string, string> = {
   'Electrohydraulic Operating Table': '/Electrohydraulic%20Operating%20table-surgical.webp',
   'Surgical Light': '/surgical%20light-surgical.webp',
   'Infusion Pump': '/Infusion%20Pump-surgical.webp',
-  'Infant Radiant Warmer': '/Infant%20Radiant%20Warmer-surgical.webp',
   'Ventilator': '/ventilator-surgical.webp',
   'Patient Monitor': '/k22%20patient%20monitor-surgical.webp',
-  '3-in-1 Trinity Incubator': '/3-in-1%20Trinity%20Incubator-surgical.webp',
   'Gastrointestinal Electronic Endoscope': '/Gastrointestinal%20Electronic%20Endoscope-surgical.webp',
 
   // ── Imaging ───────────────────────────────────────────────────────────────
