@@ -72,6 +72,32 @@ const itemImages: Record<string, string> = {
     '/dental%20x-ray.webp',
   'Dental Chair':
     '/dental%20chair%20-%20dental.webp',
+
+  // ── Dental Implants ──────────────────────────────────────────────────────
+  'Conical Connection Implant':
+    '/Conical-Connection%20b1-dental%20implants.jpg',
+  'Internal Hex Implant':
+    '/Internal%20Hex-%20Dental%20Implant.jpg',
+  'Internal Hex Prosthetics':
+    '/internal%20hex%20prosthetics-dental%20implants.jpg',
+  'Internal Hex Prosthetics 2.0':
+    '/Internal-Hex-2.0-Prosthetics-dental%20implants.jpg',
+  'Conical Connection Prosthetics':
+    '/conical%20connection%20prosthetics-dental%20implants.jpg',
+  'Implant Motor':
+    '/implant%20motor.jpeg',
+
+  // ── Digital Dental Laboratory ───────────────────────────────────────────
+  'UP3D P42 Plus':
+    '/p42plus-dental%20digital%20laboratory.webp',
+  'UP3D P53-DC Milling Machine':
+    '/up3d-p53dc-dental-milling-machine-dental%20digital%20laboratory.webp',
+  'UP3D P55D Milling Machine':
+    '/up3d-p55d-dental-milling-machine-dental%20digital%20laboratory.png',
+  'UP3D UP560HD Lab Scanner':
+    '/up3d-up560hd-dental-lab-scanner-dental%20digital%20laboratory.webp',
+  'UP3D UP610 Intraoral Scanner':
+    '/up3d-up610-intraoral-scanner-dental%20digital%20laboratory.webp',
 };
 
 const fallbackImage =
@@ -90,6 +116,53 @@ function getGridCols(count: number): string {
   if (count === 5) return 'grid-cols-2 md:grid-cols-3 lg:grid-cols-5';
   // 6, 7, 8 → 3 per row on desktop, 2 on mobile
   return 'grid-cols-2 md:grid-cols-3';
+}
+
+function ItemGrid({
+  items,
+  categoryLabel,
+  onSelect,
+}: {
+  items: string[];
+  categoryLabel: string;
+  onSelect: (item: SelectedItem) => void;
+}) {
+  const gridCols = getGridCols(items.length);
+  return (
+    <div className={`grid ${gridCols} gap-px bg-paper-200`}>
+      {items.map((item) => {
+        const imageUrl = getImage(item);
+        return (
+          <button
+            key={`${categoryLabel}-${item}`}
+            type="button"
+            onClick={() => onSelect({ category: categoryLabel, name: item, imageUrl })}
+            className="group relative aspect-[4/3] overflow-hidden bg-ink-100 text-left"
+          >
+            <img
+              src={imageUrl}
+              alt={item}
+              loading="lazy"
+              decoding="async"
+              className="w-full h-full object-contain p-3 transition-transform duration-700 group-hover:scale-105"
+              onError={(e) => {
+                (e.currentTarget as HTMLImageElement).src = fallbackImage;
+              }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-ink-950/80 via-ink-950/20 to-transparent" />
+            <div className="absolute inset-x-0 bottom-0 p-4">
+              <p className="text-white text-sm font-semibold leading-tight line-clamp-2">
+                {item}
+              </p>
+            </div>
+            <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity bg-white/20 backdrop-blur-sm rounded-full p-1.5">
+              <ArrowUpRight size={12} className="text-white" />
+            </div>
+          </button>
+        );
+      })}
+    </div>
+  );
 }
 
 export function Products() {
@@ -207,8 +280,6 @@ export function Products() {
       <section className="py-10 pb-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           {visibleGroups.map((group, i) => {
-            const gridCols = getGridCols(group.items.length);
-
             return (
               <motion.article
                 key={group.name}
@@ -223,41 +294,21 @@ export function Products() {
                 </div>
 
                 {/* Full image grid — all items */}
-                <div className={`grid ${gridCols} gap-px bg-paper-200`}>
-                  {group.items.map((item) => {
-                    const imageUrl = getImage(item);
-                    return (
-                      <button
-                        key={`${group.name}-${item}`}
-                        type="button"
-                        onClick={() =>
-                          setSelectedItem({ category: group.name, name: item, imageUrl })
-                        }
-                        className="group relative aspect-[4/3] overflow-hidden bg-ink-100 text-left"
-                      >
-                        <img
-                          src={imageUrl}
-                          alt={item}
-                          loading="lazy"
-                          decoding="async"
-                          className="w-full h-full object-contain p-3 transition-transform duration-700 group-hover:scale-105"
-                          onError={(e) => {
-                            (e.currentTarget as HTMLImageElement).src = fallbackImage;
-                          }}
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-ink-950/80 via-ink-950/20 to-transparent" />
-                        <div className="absolute inset-x-0 bottom-0 p-4">
-                          <p className="text-white text-sm font-semibold leading-tight line-clamp-2">
-                            {item}
-                          </p>
-                        </div>
-                        <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity bg-white/20 backdrop-blur-sm rounded-full p-1.5">
-                          <ArrowUpRight size={12} className="text-white" />
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
+                <ItemGrid items={group.items} categoryLabel={group.name} onSelect={setSelectedItem} />
+
+                {/* Subcategories, e.g. Dental Implants under Dental */}
+                {group.subgroups?.map((subgroup) => (
+                  <div key={subgroup.name}>
+                    <div className="px-6 pt-6 pb-5 border-t border-paper-200">
+                      <h4 className="font-display text-lg text-ink-700">{subgroup.name}</h4>
+                    </div>
+                    <ItemGrid
+                      items={subgroup.items}
+                      categoryLabel={subgroup.name}
+                      onSelect={setSelectedItem}
+                    />
+                  </div>
+                ))}
 
                 {/* Footer: Quote action */}
                 <div className="flex flex-wrap items-center justify-between gap-3 px-6 py-4 border-t border-paper-200 bg-paper-50">

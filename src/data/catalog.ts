@@ -22,9 +22,15 @@ export interface Category {
   subcategories: string[];
 }
 
+export interface EquipmentIndexSubgroup {
+  name: string;
+  items: string[];
+}
+
 export interface EquipmentIndexCategory {
   name: string;
   items: string[];
+  subgroups?: EquipmentIndexSubgroup[];
 }
 
 export const categories: Category[] = [
@@ -382,6 +388,29 @@ export const technologyEquipmentIndex: EquipmentIndexCategory[] = [
       'Pax-i3D',
       'Dental X-Ray',
       'Dental Chair',
+    ],
+    subgroups: [
+      {
+        name: 'Dental Implants',
+        items: [
+          'Conical Connection Implant',
+          'Internal Hex Implant',
+          'Internal Hex Prosthetics',
+          'Internal Hex Prosthetics 2.0',
+          'Conical Connection Prosthetics',
+          'Implant Motor',
+        ]
+      },
+      {
+        name: 'Digital Dental Laboratory',
+        items: [
+          'UP3D P42 Plus',
+          'UP3D P53-DC Milling Machine',
+          'UP3D P55D Milling Machine',
+          'UP3D UP560HD Lab Scanner',
+          'UP3D UP610 Intraoral Scanner',
+        ]
+      }
     ]
   }
 ];
