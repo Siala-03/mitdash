@@ -391,7 +391,7 @@ export const technologyEquipmentIndex: EquipmentIndexCategory[] = [
       {
         name: 'Dental Implants',
         items: [
-          'Conical Connection Implant',
+          'Guided Implant Surgery Kit',
           'Internal Hex Implant',
           'Internal Hex Prosthetics',
           'Internal Hex Prosthetics 2.0',

@@ -68,8 +68,8 @@ const itemImages: Record<string, string> = {
     '/dental%20chair%20-%20dental.webp',
 
   // ── Dental Implants ──────────────────────────────────────────────────────
-  'Conical Connection Implant':
-    '/Conical-Connection%20b1-dental%20implants.jpg',
+  'Guided Implant Surgery Kit':
+    '/guided%20implant%20surgery%20kit-dental%20implant.jpeg',
   'Internal Hex Implant':
     '/Internal%20Hex-%20Dental%20Implant.jpg',
   'Internal Hex Prosthetics':
