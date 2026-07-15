@@ -15,35 +15,43 @@ import {
 const manufacturers = [
 {
   name: 'Comen',
-  country: 'China'
+  country: 'China',
+  logo: '/comenlogo.png'
 },
 {
   name: 'Brownier',
-  country: 'China'
+  country: 'China',
+  logo: '/browinerlogo.png'
 },
 {
   name: 'Neurosoft',
-  country: 'Russia'
+  country: 'Russia',
+  logo: '/Neurosoftlogo.png'
 },
 {
   name: 'Vatech',
-  country: 'South Korea'
+  country: 'South Korea',
+  logo: '/vatechlogo.jpeg'
 },
 {
   name: 'Runyes',
-  country: 'China'
+  country: 'China',
+  logo: '/Runyes-logo-1.png'
 },
 {
   name: 'Medispark',
-  country: 'India'
+  country: 'India',
+  logo: '/medisparklogo.jpeg'
 },
 {
   name: 'Dochem',
-  country: 'India'
+  country: 'India',
+  logo: '/dochemlogo.jpg'
 },
 {
   name: 'GC Fuji',
-  country: 'Japan'
+  country: 'Japan',
+  logo: '/GC_Logo.avif'
 }];
 
 const regions = [
@@ -306,15 +314,24 @@ export function Cooperation() {
                 duration: 0.5
               }}
               className="group bg-white rounded-2xl p-6 border border-slate-100 hover:border-brand-300 hover:shadow-lg transition-all duration-300">
-              
+
                 <div className="flex items-start justify-between mb-4">
-                  <div className="font-display text-xl font-semibold text-slate-900 group-hover:text-brand-700 transition-colors">
-                    {m.name}
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center overflow-hidden shrink-0">
+                      <img
+                        src={m.logo}
+                        alt={`${m.name} logo`}
+                        loading="lazy"
+                        className="w-full h-full object-contain p-1.5" />
+                    </div>
+                    <div className="font-display text-xl font-semibold text-slate-900 group-hover:text-brand-700 transition-colors">
+                      {m.name}
+                    </div>
                   </div>
                   <CheckCircle2
                   size={18}
                   className="text-brand-600 shrink-0 mt-1" />
-                
+
                 </div>
                 <div className="text-xs text-slate-400 uppercase tracking-wider">
                   {m.country}
